@@ -16,7 +16,6 @@ html {
 body {
     margin: 0px;
     padding: 0px;
-    background-color: #328c8c;
 }
 /* ”казываем box sizing */
 *,
@@ -96,19 +95,11 @@ body {
     text-rendering: optimizeSpeed;
     line-height: 1.5;
 }
-
-
-.container {
-    margin: 0px;
-    border: none;
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    min-height: 100%;
-    min-width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.container{
+    margin:0px;
+    padding:0px;
 }
+
+
+
 
