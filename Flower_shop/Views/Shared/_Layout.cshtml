@@ -7,16 +7,34 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Flower_shop.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/layout.css" asp-append-version="true" />
+
 </head>
 <body>
     <header>
+        <div class="header-block">
+            <div class="name">
+                Цветы и подарки
+            </div>
+            <div class="buttons">
+                <button>
+                    Birthday
+                </button>
+                <button>
+                    Plants
+                </button>
+                <button>
+                    All flowers
+                </button>
+            </div>
+        </div>
+
 
     </header>
     <div class="container">
         @RenderBody()
     </div>
     <footer>
-
     </footer>
 
 
