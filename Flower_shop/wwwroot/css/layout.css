@@ -1,15 +1,32 @@
+a{
+    color: white;
+}
 .header-block {
     background-color: #013220;
-    height:200px;
-    width:100%;
-    display:flex;
-    justify-content:center;
+    height: 162px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
     align-items: center;
-    flex-direction:column;
+    flex-direction: column;
 }
-.buttons{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    flex-direction:row;
+
+.name img{
+    width:190px;
 }
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+    .buttons a {
+        text-decoration: none;
+        font-size: 30px;
+        font-family: Maison-Neue-Extended,sans-serif;
+        padding-right: 20px;
+        color: white;
+    }
+   

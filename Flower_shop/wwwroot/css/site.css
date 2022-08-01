@@ -11,6 +11,8 @@ html {
 html {
     position: relative;
     min-height: 100%;
+    padding:0;
+    margin:0;
 }
 
 body {
@@ -52,11 +54,6 @@ dd {
 ul[class],
 ol[class] {
     list-style: none;
-}
-
-/* Ёлементы a, у которых нет класса, сбрасываем до дефолтных стилей */
-a:not([class]) {
-    text-decoration-skip-ink: auto;
 }
 
 /* ”прощаем работу с изображени€ми */

@@ -1,0 +1,23 @@
+.main-page{
+    display:flex;
+    flex-direction:row;
+    max-height:500px;
+    width:100vw;
+    max-width:1920px;
+}
+.text {
+    flex: 50% 1;
+    background: #013220;
+    max-height: 500px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align:center;
+    color: white;
+    font-size: 40px;
+    font-family: Vinter-Regular,serif;
+}
+.image{
+    flex: 50% 1;
+    max-height:500px;
+}
