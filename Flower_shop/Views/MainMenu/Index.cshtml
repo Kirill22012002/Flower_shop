@@ -1,13 +1,39 @@
-﻿@{
+﻿@using Flower_shop.Models
+@model List<ProductViewModel>
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
 <div class="main-page">
-    <div class="text">
-        Живи Пахни Цвети
+    <div class="text-block">
+        <div class="main-text">
+            Подарки для самых любимых!
+        </div>
+        <div class="text">
+            Порадуйте своих близких
+        </div>
+        <div class="btn-main-block">
+            <a src=""> Кнопка </a>
+        </div>
     </div>
-    <div class="image">
-        <img src="~/images/flower7v2.jpg"/>
+    <div class="main-image">
+        <img src="~/images/flower7v2.jpg" />
     </div>
+</div>
+<div class="several-products">
+    @foreach (ProductViewModel product in Model)
+    {
+        <div class="product">
+            <div class="product-image">
+                <img src=@product.ImageUrl />
+            </div>
+            <div class="name">
+                @product.Name
+            </div>
+            <div class="price">
+                @product.Price
+            </div>
+        </div>
+    }
 </div>

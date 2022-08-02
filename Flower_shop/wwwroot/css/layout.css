@@ -2,13 +2,14 @@ a{
     color: white;
 }
 .header-block {
-    background-color: #013220;
+    background-color: #3c4619;
     height: 162px;
     width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
+    box-shadow: 0px 6px 6px 0px #3c4619;
 }
 
 .name img{
@@ -24,8 +25,9 @@ a{
 
     .buttons a {
         text-decoration: none;
-        font-size: 30px;
+        font-size: 18px;
         font-family: Maison-Neue-Extended,sans-serif;
+        text-transform: uppercase;
         padding-right: 20px;
         color: white;
     }
