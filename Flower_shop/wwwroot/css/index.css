@@ -5,7 +5,6 @@
     max-height: 500px;
     width: 100vw;
     max-width: 1920px;
-    margin-top: 4px;
 }
 
 .text-block {
@@ -14,8 +13,8 @@
     align-items: center;
     text-align: center;
     flex-direction: column;
-    flex: 50% 1;
-    background: #3c4619;
+    flex: 0 0 50%;
+    background: #7D9257;
     max-height: 373px;
     color: white;
     max-width: 100%;
@@ -25,11 +24,13 @@
 .main-text {
     font-size: 35px;
     font-family: Vinter-Regular,serif;
+    letter-spacing:2px;
 }
 
 .text {
     font-size: 17px;
     font-family: Vinter-Regular,serif;
+    letter-spacing: 4px;
 }
 .btn-main-block {
     display:flex;
@@ -49,7 +50,7 @@
 }
 
 .main-image {
-    flex: 50% 1;
+    flex: 0 0 50%;
     max-height: 373px;
     max-width: 100%;
 }
@@ -64,13 +65,12 @@
     justify-content: space-around;
     flex-direction: row;
     flex-wrap: wrap;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-bottom: 50px;
 }
 
 .product {
     display: flex;
-    justify-content: center;
     align-items: center;
     flex-direction: column;
     max-width: 250px;
@@ -79,10 +79,22 @@
 }
 
 .product-image img {
-    width: 200px;
-    height: 200px;
+    width: 230px;
+    height: 230px;
 }
 
+.text{
+    display:flex;
+    flex-direction:column;
+    width:100%;
+    line-height:28px;
+}
 .name, .price {
+    display: flex;
+    align-items: center;
     font-size: 25px;
+    padding-left:10px;
+}
+.price {
+    font-family: Maison-Neue-Extended,sans-serif;
 }

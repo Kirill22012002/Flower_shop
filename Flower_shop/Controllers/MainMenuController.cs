@@ -12,30 +12,30 @@ namespace Flower_shop.Controllers
                 new ProductViewModel()
                 {
                     Id = 0,
-                    Name = "Flower 0",
-                    Price = "60$ - 70$",
-                    ImageUrl = "/images/flower1.jpg",
+                    Name = "Коробочка цветов",
+                    Price = "от 35 р.",
+                    ImageUrl = "/images/flower10.jpg",
                 },
                 new ProductViewModel
                 {
                     Id = 1,
-                    Name = "Flower 1",
-                    Price = "80$ - 90$",
-                    ImageUrl = "/images/flower2.jpg"
+                    Name = "Конверт",
+                    Price = "от хх р.",
+                    ImageUrl = "/images/flower11.jpg"
                 },
                 new ProductViewModel()
                 {
                     Id = 2,
-                    Name = "Flower 0",
-                    Price = "110$ - 120$",
-                    ImageUrl = "/images/flower3.jpg"
+                    Name = "Цветочная коробочка",
+                    Price = "от хх р.",
+                    ImageUrl = "/images/flower12.jpg"
                 },
                 new ProductViewModel()
                 {
                     Id = 3,
-                    Name = "Flower 3",
-                    Price = "50$ - 70$",
-                    ImageUrl = "/images/flower4.jpg"
+                    Name = "Яркая композиция",
+                    Price = "от хх р.",
+                    ImageUrl = "/images/flower13.jpg"
                 },
             };
             
