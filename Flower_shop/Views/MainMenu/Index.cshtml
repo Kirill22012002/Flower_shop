@@ -6,14 +6,14 @@
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
 
 <div class="main-page">
-    <div class="text-block">
+    <div class="first-block">
         <div class="main-text">
             Подарки для самых любимых!
         </div>
         <div class="text">
             Порадуйте своих близких
         </div>
-        <div class="btn-main-block">
+        <div class="btn-first-block">
             <a src=""> Перейти </a>
         </div>
     </div>
@@ -21,21 +21,53 @@
         <img src="~/images/flower9.jpg" />
     </div>
 </div>
-<div class="several-products">
-    @foreach (ProductViewModel product in Model)
-    {
-        <div class="product">
-            <div class="product-image">
-                <img src=@product.ImageUrl />
-            </div>
-            <div class="text">
-                <div class="name">
-                    @product.Name
+<div class="block-products">
+    <div class="name-of-block-products">
+        Цветы и подарки
+    </div>
+    <div class="several-products">
+        @foreach (ProductViewModel product in Model)
+        {
+            <div class="product">
+                <div class="product-image">
+                    <img src=@product.ImageUrl />
                 </div>
-                <div class="price">
-                    @product.Price
+                <div class="text">
+                    <div class="name">
+                        @product.Name
+                    </div>
+                    <div class="price">
+                        @product.Price
+                    </div>
                 </div>
             </div>
+        }
+    </div>
+    <div class="father-btn-block">
+        <div class="btn-block">
+            <a src=""> Перейти </a>
         </div>
-    }
+    </div>
+
 </div>
+
+
+<div class="main-page">
+    <div class="main-image">
+        <img src="~/images/flower15.jpg" />
+    </div>
+    <div class="second-block">
+        <div class="main-text">
+            Букеты любой сложности
+        </div>
+        <div class="text">
+            Мы делаем с любовью
+        </div>
+        <div class="btn-second-block">
+            <a src=""> Перейти </a>
+        </div>
+    </div>
+</div>
+
+
+
