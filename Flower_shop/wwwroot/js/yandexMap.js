@@ -1,11 +1,17 @@
-﻿$(document).ready(init());
+﻿ymaps.ready(init);
+
 function init() {
-    ymaps.ready(function () {
-        var map = new ymaps.Map("map", {
-            center: [54.876674, 28.689605],
-            zoom: 50
-        }, {
-            searchControlProvider: 'yandex#search'
-        });
+    var myMap = new ymaps.Map("map", {
+        center: [54.876674, 28.689605],
+        zoom: 17
+    }, {
+        searchControlProvider: 'yandex#search'
     });
-};
+
+    myMap.geoObjects
+        .add(new ymaps.Placemark([54.876674, 28.689605], {
+            balloonContent: 'Цветы и подарки'
+        }, {
+            preset: 'islands#redDotIcon'
+        }));
+}

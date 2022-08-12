@@ -8,7 +8,7 @@
     margin-bottom:16px;
 }
 
-.first-block, .second-block {
+.first-block, .second-block, .third-block {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -28,11 +28,14 @@
 .second-block {
     background: #374172;
 }
+.third-block {
+    background: #00ff7f;
+}
 
 .main-text {
     font-size: 35px;
     font-family: Vinter-Regular,serif;
-    letter-spacing:2px;
+    letter-spacing: 2px;
 }
 
 .text {
@@ -40,7 +43,7 @@
     font-family: Vinter-Regular,serif;
     letter-spacing: 4px;
 }
-.btn-block, .btn-first-block, .btn-second-block {
+.btn-block, .btn-first-block, .btn-second-block, .btn-third-block {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,7 +77,7 @@
     color: #374172
 }
 
-.main-image {
+.main-image, .main-map {
     flex: 0 0 50%;
     max-height: 373px;
     max-width: 100%;
