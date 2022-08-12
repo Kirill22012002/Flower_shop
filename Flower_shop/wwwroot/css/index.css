@@ -5,7 +5,7 @@
     max-height: 500px;
     width: 100vw;
     max-width: 1920px;
-    margin-bottom:16px;
+    margin-bottom: 45px;
 }
 
 .first-block, .second-block, .third-block {
@@ -20,16 +20,18 @@
     max-width: 100%;
     line-height: 33px;
     min-width: 286.5px;
-    min-height: 165.48px;
 }
+
 .first-block {
     background: #7D9257;
 }
+
 .second-block {
-    background: #374172;
+    background: #2D69A9;
 }
+
 .third-block {
-    background: #00ff7f;
+    background: #278011;
 }
 
 .main-text {
@@ -43,6 +45,7 @@
     font-family: Vinter-Regular,serif;
     letter-spacing: 4px;
 }
+
 .btn-block, .btn-first-block, .btn-second-block, .btn-third-block {
     display: flex;
     justify-content: center;
@@ -57,25 +60,35 @@
     font-size: 20px;
     margin-top: 20px;
 }
+
 .btn-block {
     background-color: #7D9257;
     color: #fff;
-    border:none;
-    width:340px;
+    border: none;
+    width: 340px;
 }
+
 .father-btn-block {
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .btn-first-block {
     background-color: #fff;
     color: #7D9257;
 }
+
 .btn-second-block {
     background-color: #fff;
-    color: #374172
+    color: #2D69A9
 }
+
+.btn-third-block {
+    background-color: #fff;
+    color: #278011;
+}
+
 
 .main-image, .main-map {
     flex: 0 0 50%;
@@ -86,56 +99,18 @@
 }
 
     .main-image img {
+        min-height: 100%;
+        min-width: 100%;
         max-height: 373px;
         width: 100%;
     }
-.block-products {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    margin-bottom: 25px;
-}
-.name-of-block-products {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 16px;
-    font-size: 50px;
-}
-.several-products {
-    display: flex;
-    justify-content: space-around;
-    flex-direction: row;
-    flex-wrap: wrap;
-}
 
-.product {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    max-width: 250px;
-    max-height: 400px;
-    padding: 5px;
-}
+    .main-map div {
+        min-height: 100%;
+        min-width: 100%;
+        
+    }
 
-.product-image img {
-    width: 230px;
-    height: 230px;
-}
-
-.text{
-    display:flex;
-    flex-direction:column;
-    width:100%;
-    line-height:28px;
-    letter-spacing: 2px;
-}
-.name, .price {
-    display: flex;
-    align-items: center;
-    font-size: 25px;
-    padding-left:10px;
-}
-.title{
-    font-size:40px;
+#block-with-map {
+    max-height: 373px;
 }

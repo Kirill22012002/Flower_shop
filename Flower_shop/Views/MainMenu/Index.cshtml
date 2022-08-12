@@ -4,6 +4,8 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
+<link rel="stylesheet" href="~/css/productsIndex.css" asp-append-version="true" />
+
 <script src="~/js/yandexMap.js" type="text/javascript"></script>
 
 <div class="main-page">
@@ -66,7 +68,7 @@
         </div>
     </div>
 </div>
-<div class="main-page">
+<div class="main-page" id="block-with-map">
     <div class="third-block">
         <div class="main-text">
             Мы рядом!
@@ -79,7 +81,7 @@
         </div>
     </div>
     <div class="main-map">
-        <div class="map" id="map"></div>
+        <div class="map" id="map" style="width: 450px; height: 350px;"></div>
     </div>
 </div>
 
