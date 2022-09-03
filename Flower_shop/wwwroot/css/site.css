@@ -1,10 +1,10 @@
 html {
-    font-size: 14px;
+    font-size: 1em;
 }
 
 @media (min-width: 768px) {
     html {
-        font-size: 16px;
+        font-size: 1em;
     }
 }
 
@@ -59,8 +59,8 @@ ol[class] {
 
 /* ”прощаем работу с изображени€ми */
 img {
+    width: 100%;
     max-width: 100%;
-    display: block;
 }
 
 /* ”казываем пон€тную периодичность в потоке данных у article*/

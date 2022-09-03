@@ -3,36 +3,51 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&ampefd65cf8-8571-4b72-9d9c-97183c2c8ae2" type="text/javascript"></script>
-    
+
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Flower_shop.styles.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/layout.css" />
     <link rel="stylesheet" href="~/css/yandexMap.css" />
-    
+    <link rel="stylesheet" href="~/css/products.css" asp-append-version="true" />
+
     @RenderSection("Scripts", required: false)
 
 </head>
+
+
 <body>
     <header>
-        <div class="header-block">
-            <div class="name">
-                <img src="~/images/logo2.png" />
+        <div class="main-block-header">
+            <div class="left-block">
             </div>
-            <div class="buttons">
-                <a src="" class="btn">
-                    Цветы
+            <div class="title-block">
+                <a href="/MainMenu/Index" class="name">
+                    <img src="~/images/logo2.png" />
                 </a>
-                <a src="" class="btn">
-                    Подарки
-                </a>
-                <a src="" class="btn">
-                    Сувениры
-                </a>
+                <div class="buttons">
+                    <a href="/Gallery/Products" class="btn">
+                        Цветы
+                    </a>
+                </div>
+            </div>
+            <div class="right-block">
+                <div class="block-for-information">
+                    <div class="information">
+                        Бесплатная доставка по городу Лепель <br />
+                        +375291089024
+                    </div>
+                    <div class="more-information">
+                        Режим работы: <br />
+                        Пн-Сб - 09:00-18:00 <br />
+                        Вс - 09:00-15:00
+                    </div>
+                </div>
             </div>
         </div>
+
 
 
     </header>
@@ -47,7 +62,6 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
-    
+
 </body>
 </html>
-

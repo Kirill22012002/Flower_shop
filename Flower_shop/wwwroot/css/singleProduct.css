@@ -1,0 +1,50 @@
+.main-block {
+    display: flex;
+    flex-direction: row;
+    margin-top: 18px;
+    height: 80%;
+}
+
+.product-block {
+    width: 65%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+    .product-block img {
+        width: 60%;
+    }
+
+.price-block {
+    width: 35%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding-top:40px;
+}
+.text, .price {
+    line-height: 28px;
+    letter-spacing: normal;
+    font-size: 1.56em;
+    padding-left:0px;
+}
+.price {
+    color: gray;
+}
+.information-product, .more-information-product {
+    font-size: 1em;
+    font-family: Maison-Neue-Extended,sans-serif;
+    color:black;
+    letter-spacing: 2px;
+}
+.block-information{
+    padding-top:50px;
+}
+#logo-instagram{
+    width:50px;
+}
+.more-information-product a{
+    cursor:pointer;
+}

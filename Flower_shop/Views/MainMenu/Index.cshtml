@@ -4,7 +4,6 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="~/css/index.css" asp-append-version="true" />
-<link rel="stylesheet" href="~/css/productsIndex.css" asp-append-version="true" />
 
 <script src="~/js/yandexMap.js" type="text/javascript"></script>
 
@@ -17,10 +16,10 @@
             Порадуйте своих близких
         </div>
         <div class="btn-first-block">
-            <a src=""> Перейти </a>
+            <a href="/Gallery/Products"> Перейти </a>
         </div>
     </div>
-    <div class="main-image">
+    <div class="main-image" onclick="location.href='@Url.Action("Products", "Gallery")'">
         <img src="~/images/flower9.jpg" />
     </div>
 </div>
@@ -28,32 +27,32 @@
     <div class="name-of-block-products">
         Цветы и подарки
     </div>
-    <div class="several-products">
-        @foreach (ProductViewModel product in Model)
-        {
-            <div class="product">
-                <div class="product-image">
-                    <img src=@product.ImageUrl />
-                </div>
-                <div class="text">
-                    <div class="name">
-                        @product.Name
+    <div class="products">
+            @foreach (ProductViewModel product in Model)
+            {
+                <div class="product" onclick="location.href='@Url.Action("SingleProduct", "Gallery", new {productUrl = product.ImageUrl, productName = product.Name, productPrice = product.Price})'">
+                    <div class="product-image">
+                        <img src=@product.ImageUrl />
                     </div>
-                    <div class="price">
-                        @product.Price
+                    <div class="text">
+                        <div class="name">
+                            @product.Name
+                        </div>
+                        <div class="price">
+                            @product.Price
+                        </div>
                     </div>
                 </div>
-            </div>
-        }
-    </div>
+            }
+        </div>
     <div class="father-btn-block">
-        <div class="btn-block">
-            <a src=""> Перейти </a>
+        <div class="btn-second-block">
+            <a href="/Gallery/Products"> Перейти </a>
         </div>
     </div>
 </div>
 <div class="main-page">
-    <div class="main-image">
+    <div class="main-image" onclick="location.href='@Url.Action("Products", "Gallery")'">
         <img src="~/images/flower15.jpg" />
     </div>
     <div class="second-block">
@@ -63,8 +62,8 @@
         <div class="text">
             Мы делаем с любовью
         </div>
-        <div class="btn-second-block">
-            <a src=""> Перейти </a>
+        <div class="btn-third-block">
+            <a href="/Gallery/Products"> Перейти </a>
         </div>
     </div>
 </div>
@@ -76,12 +75,12 @@
         <div class="text">
             Маршрут построен
         </div>
-        <div class="btn-third-block">
-            <a src=""> Позвонить </a>
+        <div class="btn-fourth-block">
+            <a href="/Gallery/Products"> Перейти </a>
         </div>
     </div>
     <div class="main-map">
-        <div class="map" id="map" style="width: 450px; height: 350px;"></div>
+        <div class="map" id="map"></div>
     </div>
 </div>
 

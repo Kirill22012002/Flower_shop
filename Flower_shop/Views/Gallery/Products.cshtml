@@ -1,0 +1,32 @@
+﻿@using Flower_shop.Models
+@model List<ProductViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div>
+    <div>
+    </div>
+    <div class="block-products">
+        <div class="name-of-block-products">
+            Самые продаваемые
+        </div>
+        <div class="products">
+            @foreach (ProductViewModel product in Model)
+            {
+                <div class="product" onclick="location.href='@Url.Action("SingleProduct", "Gallery", new {productUrl = product.ImageUrl, productName = product.Name, productPrice = product.Price})'">
+                    <div class="product-image">
+                        <img src=@product.ImageUrl />
+                    </div>
+                    <div class="text">
+                        <div class="name">
+                            @product.Name
+                        </div>
+                        <div class="price">
+                            @product.Price
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>
