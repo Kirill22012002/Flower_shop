@@ -26,7 +26,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapControllerRoute(
         name: "default",
-        pattern: "{controller=MainMenu}/{action=Index}/{id?}");
+        pattern: "{controller=Index}/{action=Index}/{id?}");
 });
 
 app.MapRazorPages();

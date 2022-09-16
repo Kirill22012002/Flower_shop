@@ -4,14 +4,16 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&ampefd65cf8-8571-4b72-9d9c-97183c2c8ae2" type="text/javascript"></script>
+    <title>Цветы Лепель</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/Flower_shop.styles.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/css/layout.css" />
-    <link rel="stylesheet" href="~/css/yandexMap.css" />
-    <link rel="stylesheet" href="~/css/products.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/css?family=Raleway:700,800&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Rubik:regular,700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css?v=2" />
+    <link rel="stylesheet" href="~/css/layout.css?v=1" />
+    <link rel="stylesheet" href="~/css/header.css?v=1" />
+    <link rel="stylesheet" href="~/css/footer.css?v=1" />
+    <link rel="stylesheet" href="~/css/site.css?v=2" />
 
     @RenderSection("Scripts", required: false)
 
@@ -19,47 +21,49 @@
 
 
 <body>
-    <header>
-        <div class="main-block-header">
-            <div class="title-block">
-                <a href="/MainMenu/Index" class="name">
-                    <img src="~/images/logo2.png" />
+    <div class="wrapper">
+        <header id="open" class="header">
+            <div id="close" class="header__container">
+                <a href="" class="header__logo">
+                    Cvetu-lepel.by
                 </a>
-                <div class="buttons">
-                    <a href="/Gallery/Products" class="btn">
-                        Цветы
-                    </a>
+                <div class="header__menu menu">
+                    <nav id="menu" class="menu__body">
+                        <ul class="menu__list">
+                            <li class="menu__item"><a href="/Index/Index" class="menu__link">ДОМОЙ</a></li>
+                            <li class="menu__item"><a href="/Gallery/Products" class="menu__link">ЦВЕТЫ</a></li>
+                            <li class="menu__item"><a href="" class="menu__link">ДЕКОР</a></li>
+                            <li class="menu__item"><a href="" class="menu__link">ТЕХ.ПОДДЕРЖКА</a></li>
+                        </ul>
+                    </nav>
+                </div>
+                <div class="header__button">
+                    <a href="" class="button button_blue">ЗАКАЗАТЬ</a>
+                    <a href="#open" class="open-icon-menu"><span><img src="~/img/menu-icon.svg" /></span></a>
+                    <a href="#close" class="close-icon-menu"><span><img src="~/img/close-icon.svg" /></span></a>
                 </div>
             </div>
-        </div>
-
-
-
-    </header>
-    <div class="container">
-        @RenderBody()
+        </header>
+        <main class="main">
+            @RenderBody()
+        </main>
+        <footer class="footer">
+            <div class="footer__container">
+                <div class="footer__items">
+                    <a href="https://www.instagram.com/cvetu_podarki_lepel/?igshid=YmMyMTA2M2Y%3D" class="footer__item" target="_blank">
+                        <img src="~/img/Footer/instagram-logo.svg" alt="Инстаграмм">
+                    </a>
+                    <a href="https://www.flaticon.com/ru/stickers" title="цветок стикеры" class="footer__item" target="_blank">Стикеры от Flaticon</a>
+                </div>
+            </div>
+        </footer>
     </div>
-    <footer>
-        <div class="block-for-information">
-            <div class="information">
-                Бесплатная доставка по городу Лепель
-            </div>
-            <div class="more-information">
-                +375291089024
-            </div>
-            <div class="more-information">
-                Режим работы: <br />
-                Пн-Сб - 09:00-18:00 <br />
-                Вс - 09:00-15:00
-            </div>
-        </div>
-    </footer>
-
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&ampefd65cf8-8571-4b72-9d9c-97183c2c8ae2" type="text/javascript"></script>
 
 </body>
 </html>

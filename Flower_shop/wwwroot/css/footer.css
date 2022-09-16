@@ -1,0 +1,30 @@
+.footer {
+    background-color: #fafaf5;
+}
+
+.footer__container {
+    max-height: 150px;
+}
+
+.footer__items {
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer__item {
+    height: 100px;
+    width: 100px;
+}
+
+    .footer__item img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .footer__item:last-child {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }

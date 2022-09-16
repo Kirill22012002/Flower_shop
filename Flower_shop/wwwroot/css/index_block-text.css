@@ -1,0 +1,26 @@
+.block-text__title {
+    font-weight: 700;
+    font-size: 44px;
+    line-height: 126%;
+    color: black;
+}
+
+    .block-text__title:not(:last-child) {
+        margin: 0px 0px 12px 0px;
+    }
+
+    .block-text__title span {
+        color: #ec5863;
+    }
+
+.block-text__title_blue span {
+    color: #587eec;
+}
+
+.block-text__text {
+    line-height: 138.5%;
+}
+
+    .block-text__text:not(:last-child) {
+        margin: 0px 0px 12px 0px;
+    }

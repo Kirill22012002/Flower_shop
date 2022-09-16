@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Flower_shop.Controllers
 {
-    public class MainMenuController : Controller
+    public class IndexController : Controller
     {
         public IActionResult Index()
         {
@@ -14,28 +14,28 @@ namespace Flower_shop.Controllers
                     Id = 0,
                     Name = "Коробочка цветов",
                     Price = "от 35 р.",
-                    ImageUrl = "/images/flower10.jpg",
+                    ImageUrl = "/img/flower10.jpg",
                 },
                 new ProductViewModel
                 {
                     Id = 1,
                     Name = "Конверт",
                     Price = "от хх р.",
-                    ImageUrl = "/images/flower11.jpg"
+                    ImageUrl = "/img/flower11.jpg"
                 },
                 new ProductViewModel()
                 {
                     Id = 2,
                     Name = "Цветочная коробочка",
                     Price = "от хх р.",
-                    ImageUrl = "/images/flower12.jpg"
+                    ImageUrl = "/img/flower12.jpg"
                 },
                 new ProductViewModel()
                 {
                     Id = 3,
                     Name = "Яркая композиция",
                     Price = "от хх р.",
-                    ImageUrl = "/images/flower13.jpg"
+                    ImageUrl = "/img/flower13.jpg"
                 },
             };
             
