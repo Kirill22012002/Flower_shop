@@ -35,10 +35,13 @@
 
 /*TABLET*/
 @media(max-width: 991.98px) {
-
-    .single-product__contant {
-        padding: 0px 20px;
+    .single-product__image {
+        display:flex;
+        justify-content:center;
+        min-width: 90%;
     }
+
+
 }
 
 /*MOBILE*/
