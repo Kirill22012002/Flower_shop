@@ -14,28 +14,28 @@ namespace Flower_shop.Controllers
                     Id = 0,
                     Name = "Коробочка цветов",
                     Price = "от 35 р.",
-                    ImageUrl = "/img/flower10.jpg",
+                    Img = "/img/flower10.jpg",
                 },
                 new ProductViewModel
                 {
                     Id = 1,
                     Name = "Конверт",
                     Price = "от хх р.",
-                    ImageUrl = "/img/flower11.jpg"
+                    Img = "/img/flower11.jpg"
                 },
                 new ProductViewModel()
                 {
                     Id = 2,
                     Name = "Цветочная коробочка",
                     Price = "от хх р.",
-                    ImageUrl = "/img/flower12.jpg"
+                    Img = "/img/flower12.jpg"
                 },
                 new ProductViewModel()
                 {
                     Id = 3,
                     Name = "Яркая композиция",
                     Price = "от хх р.",
-                    ImageUrl = "/img/flower13.jpg"
+                    Img = "/img/flower13.jpg"
                 },
             };
             

@@ -1,8 +1,6 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Flower_shop.Models
+﻿namespace Flower_shop.EfStuff.DbModels
 {
-    public class ProductViewModel 
+    public class Product
     {
         public int Id { get; set; } = 0;
         public string Name { get; set; } = "";

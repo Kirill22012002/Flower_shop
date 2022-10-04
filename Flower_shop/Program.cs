@@ -1,8 +1,14 @@
+using Flower_shop.EfStuff;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+var connectString =
+    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DbStore;Integrated Security=True;";
+builder.Services.AddDbContext<WebDbContext>(x => x.UseSqlServer(connectString));
+builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
 

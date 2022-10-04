@@ -55,9 +55,9 @@
     <div class="product__container">
         @foreach (ProductViewModel product in Model)
         {
-            <div class="product__contant" onclick="location.href='@Url.Action("SingleProduct", "Gallery", new {productUrl = product.ImageUrl, productName = product.Name, productPrice = product.Price})'">
+            <div class="product__contant" onclick="location.href='@Url.Action("SingleProduct", "Gallery", new {productUrl = product.Img, productName = product.Name, productPrice = product.Price})'">
                 <div class="product__image">
-                    <img src=@product.ImageUrl alt="Продукт" />
+                    <img src=@product.Img alt="Продукт" />
                 </div>
                 <div class="product__block-text">
                     <div class="text-product">

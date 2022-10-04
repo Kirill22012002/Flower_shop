@@ -1,0 +1,52 @@
+﻿@using TagHelpersApp.Models
+@using Flower_shop.Models
+@model ProductViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/gallery_products.css?v=1" />
+
+<section class="input">
+    <div class="input__container">
+        <div class="main-block">
+            @using (Html.BeginForm())
+            {
+                <div class="block">
+                    <div class=name-of-block>
+                        НАЗВАНИЕ:
+                    </div>
+                    <div class="input-field">
+                        @Html.CheckBoxFor(x => x.Name)
+                    </div>
+                </div>
+                <div class="block">
+                    <div class=name-of-block>
+                        ФОТОГРАФИЯ В ФОРМАТЕ ""
+                    </div>
+                    <div class="input-field">
+                        @Html.CheckBoxFor(x => x.Img)
+                    </div>
+                </div>
+                <div class="block">
+                    <div class=name-of-block>
+                        ЦЕНА:
+                    </div>
+                    <div class="input-field">
+                        @Html.CheckBoxFor(x => x.Price)
+                    </div>
+                </div>
+                <div class="block">
+                    <div class=name-of-block>
+                        ТИП ПРОДУКЦИИ:
+                    </div>
+                    <div class="input-field">
+                        @Html.CheckBoxFor(x => x.Type)
+                    </div>
+                </div>
+                <div>
+                    <input type="submit" value="СОХРАНИТЬ"/>
+                </div>
+            }
+        </div>
+    </div>
+</section>
