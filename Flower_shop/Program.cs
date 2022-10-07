@@ -2,7 +2,6 @@ using Flower_shop;
 using Flower_shop.EfStuff;
 using Microsoft.EntityFrameworkCore;
 
-const string AuthName = "SmileCoockie";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -12,8 +11,10 @@ var connectString =
     @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DbStore;Integrated Security=True;";
 builder.Services.AddDbContext<WebDbContext>(x => x.UseSqlServer(connectString));
 
-builder.Services.AddAuthentication(AuthName)
-    .AddCookie(AuthName, config =>
+var authName = builder.Configuration.GetConnectionString("AuthName");
+
+builder.Services.AddAuthentication(builder.Configuration.GetConnectionString("AuthName"))
+    .AddCookie(builder.Configuration.GetConnectionString("AuthName"), config =>
     {
         config.LoginPath = "/Authentication/Autorization";
         config.AccessDeniedPath = "/Authentication/AccessDenied";

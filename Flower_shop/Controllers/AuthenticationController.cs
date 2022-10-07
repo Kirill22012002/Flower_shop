@@ -13,12 +13,15 @@ namespace Flower_shop.Controllers
     {
         private WebDbContext _dbContext;
         private IMapper _mapper;
+        private IConfiguration _config;
         public AuthenticationController(
             WebDbContext dbContext,
-            IMapper mapper)
+            IMapper mapper,
+            IConfiguration config)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _config = config;
         }
 
         [HttpGet]
@@ -41,10 +44,10 @@ namespace Flower_shop.Controllers
                 {
                     new Claim("Id", userDb.Id.ToString()),
                     new Claim("Name", userDb.FirstName),
-                    new Claim(ClaimTypes.AuthenticationMethod, "SmileCoockie")
+                    new Claim(ClaimTypes.AuthenticationMethod, _config.GetValue<string>("AuthName"))
                 };
 
-                var identity = new ClaimsIdentity(claims, "SmileCoockie");
+                var identity = new ClaimsIdentity(claims, _config.GetValue<string>("AuthName"));
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(principal);
 
@@ -53,9 +56,28 @@ namespace Flower_shop.Controllers
 
             return View();
         }
+        [HttpGet]
         public IActionResult Autorization()
         {
             return View();
+        }
+        [HttpPost]
+        public async Task<IActionResult> Autorization(LoginViewModel userView)
+        {
+            var user = _dbContext.Users.Single(x => x.Email == userView.Email && x.Password == userView.Password);
+
+            var claims = new List<Claim>()
+            {
+                new Claim("Id", user.Id.ToString()),
+                new Claim("Name", user.FirstName),
+                new Claim(ClaimTypes.AuthenticationMethod, _config.GetValue<string>("AuthName"))
+            };
+
+            var identity = new ClaimsIdentity(claims, _config.GetValue<string>("AuthName"));
+            var principal = new ClaimsPrincipal(identity);
+            await HttpContext.SignInAsync(principal);
+
+            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
 
     }

@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="~/css/index_present.css?v=1" />
 <link rel="stylesheet" href="~/css/index_ballon.css?v=1" />
 <link rel="stylesheet" href="~/css/index_delivery.css?v=1" />
-<link rel="stylesheet" href="~/css/index_block-text.css?v=1" />    
+<link rel="stylesheet" href="~/css/index_block-text.css?v=1" />
 <link rel="stylesheet" href="~/css/index_products.css?v=1" />
 
 
@@ -55,7 +55,7 @@
     <div class="product__container">
         @foreach (ProductViewModel product in Model)
         {
-            <div class="product__contant" onclick="location.href='@Url.Action("SingleProduct", "Gallery", new {productUrl = product.Img, productName = product.Name, productPrice = product.Price})'">
+            <div class="product__contant" onclick="location.href='@Url.Action("SingleProduct", "Gallery", new {product})'">
                 <div class="product__image">
                     <img src=@product.Img alt="Продукт" />
                 </div>
@@ -107,7 +107,10 @@
                     Пн-Сб - 09:00-18:00<br />
                     Вс - 09:00-15:00<br />
                 </div>
-                <a href="" class="block-text__button button">Заказать</a>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    <a href="/Authentication/Autorization" class="block-text__button button">Вход</a>
+                }
             </div>
         </div>
     </div>
