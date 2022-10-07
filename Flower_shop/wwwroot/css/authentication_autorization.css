@@ -1,0 +1,13 @@
+.registration__container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 100px 15px 50px 15px;
+    position: relative;
+}
+.main-block {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction:column;
+}

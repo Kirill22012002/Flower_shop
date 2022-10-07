@@ -1,5 +1,8 @@
+using Flower_shop;
 using Flower_shop.EfStuff;
 using Microsoft.EntityFrameworkCore;
+
+const string AuthName = "SmileCoockie";
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -8,6 +11,17 @@ builder.Services.AddRazorPages();
 var connectString =
     @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DbStore;Integrated Security=True;";
 builder.Services.AddDbContext<WebDbContext>(x => x.UseSqlServer(connectString));
+
+builder.Services.AddAuthentication(AuthName)
+    .AddCookie(AuthName, config =>
+    {
+        config.LoginPath = "/Authentication/Autorization";
+        config.AccessDeniedPath = "/Authentication/AccessDenied";
+        config.Cookie.Name = "CoockieCool";
+    });
+
+builder.Services.AddAutoMapper(typeof(AppMappingProfile));
+
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 var app = builder.Build();
@@ -26,6 +40,10 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Who I am
+app.UseAuthentication();
+
+// Where could I go 
 app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>

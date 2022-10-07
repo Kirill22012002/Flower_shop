@@ -7,6 +7,7 @@ namespace Flower_shop.EfStuff
     public class WebDbContext : DbContext
     {
         public DbSet<Product> Products { get; set; }
+        public DbSet<User> Users { get; set; }
 
         public WebDbContext(DbContextOptions options) : base(options)
         {

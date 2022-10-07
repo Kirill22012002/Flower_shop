@@ -11,9 +11,7 @@
         {
             <div class="product__contant" onclick="location.href='@Url.Action("SingleProduct",
                                                                               "Gallery",
-                                                       new {productUrl = product.Img,
-                                                            productName = product.Name,
-                                                            productPrice = product.Price})'">
+                                                       new {product})'">
                 <div class="product__image">
                     <img src=@product.Img alt="Продукт" />
                 </div>

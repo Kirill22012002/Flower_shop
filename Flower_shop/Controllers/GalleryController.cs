@@ -1,4 +1,5 @@
-﻿using Flower_shop.EfStuff;
+﻿using AutoMapper;
+using Flower_shop.EfStuff;
 using Flower_shop.EfStuff.DbModels;
 using Flower_shop.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -8,10 +9,14 @@ namespace Flower_shop.Controllers
     public class GalleryController : Controller
     {
         private WebDbContext _dbContext;
+        private IMapper _mapper;
 
-        public GalleryController(WebDbContext dbContext)
+        public GalleryController(
+            WebDbContext dbContext, 
+            IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public IActionResult Products()
@@ -26,15 +31,11 @@ namespace Flower_shop.Controllers
             }).ToList();
             return View(productsView);
         }
-        public IActionResult SingleProduct(string productUrl, string productName, string productPrice)
+        public IActionResult SingleProduct(ProductViewModel product)
         {
-            ProductViewModel productModel = new ProductViewModel
-            {
-                Name = productName,
-                Img = productUrl,
-                Price = productPrice
-            };
-            return View(productModel);
+            var productView = _mapper.Map<ProductViewModel>(product);
+
+            return View(productView);
         }
         [HttpGet]
         public IActionResult ProductEdition()
@@ -42,15 +43,9 @@ namespace Flower_shop.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ProductEdition(string name, string price, string img, string type)
+        public IActionResult ProductEdition(ProductViewModel productView)
         {
-            var productDb = new Product
-            {
-                Name = name,
-                Img = img,
-                Price = price,
-                Type = type
-            };
+            var productDb = _mapper.Map<Product>(productView);
 
             _dbContext.Products.Add(productDb);
             _dbContext.SaveChanges();

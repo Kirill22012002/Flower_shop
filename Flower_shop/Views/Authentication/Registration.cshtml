@@ -1,0 +1,45 @@
+﻿@using Flower_shop.Models.UserViewModels
+@model RegisterViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/authentication_autorization.css?v=1" />
+
+<section class="registration">
+    <div class="registration__container">
+        <div class="main-block">
+            <form method="post">
+                <div class="block">
+                    <div class="title">
+                        Регистрация:
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="title">
+                        ВВЕДИТЕ EMAIL:
+                    </div>
+                    <div class="input">
+                        @Html.TextBoxFor(x => x.Email)
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="title">
+                        ВВЕДИТЕ ПАРОЛЬ:
+                    </div>
+                    <div class="input">
+                        @Html.TextBoxFor(x => x.Password)
+                    </div>
+                </div>
+                <div class="block">
+                    <div class="title">
+                        ПОВТОРИТЕ ПАРОЛЬ:
+                    </div>
+                    <div class="input">
+                        @Html.TextBoxFor(x => x.ConfirmPassword)
+                    </div>
+                </div>
+                <input type="submit" value="Регистрация"/>
+            </form>
+        </div>
+    </div>
+</section>

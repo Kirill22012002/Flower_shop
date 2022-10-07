@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Flower_shop.Models
+@model ProductViewModel
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="~/css/gallery_edition.css?v=1" />
@@ -6,13 +8,13 @@
 <section class="input">
     <div class="input__container">
         <div class="main-block">
-            <form asp-controller="Gallery" asp-action="ProductEdition" method="post">
+            <form method="post">
                 <div class="block">
                     <div class=name-of-block>
                         НАЗВАНИЕ:
                     </div>
                     <div class="input-field">
-                        <input name="name" value="" />
+                        @Html.TextBoxFor(x => x.Name)
                     </div>
                 </div>
                 <div class="block">
@@ -20,7 +22,7 @@
                         ФОТОГРАФИЯ В ФОРМАТЕ "Img"
                     </div>
                     <div class="input-field">
-                        <input name="img" value="" />
+                        @Html.TextBoxFor(x => x.Img)
                     </div>
                 </div>
                 <div class="block">
@@ -28,7 +30,7 @@
                         ЦЕНА:
                     </div>
                     <div class="input-field">
-                        <input name="price" value="" />
+                        @Html.TextBoxFor(x => x.Price)
                     </div>
                 </div>
                 <div class="block">
@@ -36,7 +38,7 @@
                         ТИП ПРОДУКЦИИ:
                     </div>
                     <div class="input-field">
-                        <input name="type" value="" />
+                        @Html.TextBoxFor(x => x.Type)
                     </div>
                 </div>
                 <div>
