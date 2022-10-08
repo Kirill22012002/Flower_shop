@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using Flower_shop.Services
+@inject UserService userService
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -31,8 +33,10 @@
                         <ul class="menu__list">
                             <li class="menu__item"><a href="/Index/Index" class="menu__link">ДОМОЙ</a></li>
                             <li class="menu__item"><a href="/Gallery/Products" class="menu__link">ЦВЕТЫ</a></li>
-                            <li class="menu__item"><a href="/Test/TestDb" class="menu__link">DBTest</a></li>
-                            <li class="menu__item"><a href="/Gallery/ProductEdition" class="menu__link">ТЕХ.ПОДДЕРЖКА</a></li>
+                            @if (userService.IsAdmin())
+                            {
+                                <li class="menu__item"><a href="/AdminPlatform/Platform" class="menu__link">Панель управления</a></li>
+                            }
                         </ul>
                     </nav>
                 </div>

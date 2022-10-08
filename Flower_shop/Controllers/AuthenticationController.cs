@@ -64,18 +64,20 @@ namespace Flower_shop.Controllers
         [HttpPost]
         public async Task<IActionResult> Autorization(LoginViewModel userView)
         {
-
-
+            
             var user = _dbContext.Users.Single(x => x.Email == userView.Email && x.Password == userView.Password);
 
+            if (user == null)
+            {
+                return View();
+            }
 
             var claims = new List<Claim>()
-                {
-                    new Claim("Id", user.Id.ToString()),
-                    new Claim("Name", user.FirstName),
-                    new Claim(ClaimTypes.AuthenticationMethod, _config.GetSection("ConnectionStrings").GetSection("AuthName").Value)
-                };
-            
+            {
+                new Claim("Id", user.Id.ToString()),
+                new Claim("Name", user.FirstName),
+                new Claim(ClaimTypes.AuthenticationMethod, _config.GetSection("ConnectionStrings").GetSection("AuthName").Value)
+            };
 
             var identity = new ClaimsIdentity(claims, _config.GetSection("ConnectionStrings").GetSection("AuthName").Value);
             var principal = new ClaimsPrincipal(identity);

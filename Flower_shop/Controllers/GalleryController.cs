@@ -2,6 +2,7 @@
 using Flower_shop.EfStuff;
 using Flower_shop.EfStuff.DbModels;
 using Flower_shop.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Flower_shop.Controllers
@@ -12,7 +13,7 @@ namespace Flower_shop.Controllers
         private IMapper _mapper;
 
         public GalleryController(
-            WebDbContext dbContext, 
+            WebDbContext dbContext,
             IMapper mapper)
         {
             _dbContext = dbContext;
@@ -36,21 +37,6 @@ namespace Flower_shop.Controllers
             var productView = _mapper.Map<ProductViewModel>(product);
 
             return View(productView);
-        }
-        [HttpGet]
-        public IActionResult ProductEdition()
-        {
-            return View();
-        }
-        [HttpPost]
-        public IActionResult ProductEdition(ProductViewModel productView)
-        {
-            var productDb = _mapper.Map<Product>(productView);
-
-            _dbContext.Products.Add(productDb);
-            _dbContext.SaveChanges();
-
-            return View();
         }
     }
 }

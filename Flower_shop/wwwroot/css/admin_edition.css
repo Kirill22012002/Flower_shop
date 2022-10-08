@@ -1,12 +1,12 @@
-.input__container {
+.edition__container {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
     padding: 100px 15px 50px 15px;
     position: relative;
 }
-.input{
-    display:flex;
-    justify-content:center;
-    align-items:center;
+.edition {
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }

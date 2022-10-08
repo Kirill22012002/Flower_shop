@@ -1,0 +1,61 @@
+.platform__container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 100px 15px 50px 15px;
+    position: relative;
+}
+
+.platform {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.admin__list {
+    display: flex;
+}
+
+.admin__item {
+    margin: 0 40px 0 0;
+}
+
+.admin__link {
+    font-family: Raleway;
+    text-transform: uppercase;
+    font-weight: 700;
+    font-size: 10px;
+    line-height: 1.2;
+    color: black;
+    letter-spacing: 1px;
+}
+
+    .admin__link:hover {
+        text-decoration: underline;
+    }
+
+.platform__button {
+    position: relative;
+    z-index: 5;
+    display: flex;
+    justify-content: flex-end;
+    flex-direction:column;
+    flex: 0 0 252px;
+    align-items: center;
+}
+
+.button{
+    margin:6px;
+}
+
+.button:hover {
+    background-color: #ff9299;
+}
+
+.button_blue {
+    background-color: blue;
+}
+
+    .button_blue:hover {
+        background-color: rgb(87, 87, 255);
+    }
