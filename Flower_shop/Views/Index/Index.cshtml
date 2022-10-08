@@ -55,7 +55,7 @@
     <div class="product__container">
         @foreach (ProductViewModel product in Model)
         {
-            <div class="product__contant" onclick="location.href='@Url.Action("SingleProduct", "Gallery", new {product})'">
+            <div class="product__contant" onclick="location.href='@Url.Action("SingleProduct", "Gallery", product)'">
                 <div class="product__image">
                     <img src=@product.Img alt="Продукт" />
                 </div>
@@ -107,10 +107,7 @@
                     Пн-Сб - 09:00-18:00<br />
                     Вс - 09:00-15:00<br />
                 </div>
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <a href="/Authentication/Autorization" class="block-text__button button">Вход</a>
-                }
+                <a href="" class="block-text__button button">Заказать</a>
             </div>
         </div>
     </div>

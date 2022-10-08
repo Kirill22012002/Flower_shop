@@ -44,10 +44,10 @@ namespace Flower_shop.Controllers
                 {
                     new Claim("Id", userDb.Id.ToString()),
                     new Claim("Name", userDb.FirstName),
-                    new Claim(ClaimTypes.AuthenticationMethod, _config.GetValue<string>("AuthName"))
+                    new Claim(ClaimTypes.AuthenticationMethod, _config.GetSection("ConnectionStrings").GetSection("AuthName").Value)
                 };
 
-                var identity = new ClaimsIdentity(claims, _config.GetValue<string>("AuthName"));
+                var identity = new ClaimsIdentity(claims, _config.GetSection("ConnectionStrings").GetSection("AuthName").Value);
                 var principal = new ClaimsPrincipal(identity);
                 await HttpContext.SignInAsync(principal);
 
@@ -64,16 +64,20 @@ namespace Flower_shop.Controllers
         [HttpPost]
         public async Task<IActionResult> Autorization(LoginViewModel userView)
         {
+
+
             var user = _dbContext.Users.Single(x => x.Email == userView.Email && x.Password == userView.Password);
 
-            var claims = new List<Claim>()
-            {
-                new Claim("Id", user.Id.ToString()),
-                new Claim("Name", user.FirstName),
-                new Claim(ClaimTypes.AuthenticationMethod, _config.GetValue<string>("AuthName"))
-            };
 
-            var identity = new ClaimsIdentity(claims, _config.GetValue<string>("AuthName"));
+            var claims = new List<Claim>()
+                {
+                    new Claim("Id", user.Id.ToString()),
+                    new Claim("Name", user.FirstName),
+                    new Claim(ClaimTypes.AuthenticationMethod, _config.GetSection("ConnectionStrings").GetSection("AuthName").Value)
+                };
+            
+
+            var identity = new ClaimsIdentity(claims, _config.GetSection("ConnectionStrings").GetSection("AuthName").Value);
             var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(principal);
 

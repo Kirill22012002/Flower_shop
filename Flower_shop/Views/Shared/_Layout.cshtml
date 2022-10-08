@@ -37,7 +37,10 @@
                     </nav>
                 </div>
                 <div class="header__button">
-                    <a href="" id="doesnt-work" class="button button_blue">ЗАКАЗАТЬ</a>
+                    @if (!User.Identity.IsAuthenticated)
+                    {
+                        <a href="/Authentication/Autorization" class="button button_blue">Войти</a>
+                    }
                     <a href="#open" class="open-icon-menu"><span><img src="~/img/menu-icon.svg" /></span></a>
                     <a href="#close" class="close-icon-menu"><span><img src="~/img/close-icon.svg" /></span></a>
                 </div>

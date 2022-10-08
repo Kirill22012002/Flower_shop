@@ -1,17 +1,17 @@
 ﻿@using Flower_shop.Models.UserViewModels
-@model RegisterViewModel
+@model LoginViewModel
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/authentication_registration.css?v=1" />
+<link rel="stylesheet" href="~/css/authentication_autorization.css?v=1" />
 
-<section class="registration">
-    <div class="registration__container">
+<section class="autorization">
+    <div class="autorization__container">
         <div class="main-block">
             <form method="post">
                 <div class="block">
                     <div class="title">
-                        Регистрация:
+                        ВХОД:
                     </div>
                 </div>
                 <div class="block">
@@ -30,16 +30,9 @@
                         @Html.TextBoxFor(x => x.Password)
                     </div>
                 </div>
-                <div class="block">
-                    <div class="title">
-                        ПОВТОРИТЕ ПАРОЛЬ:
-                    </div>
-                    <div class="input">
-                        @Html.TextBoxFor(x => x.ConfirmPassword)
-                    </div>
-                </div>
-                <input type="submit" value="Регистрация"/>
+                <input type="submit" value="Вход"/>
             </form>
+            <a href="/Authentication/Registration">РЕГИСТРАЦИЯ</a>
         </div>
     </div>
 </section>
