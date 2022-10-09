@@ -20,7 +20,6 @@ namespace Flower_shop.Controllers
                 Name = x.Name,
                 Price = x.Price,
                 Type = x.Type,
-                Img = x.Img
             }).Take(4).ToList();
 
             return View(productsView);

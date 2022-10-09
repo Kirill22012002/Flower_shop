@@ -26,7 +26,6 @@ namespace Flower_shop.Controllers
             {
                 Id = x.Id,
                 Name = x.Name,
-                Img = x.Img,
                 Price = x.Price,
                 Type = x.Type
             }).ToList();

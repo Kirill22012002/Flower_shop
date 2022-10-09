@@ -9,20 +9,23 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Flower_shop.Controllers
 {
-    
+
     public class AdminPlatformController : Controller
     {
         private IMapper _mapper;
         private WebDbContext _dbContext;
         private UserService _userService;
+        private IWebHostEnvironment _appEnvironment;
         public AdminPlatformController(
             IMapper mapper,
-            WebDbContext dbContext, 
-            UserService userService)
+            WebDbContext dbContext,
+            UserService userService,
+            IWebHostEnvironment appEnvironment)
         {
             _mapper = mapper;
             _dbContext = dbContext;
             _userService = userService;
+            _appEnvironment = appEnvironment;
         }
 
         public IActionResult Platform()
@@ -45,23 +48,39 @@ namespace Flower_shop.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ProductEdition(ProductViewModel productView)
+        public async Task<IActionResult> ProductEdition(ProductViewModel productView)
         {
             var productDb = _mapper.Map<Product>(productView);
+
+            if (productView.UploadedFile != null)
+            {
+                string path = "/files/" + productView.UploadedFile.FileName;
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await productView.UploadedFile.CopyToAsync(fileStream);
+
+                }
+                var file = new ProductImage { Name = productView.UploadedFile.Name, Path = path, Product = productDb };
+
+                _dbContext.ProductImage.Add(file);
+                _dbContext.SaveChanges();
+                productDb.ProductImage = file;
+            }
+
 
             _dbContext.Products.Add(productDb);
             _dbContext.SaveChanges();
 
-            return View();
+            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
 
         [HttpGet]
-        public IActionResult DeleteProduct()
+        public IActionResult ProductDelete()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult DeleteProduct(int Id)
+        public IActionResult ProductDelete(int Id)
         {
             var productDb = _dbContext.Products.Single(x => x.Id == Id);
             _dbContext.Products.Remove(productDb);
