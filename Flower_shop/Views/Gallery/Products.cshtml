@@ -1,5 +1,8 @@
-﻿@using Flower_shop.Models
+﻿@using Flower_shop.EfStuff.DbModels.Enums
+@using Flower_shop.Models
+@using Flower_shop.Services
 @model List<ProductViewModel>
+@inject UserService userService
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -21,6 +24,16 @@
                         @product.Price
                     </div>
                 </div>
+                @if (userService.IsAdmin())
+                {
+                    <form action="/AdminPlatform/DeleteProduct" method="post">
+                        <div class="product-remove">
+                            <input name="Id" type="hidden" value="@product.Id" />
+                            <input type="submit" value="Удалить" />
+                        </div>
+                    </form>
+
+                }
             </div>
         }
     </div>

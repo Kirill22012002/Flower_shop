@@ -54,5 +54,21 @@ namespace Flower_shop.Controllers
 
             return View();
         }
+
+        [HttpGet]
+        public IActionResult DeleteProduct()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult DeleteProduct(int Id)
+        {
+            var productDb = _dbContext.Products.Single(x => x.Id == Id);
+            _dbContext.Products.Remove(productDb);
+            _dbContext.SaveChanges();
+
+            return RedirectToRoute("default", new { controller = "Gallery", action = "Products" });
+        }
+
     }
 }
