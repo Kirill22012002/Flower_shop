@@ -3,43 +3,32 @@
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<link rel="stylesheet" href="~/css/authentication_registration.css?v=1" />
+<link rel="stylesheet" href="~/css/authentication_registration.css?v=2" />
+<link rel="stylesheet" href="~/css/forms.css?v=1" />
 
 <section class="registration">
     <div class="registration__container">
-        <div class="main-block">
-            <form method="post">
-                <div class="block">
-                    <div class="title">
-                        Регистрация:
-                    </div>
-                </div>
-                <div class="block">
-                    <div class="title">
-                        ВВЕДИТЕ EMAIL:
+        <div class="block">
+            <div class="name">
+                РЕГИСТРАЦИЯ:
+            </div>
+            <div class="form-field">
+                <form method="post">
+                    <div class="input">
+                        @Html.TextBoxFor(x => x.Email, new {@class="input-field", placeholder="ВВЕДИТЕ EMAIL"})
                     </div>
                     <div class="input">
-                        @Html.TextBoxFor(x => x.Email)
-                    </div>
-                </div>
-                <div class="block">
-                    <div class="title">
-                        ВВЕДИТЕ ПАРОЛЬ:
+                        @Html.TextBoxFor(x => x.Password, new {@class="input-field", placeholder="ВВЕДИТЕ ПАРОЛЬ"})
                     </div>
                     <div class="input">
-                        @Html.TextBoxFor(x => x.Password)
+                        @Html.TextBoxFor(x => x.ConfirmPassword, new {@class="input-field", placeholder="ПОВТОРИТЕ ПАРОЛЬ"})
                     </div>
-                </div>
-                <div class="block">
-                    <div class="title">
-                        ПОВТОРИТЕ ПАРОЛЬ:
+                    <div class="button-submit">
+                        <input type="submit" value="РЕГИСТРАЦИЯ" />
                     </div>
-                    <div class="input">
-                        @Html.TextBoxFor(x => x.ConfirmPassword)
-                    </div>
-                </div>
-                <input type="submit" value="Регистрация"/>
-            </form>
+                </form>
+                <a href="/Authentication/Autorization">ВОЙТИ</a>
+            </div>
         </div>
     </div>
 </section>

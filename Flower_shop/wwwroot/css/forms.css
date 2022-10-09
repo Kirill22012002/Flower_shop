@@ -5,7 +5,7 @@
     align-items: center;
 }
 
-.product-edition {
+.form-field {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,10 +74,13 @@
     width: 248px;
 }
 
-.product-edition form {
+.form-field form {
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+.form-field a{
+    margin-top:10px;
 }
 
 .name {
@@ -87,7 +90,7 @@
     color: #166fe5;
     font-size: 49px;
     font-family: Comic Sans MS;
-    margin-top: 61px;
+    margin-top: 20px;
     margin-bottom: 20px;
 }
 
@@ -98,12 +101,12 @@
         margin-bottom: 16px;
     }
 
-    .product-edition {
+    .form-field {
         width: 356px;
     }
 
     .input-field {
         height: 53px;
-        font-size:20px;
+        font-size: 20px;
     }
 }

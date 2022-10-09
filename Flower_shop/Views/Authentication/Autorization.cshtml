@@ -4,35 +4,28 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 <link rel="stylesheet" href="~/css/authentication_autorization.css?v=1" />
+<link rel="stylesheet" href="~/css/forms.css?v=1" />
 
 <section class="autorization">
     <div class="autorization__container">
-        <div class="main-block">
-            <form method="post">
-                <div class="block">
-                    <div class="title">
-                        ВХОД:
-                    </div>
-                </div>
-                <div class="block">
-                    <div class="title">
-                        ВВЕДИТЕ EMAIL:
+        <div class="block">
+            <div class="name">
+                ВХОД:
+            </div>
+            <div class="form-field">
+                <form method="post">
+                    <div class="input">
+                        @Html.TextBoxFor(x => x.Email, new {@class="input-field", placeholder="ВВЕДИТЕ EMAIL"})
                     </div>
                     <div class="input">
-                        @Html.TextBoxFor(x => x.Email)
+                        @Html.TextBoxFor(x => x.Password, new {@class="input-field", placeholder="ВВЕДИТЕ ПАРОЛЬ"})
                     </div>
-                </div>
-                <div class="block">
-                    <div class="title">
-                        ВВЕДИТЕ ПАРОЛЬ:
+                    <div class="button-submit">
+                        <input type="submit" value="ВОЙТИ" />
                     </div>
-                    <div class="input">
-                        @Html.TextBoxFor(x => x.Password)
-                    </div>
-                </div>
-                <input type="submit" value="Вход"/>
-            </form>
-            <a href="/Authentication/Registration">РЕГИСТРАЦИЯ</a>
+                </form>
+                <a href="/Authentication/Registration">РЕГИСТРАЦИЯ</a>
+            </div>
         </div>
     </div>
 </section>
