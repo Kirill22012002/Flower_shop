@@ -16,7 +16,7 @@
                 Добавить продукт
             </div>
             <div class="form-field">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="input">
                         @Html.TextBoxFor(x => x.Name, new {@class="input-field", placeholder="Название"})
                     </div>
@@ -24,7 +24,7 @@
                         @Html.TextBoxFor(x => x.Price, new {@class="input-field", placeholder="Цена"})
                     </div>
                     <div class="input">
-                        @Html.LabelFor(x => x.UploadedFile, new {@class="input-field", placeholder="Картинка"})
+                        @Html.TextBoxFor(x => x.UploadedFile, new {@class="input-field", type="file", placeholder="Картинка"})
                     </div>
                     <div class="input">
                         @Html.TextBoxFor(x => x.Type, new {@class="input-field", placeholder="Тип продукта"})
