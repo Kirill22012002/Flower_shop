@@ -22,13 +22,8 @@ namespace Flower_shop.Controllers
 
         public IActionResult Products()
         {
-            var productsView = _dbContext.Products.Select(x => new ProductViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Price = x.Price,
-                Type = x.Type
-            }).ToList();
+            var productsView = _mapper.Map<List<ProductViewModel>>(_dbContext.Products.ToList());
+
             return View(productsView);
         }
         public IActionResult SingleProduct(ProductViewModel product)

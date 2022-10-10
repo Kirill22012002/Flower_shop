@@ -9,7 +9,6 @@ namespace Flower_shop.EfStuff
     {
         public DbSet<Product> Products { get; set; }
         public DbSet<User> Users { get; set; }
-        public DbSet<ProductImage> ProductImage { get; set; }
 
         public WebDbContext(DbContextOptions options) : base(options)
         {

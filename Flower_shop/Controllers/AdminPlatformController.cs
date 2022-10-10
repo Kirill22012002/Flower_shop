@@ -50,7 +50,6 @@ namespace Flower_shop.Controllers
         [HttpPost]
         public async Task<IActionResult> ProductEdition(ProductViewModel productView)
         {
-            var productDb = _mapper.Map<Product>(productView);
 
             if (productView.UploadedFile != null)
             {
@@ -60,16 +59,19 @@ namespace Flower_shop.Controllers
                     await productView.UploadedFile.CopyToAsync(fileStream);
 
                 }
-                var file = new ProductImage { Name = productView.UploadedFile.Name, Path = path, Product = productDb };
+                var productViewModel = new ProductViewModel { 
+                    ImageName = productView.UploadedFile.Name, 
+                    ImagePath = path, 
+                    Name = productView.Name, 
+                    Price = productView.Price,
+                    Type = productView.Type
+                };
 
-                _dbContext.ProductImage.Add(file);
+                var productDb = _mapper.Map<Product>(productViewModel);
+
+                _dbContext.Products.Add(productDb);
                 _dbContext.SaveChanges();
-                productDb.ProductImage = file;
             }
-
-
-            _dbContext.Products.Add(productDb);
-            _dbContext.SaveChanges();
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }

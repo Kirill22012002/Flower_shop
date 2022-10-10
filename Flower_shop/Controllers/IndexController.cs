@@ -1,4 +1,5 @@
-﻿using Flower_shop.EfStuff;
+﻿using AutoMapper;
+using Flower_shop.EfStuff;
 using Flower_shop.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,20 +8,18 @@ namespace Flower_shop.Controllers
     public class IndexController : Controller
     {
         private WebDbContext _dbContext;
-        public IndexController(WebDbContext dbContext)
+        private IMapper _mapper;
+        public IndexController(
+            WebDbContext dbContext, 
+            IMapper mapper)
         {
             _dbContext = dbContext;
+            _mapper = mapper;
         }
 
         public IActionResult Index()
         {
-            var productsView = _dbContext.Products.Select(x => new ProductViewModel
-            {
-                Id = x.Id,
-                Name = x.Name,
-                Price = x.Price,
-                Type = x.Type,
-            }).Take(4).ToList();
+            var productsView = _mapper.Map<List<ProductViewModel>>(_dbContext.Products.Take(4));
 
             return View(productsView);
         }
