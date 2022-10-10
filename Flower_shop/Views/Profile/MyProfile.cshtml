@@ -1,0 +1,27 @@
+﻿@using Flower_shop.Models.UserViewModels
+@model UserViewModel
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<link rel="stylesheet" href="~/css/profile_myprofile.css?v=1" />
+
+<section class="profile">
+    <div class="profile__container">
+        <div class="profile__contant">
+            <div class="data">
+                <span class="name">
+                    @Model.FirstName
+                </span>
+                <span class="name">
+                    @Model.LastName
+                </span>
+            </div>
+            <div class="data">
+                @Model.Email
+            </div>
+            <div class="data">
+                <a href="/Authentication/SignOut">Выйти</a>
+            </div>
+        </div>
+    </div>
+</section>

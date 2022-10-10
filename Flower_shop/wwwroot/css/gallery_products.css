@@ -57,6 +57,13 @@
     display: flex;
     align-items: center;
 }
+.remove-block{
+    display:flex;
+    justify-content: flex-end;
+}
+form input{
+    font-size:20px;
+}
 /*MOBILE*/
 @media(max-width: 767.98px) {
     .product__contant {

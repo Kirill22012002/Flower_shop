@@ -27,13 +27,12 @@
                 </div>
                 @if (userService.IsAdmin())
                 {
-                    <form action="/AdminPlatform/ProductDelete" method="post">
+                    <form action="/AdminPlatform/ProductDelete" method="post" class="remove-block">
                         <div class="product-remove">
                             <input name="Id" type="hidden" value="@product.Id" />
                             <input type="submit" value="Удалить" />
                         </div>
                     </form>
-
                 }
             </div>
         }

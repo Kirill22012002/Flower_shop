@@ -1,0 +1,18 @@
+.profile__container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    padding: 100px 15px 50px 0px;
+    position: relative;
+}
+
+.profile__contant {
+    flex: 0 1 50%;
+    padding-left: 40px;
+}
+.data{
+    font-size:25px;
+}
+.data a{
+    color:red;
+}

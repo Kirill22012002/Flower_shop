@@ -85,6 +85,12 @@ namespace Flower_shop.Controllers
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
+        public async Task<IActionResult> SignOut()
+        {
+            await HttpContext.SignOutAsync();
+
+            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
+        }
 
     }
 }
