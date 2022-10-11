@@ -19,9 +19,10 @@ namespace Flower_shop.Controllers
 
         public IActionResult Index()
         {
-            var productsView = _mapper.Map<List<ProductViewModel>>(_dbContext.Products.Take(4));
-
-            return View(productsView);
+/*            var productsView = _mapper.Map<List<ProductViewModel>>(_dbContext.Products.Take(4));
+*/
+/*            return View(productsView);
+*/            return View();
         }
     }
 }

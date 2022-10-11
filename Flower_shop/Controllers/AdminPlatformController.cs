@@ -63,8 +63,7 @@ namespace Flower_shop.Controllers
                     ImageName = productView.UploadedFile.Name, 
                     ImagePath = path, 
                     Name = productView.Name, 
-                    Price = productView.Price,
-                    Type = productView.Type
+                    Price = productView.Price
                 };
 
                 var productDb = _mapper.Map<Product>(productViewModel);
