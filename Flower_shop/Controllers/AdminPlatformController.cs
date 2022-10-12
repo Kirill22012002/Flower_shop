@@ -45,6 +45,15 @@ namespace Flower_shop.Controllers
             {
                 return RedirectToRoute("default", new { controller = "Index", action = "Index" });
             }
+
+            var typesView = _mapper.Map<List<TypeProductViewModel>>(_dbContext.TypesProduct.ToList());
+
+            typesView.ForEach(x => x.Name = )
+
+            var productView = new ProductViewModel() { TypesName = }
+
+
+            TypesName
             return View();
         }
         [HttpPost]
@@ -73,6 +82,20 @@ namespace Flower_shop.Controllers
             }
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
+        }
+        [HttpGet]
+        public IActionResult TypeEdition()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult TypeEdition(TypeProductViewModel typeProductView)
+        {
+            var typeProductDb = _mapper.Map<TypeProduct>(typeProductView);
+            _dbContext.TypesProduct.Add(typeProductDb);
+            _dbContext.SaveChanges();
+
+            return View();
         }
 
         [HttpGet]

@@ -26,6 +26,13 @@
                     <div class="input">
                         @Html.TextBoxFor(x => x.UploadedFile, new {@class="input-field", type="file", placeholder="Картинка"})
                     </div>
+                    @foreach (TypeProductViewModel typeProduct in Model.Types) ;
+                    {
+                        <div class="input">
+                            
+                            @Html.TextBoxFor(x => x.UploadedFile, new {@class="input-field", type="file", placeholder="Картинка"})
+                        </div>
+                    }
                     <div class="button-submit">
                         <input type="submit" value="ДОБАВИТЬ" />
                     </div>
