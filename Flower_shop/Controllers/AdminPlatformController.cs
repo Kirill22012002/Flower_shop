@@ -46,15 +46,22 @@ namespace Flower_shop.Controllers
                 return RedirectToRoute("default", new { controller = "Index", action = "Index" });
             }
 
-            var typesView = _mapper.Map<List<TypeProductViewModel>>(_dbContext.TypesProduct.ToList());
+            var typeView = _mapper.Map<List<TypeProductViewModel>>(_dbContext.TypesProduct.ToList());
 
-            typesView.ForEach(x => x.Name = )
+            var typeName = new List<string>();
 
-            var productView = new ProductViewModel() { TypesName = }
+            foreach(var name in typeView)
+            {
+                typeName.Add(name.Name);
+            }
+
+            var productView = new ProductViewModel()
+            {
+                TypesName = typeName
+            };
 
 
-            TypesName
-            return View();
+            return View(productView);
         }
         [HttpPost]
         public async Task<IActionResult> ProductEdition(ProductViewModel productView)
@@ -74,8 +81,10 @@ namespace Flower_shop.Controllers
                     Name = productView.Name, 
                     Price = productView.Price
                 };
+                var typeProduct = _dbContext.TypesProduct.SingleOrDefault(x => x.Name.ToLower() == productView.TypeName.ToLower());
 
                 var productDb = _mapper.Map<Product>(productViewModel);
+                productDb.TypeProduct = typeProduct;
 
                 _dbContext.Products.Add(productDb);
                 _dbContext.SaveChanges();
@@ -84,12 +93,12 @@ namespace Flower_shop.Controllers
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
         [HttpGet]
-        public IActionResult TypeEdition()
+        public IActionResult TypeProductEdition()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult TypeEdition(TypeProductViewModel typeProductView)
+        public IActionResult TypeProductEdition(TypeProductViewModel typeProductView)
         {
             var typeProductDb = _mapper.Map<TypeProduct>(typeProductView);
             _dbContext.TypesProduct.Add(typeProductDb);

@@ -6,6 +6,6 @@ namespace Flower_shop.Models
     {
         public int Id { get; set; } 
         public string Name { get; set; } = "";
-        public List<ProductViewModel> Products { get; set; }
+        public List<string> ProductNames { get; set; }
     }
 }
