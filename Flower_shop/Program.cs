@@ -1,5 +1,6 @@
 using Flower_shop;
 using Flower_shop.EfStuff;
+using Flower_shop.EfStuff.Repositories;
 using Flower_shop.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -25,6 +26,9 @@ builder.Services.AddAuthentication(builder.Configuration.GetConnectionString("Au
 builder.Services.AddAutoMapper(typeof(AppMappingProfile));
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<ProductRepository>();
+builder.Services.AddScoped<TypeProductRepository>();
+builder.Services.AddScoped<UserRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

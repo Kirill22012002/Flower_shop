@@ -2,6 +2,7 @@
 using Flower_shop.EfStuff;
 using Flower_shop.EfStuff.DbModels;
 using Flower_shop.EfStuff.DbModels.Enums;
+using Flower_shop.EfStuff.Repositories;
 using Flower_shop.Models.UserViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -14,16 +15,18 @@ namespace Flower_shop.Controllers
         private WebDbContext _dbContext;
         private IMapper _mapper;
         private IConfiguration _config;
+        private UserRepository _userRepository;
         public AuthenticationController(
             WebDbContext dbContext,
             IMapper mapper,
-            IConfiguration config)
+            IConfiguration config,
+            UserRepository userRepository)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _config = config;
+            _userRepository = userRepository;
         }
-
         [HttpGet]
         public IActionResult Registration()
         {
@@ -37,8 +40,7 @@ namespace Flower_shop.Controllers
                 var userDb = _mapper.Map<User>(registerView);
                 userDb.Role = SiteRole.User;
 
-                _dbContext.Users.Add(userDb);
-                _dbContext.SaveChanges();
+                _userRepository.Save(userDb);
 
                 var claims = new List<Claim>()
                 {
@@ -64,8 +66,7 @@ namespace Flower_shop.Controllers
         [HttpPost]
         public async Task<IActionResult> Autorization(LoginViewModel userView)
         {
-            
-            var user = _dbContext.Users.Single(x => x.Email == userView.Email && x.Password == userView.Password);
+            var user = _userRepository.GetByEmAndPass(userView.Email, userView.Password);
 
             if (user == null)
             {
@@ -91,6 +92,5 @@ namespace Flower_shop.Controllers
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
-
     }
 }

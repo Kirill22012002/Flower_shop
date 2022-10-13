@@ -2,6 +2,7 @@
 using Flower_shop.EfStuff;
 using Flower_shop.EfStuff.DbModels;
 using Flower_shop.EfStuff.DbModels.Enums;
+using Flower_shop.EfStuff.Repositories;
 using Flower_shop.Models;
 using Flower_shop.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -9,25 +10,29 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Flower_shop.Controllers
 {
-
     public class AdminPlatformController : Controller
     {
         private IMapper _mapper;
         private WebDbContext _dbContext;
         private UserService _userService;
         private IWebHostEnvironment _appEnvironment;
+        private ProductRepository _productRepository;
+        private TypeProductRepository _typeProductRepository;
         public AdminPlatformController(
             IMapper mapper,
             WebDbContext dbContext,
             UserService userService,
-            IWebHostEnvironment appEnvironment)
+            IWebHostEnvironment appEnvironment,
+            ProductRepository productRepository,
+            TypeProductRepository typeProductRepository)
         {
             _mapper = mapper;
             _dbContext = dbContext;
             _userService = userService;
             _appEnvironment = appEnvironment;
+            _productRepository = productRepository;
+            _typeProductRepository = typeProductRepository;
         }
-
         public IActionResult Platform()
         {
             if (!_userService.IsAdmin())
@@ -37,7 +42,6 @@ namespace Flower_shop.Controllers
 
             return View();
         }
-
         [HttpGet]
         public IActionResult ProductEdition()
         {
@@ -86,8 +90,7 @@ namespace Flower_shop.Controllers
                 var productDb = _mapper.Map<Product>(productViewModel);
                 productDb.TypeProduct = typeProduct;
 
-                _dbContext.Products.Add(productDb);
-                _dbContext.SaveChanges();
+                _productRepository.Save(productDb);
             }
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
@@ -101,26 +104,21 @@ namespace Flower_shop.Controllers
         public IActionResult TypeProductEdition(TypeProductViewModel typeProductView)
         {
             var typeProductDb = _mapper.Map<TypeProduct>(typeProductView);
-            _dbContext.TypesProduct.Add(typeProductDb);
-            _dbContext.SaveChanges();
+            _typeProductRepository.Save(typeProductDb);
 
             return View();
         }
-
         [HttpGet]
         public IActionResult ProductDelete()
         {
             return View();
         }
         [HttpPost]
-        public IActionResult ProductDelete(int Id)
+        public IActionResult ProductDelete(int id)
         {
-            var productDb = _dbContext.Products.Single(x => x.Id == Id);
-            _dbContext.Products.Remove(productDb);
-            _dbContext.SaveChanges();
+            _productRepository.Remove(_productRepository.Get(id));
 
             return RedirectToRoute("default", new { controller = "Gallery", action = "Products" });
         }
-
     }
 }
