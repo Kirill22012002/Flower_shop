@@ -85,7 +85,8 @@ namespace Flower_shop.Controllers
                     Name = productView.Name, 
                     Price = productView.Price
                 };
-                var typeProduct = _dbContext.TypesProduct.SingleOrDefault(x => x.Name.ToLower() == productView.TypeName.ToLower());
+
+                var typeProduct = _typeProductRepository.GetByName(productView.TypeName);
 
                 var productDb = _mapper.Map<Product>(productViewModel);
                 productDb.TypeProduct = typeProduct;
