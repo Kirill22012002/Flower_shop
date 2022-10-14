@@ -119,7 +119,7 @@ namespace Flower_shop.Controllers
         {
             _productRepository.Remove(_productRepository.Get(id));
 
-            return RedirectToRoute("default", new { controller = "Gallery", action = "Products" });
+            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
     }
 }

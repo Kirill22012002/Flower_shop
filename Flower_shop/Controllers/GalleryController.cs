@@ -13,19 +13,24 @@ namespace Flower_shop.Controllers
         private WebDbContext _dbContext;
         private IMapper _mapper;
         private ProductRepository _productRepository;
+        private TypeProductRepository _typeProductRepository;
 
         public GalleryController(
             WebDbContext dbContext,
             IMapper mapper,
-            ProductRepository productRepository)
+            ProductRepository productRepository, 
+            TypeProductRepository typeProductRepository)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _productRepository = productRepository;
+            _typeProductRepository = typeProductRepository;
         }
-        public IActionResult Products()
+        public IActionResult Products(int typeId)
         {
-            var productsView = _mapper.Map<List<ProductViewModel>>(_productRepository.GetAll());
+            var typeDb = _typeProductRepository.Get(typeId);
+
+            var productsView = _mapper.Map<List<ProductViewModel>>(typeDb.Products);
 
             return View(productsView);
         }
