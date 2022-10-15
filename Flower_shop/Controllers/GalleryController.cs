@@ -29,7 +29,9 @@ namespace Flower_shop.Controllers
         public IActionResult Products(int typeId)
         {
             var typeDb = _typeProductRepository.Get(typeId);
-
+            if (typeDb == null)
+                return RedirectToRoute("default", new { controller = "Index", action = "Index" });
+            
             var productsView = _mapper.Map<List<ProductViewModel>>(typeDb.Products);
 
             return View(productsView);
