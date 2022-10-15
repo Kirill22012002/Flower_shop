@@ -107,7 +107,7 @@ namespace Flower_shop.Controllers
             var typeProductDb = _mapper.Map<TypeProduct>(typeProductView);
             _typeProductRepository.Save(typeProductDb);
 
-            return View();
+            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
         [HttpGet]
         public IActionResult ProductDelete()
