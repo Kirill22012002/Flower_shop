@@ -26,6 +26,7 @@ builder.Services.AddAuthentication(builder.Configuration.GetConnectionString("Au
 builder.Services.AddAutoMapper(typeof(AppMappingProfile));
 
 builder.Services.AddScoped<UserService>();
+builder.Services.AddScoped<TypeProductService>();
 builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<TypeProductRepository>();
 builder.Services.AddScoped<UserRepository>();
