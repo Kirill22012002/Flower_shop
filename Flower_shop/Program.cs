@@ -10,7 +10,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddRazorPages();
 var connectString =
-    @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=DbStore;Integrated Security=True;";
+    @"Data Source=localhost;Database=cvetulep_database;Id=cvetulep_adminPassword=DaFnA300012";
 builder.Services.AddDbContext<WebDbContext>(x => x.UseSqlServer(connectString));
 
 var authName = builder.Configuration.GetConnectionString("AuthName");
