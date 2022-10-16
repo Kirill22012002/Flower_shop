@@ -18,13 +18,15 @@ namespace Flower_shop.Controllers
         private IWebHostEnvironment _appEnvironment;
         private ProductRepository _productRepository;
         private TypeProductRepository _typeProductRepository;
+        private ImageRepository _imageRepository;
         public AdminPlatformController(
             IMapper mapper,
             WebDbContext dbContext,
             UserService userService,
             IWebHostEnvironment appEnvironment,
             ProductRepository productRepository,
-            TypeProductRepository typeProductRepository)
+            TypeProductRepository typeProductRepository, 
+            ImageRepository imageRepository)
         {
             _mapper = mapper;
             _dbContext = dbContext;
@@ -32,6 +34,7 @@ namespace Flower_shop.Controllers
             _appEnvironment = appEnvironment;
             _productRepository = productRepository;
             _typeProductRepository = typeProductRepository;
+            _imageRepository = imageRepository;
         }
         public IActionResult Platform()
         {
@@ -141,6 +144,33 @@ namespace Flower_shop.Controllers
         public IActionResult TypeProductDelete(int typeId)
         {
             _typeProductRepository.Remove(_typeProductRepository.Get(typeId));
+
+            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
+        }
+        [HttpPost]
+        public async Task<IActionResult> ImageEdition(ImageViewModel imageViewModel)
+        {
+
+            if (imageViewModel.UploadedFile != null)
+            {
+                string path = "/files/" + imageViewModel.UploadedFile.FileName;
+                using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
+                {
+                    await imageViewModel.UploadedFile.CopyToAsync(fileStream);
+
+                }
+                var newImageViewModel = new ImageViewModel
+                {
+                    Block = imageViewModel.Block,
+                    Name = imageViewModel.Name,
+                    ImageName = imageViewModel.UploadedFile.Name,
+                    ImagePath = path
+                };
+
+                var imageDb = _mapper.Map<Image>(newImageViewModel);
+
+                _imageRepository.Save(imageDb);
+            }
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }

@@ -29,6 +29,7 @@ builder.Services.AddScoped<UserService>();
 builder.Services.AddScoped<TypeProductService>();
 builder.Services.AddScoped<ProductRepository>();
 builder.Services.AddScoped<TypeProductRepository>();
+builder.Services.AddScoped<ImageRepository>();
 builder.Services.AddScoped<UserRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
