@@ -15,12 +15,15 @@
             <div class="form-field">
                 <form method="post">
                     <div class="input">
+                        @Html.ValidationMessageFor(x => x.Email)
                         @Html.TextBoxFor(x => x.Email, new {@class="input-field", placeholder="ВВЕДИТЕ EMAIL"})
                     </div>
                     <div class="input">
+                        @Html.ValidationMessageFor(x => x.Password)
                         @Html.PasswordFor(x => x.Password, new {@class="input-field", placeholder="ВВЕДИТЕ ПАРОЛЬ"})
                     </div>
                     <div class="input">
+                        @Html.ValidationMessageFor(x => x.ConfirmPassword)
                         @Html.PasswordFor(x => x.ConfirmPassword, new {@class="input-field", placeholder="ПОВТОРИТЕ ПАРОЛЬ"})
                     </div>
                     <div class="button-submit">
