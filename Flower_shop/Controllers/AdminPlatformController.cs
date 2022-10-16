@@ -99,7 +99,18 @@ namespace Flower_shop.Controllers
         [HttpGet]
         public IActionResult TypeProductEdition()
         {
-            return View();
+            var typesDb = _typeProductRepository.GetAll();
+
+            var typeView = new TypeProductViewModel
+            {
+                TypeProducts = typesDb.Select(x => new TypeProductViewModel
+                {
+                    Id = x.Id,
+                    Name = x.Name
+                }).ToList()
+
+            };
+            return View(typeView);
         }
         [HttpPost]
         public IActionResult TypeProductEdition(TypeProductViewModel typeProductView)
@@ -118,6 +129,18 @@ namespace Flower_shop.Controllers
         public IActionResult ProductDelete(int id)
         {
             _productRepository.Remove(_productRepository.Get(id));
+
+            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
+        }
+        [HttpGet]
+        public IActionResult TypeProductDelete()
+        {
+            return View();
+        }
+        [HttpPost]
+        public IActionResult TypeProductDelete(int typeId)
+        {
+            _typeProductRepository.Remove(_typeProductRepository.Get(typeId));
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
