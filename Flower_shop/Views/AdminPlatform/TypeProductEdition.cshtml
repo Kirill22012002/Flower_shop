@@ -26,5 +26,22 @@
                 </form>
             </div>
         </div>
+        <div class="block">
+            @foreach (TypeProductViewModel typeProduct in Model.TypeProducts)
+            {
+                <div class="name">
+                    Удалить тип продукта
+                </div>
+                <div>
+                    @typeProduct.Name
+                </div>
+                <form action="/AdminPlatform/TypeProductDelete" method="post" class="remove-block">
+                    <div class="product-remove">
+                        <input name="typeId" type="hidden" value="@typeProduct.Id" />
+                        <input type="submit" value="Удалить" />
+                    </div>
+                </form>
+            }
+        </div>
     </div>
 </section>
