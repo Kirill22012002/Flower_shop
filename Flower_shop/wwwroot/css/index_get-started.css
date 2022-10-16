@@ -24,7 +24,7 @@
 
 .get-started__contant {
     flex: 0 1 50%;
-    padding-left:40px;
+    padding-left: 40px;
 }
 
 .get-started__block-text {
@@ -51,6 +51,7 @@
         right: 170px;
         border-radius: 20px 0px 0px 20px;
     }
+
     .get-started__contant {
         padding: 0px 20px;
     }

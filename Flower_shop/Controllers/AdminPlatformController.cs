@@ -147,10 +147,18 @@ namespace Flower_shop.Controllers
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
+        [HttpGet]
+        public IActionResult ImageEdition(int block)
+        {
+            var imageView = new ImageViewModel
+            {
+                Block = block
+            };
+            return View(imageView);
+        }
         [HttpPost]
         public async Task<IActionResult> ImageEdition(ImageViewModel imageViewModel)
         {
-
             if (imageViewModel.UploadedFile != null)
             {
                 string path = "/files/" + imageViewModel.UploadedFile.FileName;
@@ -159,17 +167,14 @@ namespace Flower_shop.Controllers
                     await imageViewModel.UploadedFile.CopyToAsync(fileStream);
 
                 }
-                var newImageViewModel = new ImageViewModel
-                {
-                    Block = imageViewModel.Block,
-                    Name = imageViewModel.Name,
-                    ImageName = imageViewModel.UploadedFile.Name,
-                    ImagePath = path
-                };
+                
+                var imageDb = _imageRepository.GetByBlock(imageViewModel.Block);
 
-                var imageDb = _mapper.Map<Image>(newImageViewModel);
+                imageDb.ImageName = imageViewModel.UploadedFile.Name;
+                imageDb.ImagePath = path;
+                imageDb.Name = imageViewModel.Name;
 
-                _imageRepository.Save(imageDb);
+                _dbContext.SaveChanges();
             }
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
