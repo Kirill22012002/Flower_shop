@@ -1,5 +1,7 @@
 ﻿@using Flower_shop.Models
-@model List<ProductViewModel>
+@using Flower_shop.Services
+@model IndexPageViewModel
+@inject UserService userService
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -12,13 +14,12 @@
 <link rel="stylesheet" href="~/css/index_products.css?v=1" />
 
 
-
 <section class="get-started">
     <div class="get-started__container">
         <div class="get-started__contant">
             <div class="get-started__block-text block-text">
                 <h1 class="block-text__title block-text__title_blue">
-                    Подарки для самых <span>любимых!</span>
+                    @Model.Images.SingleOrDefault(x => x.Block == 1).Name
                 </h1>
                 <div class="block-text__text">
                     Порадуйте своих близких
@@ -27,21 +28,23 @@
             </div>
         </div>
         <div class="get-started__image">
-            <img class="flower_pc" src="~/img/Get-started/flowers.png" alt="Цветы для PC">
-            <img class="flower_mobile" src="~/img/Get-started/flowers.png" alt="Цветы для MOBILE">
+            <img class="flower_pc flower_mobile" src="@Model.Images.SingleOrDefault(x => x.Block == 1).ImagePath">
         </div>
     </div>
+    @if (userService.IsAdmin())
+    {
+        <a href="/AdminPlatform/ImageEdition?block=1" class="block-text__button button button_blue">ИЗМЕНИТЬ</a>
+    }
 </section>
 <section class="present">
     <div class="present__container">
         <div class="present__image">
-            <img class="present_pc" src="~/img/Presents/presents.png" alt="Подарок для PC">
-            <img class="present_mobile" src="~/img/Presents/presents-mobile.png" alt="Подарок для MOBILE">
+            <img class="present_pc present_mobile" src="@Model.Images.SingleOrDefault(x => x.Block == 2).ImagePath">
         </div>
         <div class="present__contant">
             <div class="present__block-text block-text">
                 <h2 class="block-text__title">
-                    <span>Подарки</span> на любую сумму!
+                    @Model.Images.SingleOrDefault(x => x.Block == 2).Name
                 </h2>
                 <div class="block-text__text">
                     Порадуйте своих близких
@@ -50,10 +53,15 @@
             </div>
         </div>
     </div>
+    @if (userService.IsAdmin())
+    {
+        <a href="/AdminPlatform/ImageEdition?block=2" class="block-text__button button button_blue">ИЗМЕНИТЬ</a>
+
+    }
 </section>
 <section class="product">
     <div class="product__container">
-        @foreach (ProductViewModel product in Model)
+        @foreach (ProductViewModel product in Model.Products)
         {
             <div class="product__contant" onclick="location.href='@Url.Action("SingleProduct", "Gallery", product)'">
                 <div class="product__image">
@@ -76,7 +84,7 @@
         <div class="balloon__contant">
             <div class="balloon__block-text block-text">
                 <h2 class="block-text__title block-text__title_blue">
-                    Счастливая <span>семья!</span>
+                    @Model.Images.SingleOrDefault(x => x.Block == 3).Name
                 </h2>
                 <div class="block-text__text">
                     Порадуйте своих близких
@@ -85,21 +93,23 @@
             </div>
         </div>
         <div class="balloon__image">
-            <img class="balloon_pc" src="~/img/Family/balloons.png" alt="Шарики для PC">
-            <img class="balloon_mobile" src="~/img/Family/balloons-mobile.png" alt="Шарики для MOBILE">
+            <img class="balloon_pc balloon_mobile" src="@Model.Images.SingleOrDefault(x => x.Block == 3).ImagePath">
         </div>
     </div>
+    @if (userService.IsAdmin())
+    {
+        <a href="/AdminPlatform/ImageEdition?block=3" class="block-text__button button button_blue">ИЗМЕНИТЬ</a>
+    }
 </section>
 <section class="delivery">
     <div class="delivery__container">
         <div class="delivery__image">
-            <img class="delivery_pc" src="~/img/Delivery/car.png" alt="Машина для PC">
-            <img class="delivery_mobile" src="~/img/Delivery/car-mobile.png" alt="Машина для MOBILE">
+            <img class="delivery_pc delivery_mobile" src="@Model.Images.SingleOrDefault(x => x.Block == 4).ImagePath">
         </div>
         <div class="delivery__contant">
             <div class="delivery__block-text block-text">
                 <h2 class="block-text__title">
-                    <span>Бесплатная</span> доставка по городу Лепель
+                    @Model.Images.SingleOrDefault(x => x.Block == 4).Name
                 </h2>
                 <div class="block-text__text">
                     +375291089024 <br />
@@ -107,10 +117,14 @@
                     Пн-Сб - 09:00-18:00<br />
                     Вс - 09:00-15:00<br />
                 </div>
-                <a href="" class="block-text__button button">Заказать</a>
+                <a href="/Gallery/Products" class="block-text__button button">Посмотреть</a>
             </div>
         </div>
     </div>
+    @if (userService.IsAdmin())
+    {
+            <a href="/AdminPlatform/ImageEdition?block=4" class="block-text__button button button_blue">ИЗМЕНИТЬ</a>
+    }
 </section>
 
 

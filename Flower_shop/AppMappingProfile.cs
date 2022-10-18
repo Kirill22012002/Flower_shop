@@ -14,6 +14,7 @@ namespace Flower_shop
             CreateMap<User, UserViewModel>().ReverseMap();
             CreateMap<RegisterViewModel, User>().ReverseMap();
             CreateMap<TypeProduct, TypeProductViewModel>().ReverseMap();
+            CreateMap<Image, ImageViewModel>().ReverseMap();
         }
     }
 }

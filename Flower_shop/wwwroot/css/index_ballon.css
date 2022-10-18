@@ -28,9 +28,6 @@
         max-width: 100%;
     }
 
-.balloon_mobile {
-    display: none;
-}
 
 /*TABLET*/
 @media(max-width: 991.98px) {
@@ -61,13 +58,6 @@
     .balloon__image {
         flex: 1 1 100%;
         text-align: center;
-    }
-
-    .balloon_pc {
-        display: none;
-    }
-
-    .balloon_mobile {
-        display: flex;
+        padding-top:10px;
     }
 }
