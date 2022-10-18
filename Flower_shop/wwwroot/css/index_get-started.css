@@ -41,10 +41,6 @@
         max-width: 100%;
     }
 
-.flower_mobile {
-    display: none;
-}
-
 /*TABLET*/
 @media(max-width: 991.98px) {
     .get-started__container::before {
@@ -79,13 +75,7 @@
     .get-started__image {
         flex: 1 1 100%;
         text-align: center;
+        padding-top: 10px;
     }
 
-    .flower_pc {
-        display: none;
-    }
-
-    .flower_mobile {
-        display: flex;
-    }
 }

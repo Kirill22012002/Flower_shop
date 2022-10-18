@@ -28,7 +28,7 @@
             </div>
         </div>
         <div class="get-started__image">
-            <img class="flower_pc" src="@Model.Images.SingleOrDefault(x => x.Block == 1).ImagePath">
+            <img class="flower_pc flower_mobile" src="@Model.Images.SingleOrDefault(x => x.Block == 1).ImagePath">
         </div>
     </div>
     @if (userService.IsAdmin())
@@ -39,7 +39,7 @@
 <section class="present">
     <div class="present__container">
         <div class="present__image">
-            <img class="present_pc" src="@Model.Images.SingleOrDefault(x => x.Block == 2).ImagePath">
+            <img class="present_pc present_mobile" src="@Model.Images.SingleOrDefault(x => x.Block == 2).ImagePath">
         </div>
         <div class="present__contant">
             <div class="present__block-text block-text">
@@ -93,7 +93,7 @@
             </div>
         </div>
         <div class="balloon__image">
-            <img class="balloon_pc" src="@Model.Images.SingleOrDefault(x => x.Block == 3).ImagePath">
+            <img class="balloon_pc balloon_mobile" src="@Model.Images.SingleOrDefault(x => x.Block == 3).ImagePath">
         </div>
     </div>
     @if (userService.IsAdmin())
@@ -104,7 +104,7 @@
 <section class="delivery">
     <div class="delivery__container">
         <div class="delivery__image">
-            <img class="delivery_pc" src="@Model.Images.SingleOrDefault(x => x.Block == 4).ImagePath">
+            <img class="delivery_pc delivery_mobile" src="@Model.Images.SingleOrDefault(x => x.Block == 4).ImagePath">
         </div>
         <div class="delivery__contant">
             <div class="delivery__block-text block-text">
@@ -117,7 +117,7 @@
                     Пн-Сб - 09:00-18:00<br />
                     Вс - 09:00-15:00<br />
                 </div>
-                <a href="" class="block-text__button button">Заказать</a>
+                <a href="/Gallery/Products" class="block-text__button button">Посмотреть</a>
             </div>
         </div>
     </div>
