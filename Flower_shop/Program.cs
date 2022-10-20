@@ -9,9 +9,10 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-var connectString =
-    @"Data Source=localhost;Database=cvetulep_database;Id=cvetulep_adminPassword=DaFnA300012";
-builder.Services.AddDbContext<WebDbContext>(x => x.UseSqlServer(connectString));
+
+string connectionString = "Server=w12.hoster.by;TrustServerCertificate=True; DataBase=cvetulep_flowerDataBase;User Id=cvetulep_administrator; Password=17_29dqeB";
+builder.Services.AddDbContext<WebDbContext>(x =>
+    x.UseSqlServer(connectionString));
 
 var authName = builder.Configuration.GetConnectionString("AuthName");
 
