@@ -27,12 +27,12 @@
             </div>
         </div>
         <div class="block">
+            <div class="name">
+                Удалить тип продукта
+            </div>
             @foreach (TypeProductViewModel typeProduct in Model.TypeProducts)
             {
-                <div class="name">
-                    Удалить тип продукта
-                </div>
-                <div>
+                <div class="name-type">
                     @typeProduct.Name
                 </div>
                 <form action="/AdminPlatform/TypeProductDelete" method="post" class="remove-block">

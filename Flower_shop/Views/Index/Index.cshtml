@@ -19,10 +19,10 @@
         <div class="get-started__contant">
             <div class="get-started__block-text block-text">
                 <h1 class="block-text__title block-text__title_blue">
-                    @Model.Images.SingleOrDefault(x => x.Block == 1).Name
+                    @Model.Images.SingleOrDefault(x => x.Block == 1).Title
                 </h1>
                 <div class="block-text__text">
-                    Порадуйте своих близких
+                    @Model.Images.SingleOrDefault(x => x.Block == 1).Subtitle
                 </div>
                 <a href="/Gallery/Products" class="block-text__button button">Перейти</a>
             </div>
@@ -44,10 +44,10 @@
         <div class="present__contant">
             <div class="present__block-text block-text">
                 <h2 class="block-text__title">
-                    @Model.Images.SingleOrDefault(x => x.Block == 2).Name
+                    @Model.Images.SingleOrDefault(x => x.Block == 2).Title
                 </h2>
                 <div class="block-text__text">
-                    Порадуйте своих близких
+                    @Model.Images.SingleOrDefault(x => x.Block == 2).Subtitle
                 </div>
                 <a href="/Gallery/Products" class="block-text__button button">Перейти</a>
             </div>
@@ -84,10 +84,10 @@
         <div class="balloon__contant">
             <div class="balloon__block-text block-text">
                 <h2 class="block-text__title block-text__title_blue">
-                    @Model.Images.SingleOrDefault(x => x.Block == 3).Name
+                    @Model.Images.SingleOrDefault(x => x.Block == 3).Title
                 </h2>
                 <div class="block-text__text">
-                    Порадуйте своих близких
+                    @Model.Images.SingleOrDefault(x => x.Block == 3).Subtitle
                 </div>
                 <a href="/Gallery/Products" class="block-text__button button">Перейти</a>
             </div>
@@ -109,13 +109,10 @@
         <div class="delivery__contant">
             <div class="delivery__block-text block-text">
                 <h2 class="block-text__title">
-                    @Model.Images.SingleOrDefault(x => x.Block == 4).Name
+                    @Model.Images.SingleOrDefault(x => x.Block == 4).Title
                 </h2>
                 <div class="block-text__text">
-                    +375291089024 <br />
-                    Режим работы:<br />
-                    Пн-Сб - 09:00-18:00<br />
-                    Вс - 09:00-15:00<br />
+                    @Model.Images.SingleOrDefault(x => x.Block == 4).Subtitle
                 </div>
                 <a href="/Gallery/Products" class="block-text__button button">Посмотреть</a>
             </div>

@@ -14,5 +14,6 @@ namespace Flower_shop.EfStuff.Repositories
         {
             return _webContext.TypesProduct.SingleOrDefault(x => x.Name.ToLower() == name.ToLower());
         }
+        
     }
 }

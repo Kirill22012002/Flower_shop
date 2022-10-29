@@ -7,6 +7,7 @@ using Flower_shop.Models;
 using Flower_shop.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Flower_shop.Controllers
 {
@@ -143,7 +144,13 @@ namespace Flower_shop.Controllers
         [HttpPost]
         public IActionResult TypeProductDelete(int typeId)
         {
-            _typeProductRepository.Remove(_typeProductRepository.Get(typeId));
+            var typeWithProducts = _dbContext.TypesProduct
+                .OrderBy(x => x.Name)
+                .Include(x => x.Products)
+                .FirstOrDefault(x => x.Id == typeId);
+
+            _dbContext.Remove(typeWithProducts);
+            _dbContext.SaveChanges();
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
@@ -172,7 +179,8 @@ namespace Flower_shop.Controllers
 
                 imageDb.ImageName = imageViewModel.UploadedFile.Name;
                 imageDb.ImagePath = path;
-                imageDb.Name = imageViewModel.Name;
+                imageDb.Title = imageViewModel.Title;
+                imageDb.Subtitle = imageViewModel.Subtitle;
 
                 _dbContext.SaveChanges();
             }

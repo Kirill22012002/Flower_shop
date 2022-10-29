@@ -13,12 +13,15 @@
                 <a href="/AdminPlatform/Platform">НАЗАД</a>
             </div>
             <div class="name">
-                Изменить заставку
+                Изменить заставку @Model.Block блока
             </div>
             <div class="form-field">
                 <form method="post" enctype="multipart/form-data">
                     <div class="input">
-                        @Html.TextBoxFor(x => x.Name, new {@class="input-field", placeholder="Название"})
+                        @Html.TextBoxFor(x => x.Title, new {@class="input-field", placeholder="Загаловок"})
+                    </div>
+                    <div class="input">
+                        @Html.TextBoxFor(x => x.Subtitle, new {@class="input-field", placeholder="Подзагаловок"})
                     </div>
                     <div class="input">
                         @Html.TextBoxFor(x => x.Block, new {@class="input-field", type="hidden", value=@Model.Block})
