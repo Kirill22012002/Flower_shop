@@ -18,12 +18,6 @@ namespace Flower_shop.EfStuff
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-
-            modelBuilder
-                .Entity<TypeProduct>()
-                .HasMany(x => x.Products)
-                .WithOne(x => x.TypeProduct)
-                .OnDelete(DeleteBehavior.ClientCascade);
         }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
