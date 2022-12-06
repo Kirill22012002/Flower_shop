@@ -1,0 +1,18 @@
+﻿global using Flower_shop;
+global using Flower_shop.EfStuff;
+global using Flower_shop.EfStuff.DbModels;
+global using Flower_shop.EfStuff.Repositories;
+global using Flower_shop.Models;
+global using Flower_shop.Services;
+global using Flower_shop.EfStuff.DbModels.Enums;
+global using Flower_shop.Models.UserViewModels;
+global using Flower_shop.Models.ValidationAttributes;
+
+global using Microsoft.AspNetCore.Mvc;
+global using Microsoft.EntityFrameworkCore;
+global using Microsoft.AspNetCore.Authentication;
+
+global using System.Security.Claims;
+global using System.ComponentModel.DataAnnotations;
+
+global using AutoMapper;

@@ -1,9 +1,4 @@
-﻿using Flower_shop.EfStuff.DbModels;
-using Flower_shop.Models;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace Flower_shop.EfStuff
+﻿namespace Flower_shop.EfStuff
 {
     public class WebDbContext : DbContext
     {
@@ -25,6 +20,5 @@ namespace Flower_shop.EfStuff
             optionsBuilder.UseLazyLoadingProxies();
             base.OnConfiguring(optionsBuilder);
         }
-
     }
 }

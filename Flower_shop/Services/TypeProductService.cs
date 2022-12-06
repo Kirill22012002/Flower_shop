@@ -1,10 +1,4 @@
-﻿using Flower_shop.EfStuff;
-using Flower_shop.EfStuff.DbModels;
-using Flower_shop.EfStuff.DbModels.Enums;
-using Flower_shop.Models;
-using Flower_shop.Models.UserViewModels;
-
-namespace Flower_shop.Services
+﻿namespace Flower_shop.Services
 {
     public class TypeProductService
     {

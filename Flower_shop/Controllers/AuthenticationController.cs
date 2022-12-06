@@ -1,14 +1,4 @@
-﻿using AutoMapper;
-using Flower_shop.EfStuff;
-using Flower_shop.EfStuff.DbModels;
-using Flower_shop.EfStuff.DbModels.Enums;
-using Flower_shop.EfStuff.Repositories;
-using Flower_shop.Models.UserViewModels;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Mvc;
-using System.Security.Claims;
-
-namespace Flower_shop.Controllers
+﻿namespace Flower_shop.Controllers
 {
     public class AuthenticationController : Controller
     {

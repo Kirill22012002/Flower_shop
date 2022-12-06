@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace Flower_shop.EfStuff.DbModels
+﻿namespace Flower_shop.EfStuff.DbModels
 {
     public class TypeProduct : BaseModel
     {

@@ -1,7 +1,4 @@
-﻿using Flower_shop.EfStuff.DbModels;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Flower_shop.Models
+﻿namespace Flower_shop.Models
 {
     public class IndexPageViewModel
     {

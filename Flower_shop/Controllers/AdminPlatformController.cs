@@ -1,15 +1,4 @@
-﻿using AutoMapper;
-using Flower_shop.EfStuff;
-using Flower_shop.EfStuff.DbModels;
-using Flower_shop.EfStuff.DbModels.Enums;
-using Flower_shop.EfStuff.Repositories;
-using Flower_shop.Models;
-using Flower_shop.Services;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-
-namespace Flower_shop.Controllers
+﻿namespace Flower_shop.Controllers
 {
     public class AdminPlatformController : Controller
     {
