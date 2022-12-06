@@ -1,6 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
-
-namespace Flower_shop.Models.UserViewModels
+﻿namespace Flower_shop.Models.UserViewModels
 {
     public class UserViewModel
     {

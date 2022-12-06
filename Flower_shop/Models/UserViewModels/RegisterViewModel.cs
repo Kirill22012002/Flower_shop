@@ -1,8 +1,4 @@
-﻿using Flower_shop.Models.ValidationAttributes;
-using Microsoft.AspNetCore.Mvc;
-using System.ComponentModel.DataAnnotations;
-
-namespace Flower_shop.Models.UserViewModels
+﻿namespace Flower_shop.Models.UserViewModels
 {
     public class RegisterViewModel
     {

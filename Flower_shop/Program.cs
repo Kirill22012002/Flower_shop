@@ -1,10 +1,3 @@
-using Flower_shop;
-using Flower_shop.EfStuff;
-using Flower_shop.EfStuff.Repositories;
-using Flower_shop.Services;
-using Microsoft.EntityFrameworkCore;
-
-
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.

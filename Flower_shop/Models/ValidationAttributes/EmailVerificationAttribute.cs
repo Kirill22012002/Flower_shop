@@ -1,7 +1,4 @@
-﻿using Flower_shop.EfStuff.Repositories;
-using System.ComponentModel.DataAnnotations;
-
-namespace Flower_shop.Models.ValidationAttributes
+﻿namespace Flower_shop.Models.ValidationAttributes
 {
     public class EmailVerificationAttribute : ValidationAttribute
     {
