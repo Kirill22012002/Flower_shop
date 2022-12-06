@@ -1,6 +1,4 @@
-﻿using Flower_shop.EfStuff.DbModels.Enums;
-
-namespace Flower_shop.EfStuff.DbModels
+﻿namespace Flower_shop.EfStuff.DbModels
 {
     public class User : BaseModel
     {

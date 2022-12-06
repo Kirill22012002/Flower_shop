@@ -1,11 +1,4 @@
-﻿using AutoMapper;
-using Flower_shop.EfStuff;
-using Flower_shop.Models;
-using Flower_shop.Models.UserViewModels;
-using Flower_shop.Services;
-using Microsoft.AspNetCore.Mvc;
-
-namespace Flower_shop.Controllers
+﻿namespace Flower_shop.Controllers
 {
     public class ProfileController : Controller
     {
