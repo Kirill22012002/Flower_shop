@@ -2,17 +2,14 @@
 {
     public class AuthenticationController : Controller
     {
-        private WebDbContext _dbContext;
         private IMapper _mapper;
         private IConfiguration _config;
-        private UserRepository _userRepository;
+        private IUserRepository _userRepository;
         public AuthenticationController(
-            WebDbContext dbContext,
             IMapper mapper,
             IConfiguration config,
-            UserRepository userRepository)
+            IUserRepository userRepository)
         {
-            _dbContext = dbContext;
             _mapper = mapper;
             _config = config;
             _userRepository = userRepository;

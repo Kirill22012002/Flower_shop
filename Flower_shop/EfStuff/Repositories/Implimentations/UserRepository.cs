@@ -1,6 +1,6 @@
-﻿namespace Flower_shop.EfStuff.Repositories
+﻿namespace Flower_shop.EfStuff.Repositories.Implimentations
 {
-    public class UserRepository : BaseRepository<User> 
+    public class UserRepository : BaseRepository<User>, IUserRepository
     {
         public UserRepository(WebDbContext context) : base(context)
         {
