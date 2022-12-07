@@ -3,11 +3,11 @@
     public class ProfileController : Controller
     {
         private IMapper _mapper;
-        private UserService _userService;
+        private IUserService _userService;
 
         public ProfileController(
             IMapper mapper,
-            UserService userService)
+            IUserService userService)
         {
             _mapper = mapper;
             _userService = userService;
