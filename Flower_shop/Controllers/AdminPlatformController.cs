@@ -9,6 +9,7 @@
         private IProductRepository _productRepository;
         private ITypeProductRepository _typeProductRepository;
         private IImageRepository _imageRepository;
+        private IUserRepository _userRepository;
         public AdminPlatformController(
             IMapper mapper,
             IUserService userService,
@@ -16,7 +17,8 @@
             IWebHostEnvironment appEnvironment,
             IProductRepository productRepository,
             ITypeProductRepository typeProductRepository,
-            IImageRepository imageRepository)
+            IImageRepository imageRepository,
+            IUserRepository userRepository)
         {
             _mapper = mapper;
             _userService = userService;
@@ -25,6 +27,7 @@
             _productRepository = productRepository;
             _typeProductRepository = typeProductRepository;
             _imageRepository = imageRepository;
+            _userRepository = userRepository;
         }
         public IActionResult Platform()
         {
@@ -176,6 +179,18 @@
             }
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
+        }
+        [HttpGet]
+        public IActionResult GetAllUsers()
+        {
+            if (_userService.IsAdmin())
+            {
+                return View(_mapper.Map<List<UserViewModel>>(_userRepository.GetAll()));
+            }
+            else
+            {
+                return Redirect("~/Index/Index");
+            }
         }
     }
 }
