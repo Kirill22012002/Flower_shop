@@ -1,12 +1,12 @@
-﻿namespace Flower_shop.Services
+﻿namespace Flower_shop.Services.Implimentations
 {
-    public class UserService
+    public class UserService : IUserService
     {
         private IHttpContextAccessor _httpContextAccessor;
         private WebDbContext _dbContext;
 
         public UserService(
-            IHttpContextAccessor httpContextAccessor, 
+            IHttpContextAccessor httpContextAccessor,
             WebDbContext dbContext)
         {
             _httpContextAccessor = httpContextAccessor;
@@ -22,7 +22,7 @@
                 .FirstOrDefault(x => x.Type == "Id")
                 ?.Value;
 
-            if(idStr == null)
+            if (idStr == null)
             {
                 return null;
             }
