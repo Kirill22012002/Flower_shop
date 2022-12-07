@@ -1,4 +1,6 @@
-﻿namespace Flower_shop.Models.ValidationAttributes
+﻿using Flower_shop.EfStuff.Repositories.Implimentations;
+
+namespace Flower_shop.Models.ValidationAttributes
 {
     public class IsUniqEmailAttribute : ValidationAttribute
     {
@@ -6,7 +8,7 @@
             object value, 
             ValidationContext validationContext)
         {
-            var userRepository = validationContext.GetService(typeof(UserRepository)) as UserRepository;
+            var userRepository = validationContext.GetService(typeof(IUserRepository)) as IUserRepository;
 
             var email = value?.ToString();
             var isDublicate = userRepository.IsEmailExist(email);
