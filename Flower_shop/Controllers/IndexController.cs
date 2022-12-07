@@ -2,17 +2,14 @@
 {
     public class IndexController : Controller
     {
-        private WebDbContext _dbContext;
         private IMapper _mapper;
-        private ProductRepository _productRepository;
-        private ImageRepository _imageRepository;
+        private IProductRepository _productRepository;
+        private IImageRepository _imageRepository;
         public IndexController(
-            WebDbContext dbContext,
             IMapper mapper,
-            ProductRepository productRepository,
-            ImageRepository imageRepository)
+            IProductRepository productRepository,
+            IImageRepository imageRepository)
         {
-            _dbContext = dbContext;
             _mapper = mapper;
             _productRepository = productRepository;
             _imageRepository = imageRepository;

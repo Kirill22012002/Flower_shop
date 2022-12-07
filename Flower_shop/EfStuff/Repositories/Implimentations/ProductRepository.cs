@@ -1,6 +1,6 @@
-﻿namespace Flower_shop.EfStuff.Repositories
+﻿namespace Flower_shop.EfStuff.Repositories.Implimentations
 {
-    public class ProductRepository : BaseRepository<Product> 
+    public class ProductRepository : BaseRepository<Product>, IProductRepository
     {
         public ProductRepository(WebDbContext context) : base(context)
         {

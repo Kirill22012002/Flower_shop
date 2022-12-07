@@ -3,24 +3,24 @@
     public class AdminPlatformController : Controller
     {
         private IMapper _mapper;
-        private WebDbContext _dbContext;
         private UserService _userService;
+        private WebDbContext _dbContext;
         private IWebHostEnvironment _appEnvironment;
-        private ProductRepository _productRepository;
-        private TypeProductRepository _typeProductRepository;
-        private ImageRepository _imageRepository;
+        private IProductRepository _productRepository;
+        private ITypeProductRepository _typeProductRepository;
+        private IImageRepository _imageRepository;
         public AdminPlatformController(
             IMapper mapper,
-            WebDbContext dbContext,
             UserService userService,
+            WebDbContext dbContext,
             IWebHostEnvironment appEnvironment,
-            ProductRepository productRepository,
-            TypeProductRepository typeProductRepository, 
-            ImageRepository imageRepository)
+            IProductRepository productRepository,
+            ITypeProductRepository typeProductRepository,
+            IImageRepository imageRepository)
         {
             _mapper = mapper;
-            _dbContext = dbContext;
             _userService = userService;
+            _dbContext = dbContext;
             _appEnvironment = appEnvironment;
             _productRepository = productRepository;
             _typeProductRepository = typeProductRepository;
@@ -43,11 +43,11 @@
                 return RedirectToRoute("default", new { controller = "Index", action = "Index" });
             }
 
-            var typeView = _mapper.Map<List<TypeProductViewModel>>(_dbContext.TypesProduct.ToList());
+            var typeView = _mapper.Map<List<TypeProductViewModel>>(_typeProductRepository.GetAll());
 
             var typeName = new List<string>();
 
-            foreach(var name in typeView)
+            foreach (var name in typeView)
             {
                 typeName.Add(name.Name);
             }
@@ -72,10 +72,11 @@
                     await productView.UploadedFile.CopyToAsync(fileStream);
 
                 }
-                var productViewModel = new ProductViewModel { 
-                    ImageName = productView.UploadedFile.Name, 
-                    ImagePath = path, 
-                    Name = productView.Name, 
+                var productViewModel = new ProductViewModel
+                {
+                    ImageName = productView.UploadedFile.Name,
+                    ImagePath = path,
+                    Name = productView.Name,
                     Price = productView.Price
                 };
 
@@ -163,7 +164,7 @@
                     await imageViewModel.UploadedFile.CopyToAsync(fileStream);
 
                 }
-                
+
                 var imageDb = _imageRepository.GetByBlock(imageViewModel.Block);
 
                 imageDb.ImageName = imageViewModel.UploadedFile.Name;

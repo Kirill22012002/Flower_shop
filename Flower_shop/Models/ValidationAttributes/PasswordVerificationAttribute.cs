@@ -1,4 +1,6 @@
-﻿namespace Flower_shop.Models.ValidationAttributes
+﻿using Flower_shop.EfStuff.Repositories.Implimentations;
+
+namespace Flower_shop.Models.ValidationAttributes
 {
     public class PasswordVerificationAttribute : ValidationAttribute
     {
@@ -7,7 +9,7 @@
             ValidationContext validationContext)
         {
             var password = value?.ToString();
-            var repository = validationContext.GetService(typeof(UserRepository)) as UserRepository;
+            var repository = validationContext.GetService(typeof(IUserRepository)) as IUserRepository;
             var user = repository.IsPasswordExist(password);
             if (!user)
             {

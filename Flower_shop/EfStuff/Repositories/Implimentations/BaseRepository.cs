@@ -1,6 +1,6 @@
-﻿namespace Flower_shop.EfStuff.Repositories
+﻿namespace Flower_shop.EfStuff.Repositories.Implimentations
 {
-    public abstract class BaseRepository<T> where T : BaseModel 
+    public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
         protected WebDbContext _webContext;
         protected DbSet<T> _dbSet;
@@ -15,7 +15,7 @@
         public List<T> GetAll() => _dbSet.ToList();
         public void Save(T model)
         {
-            if(model.Id > 0)
+            if (model.Id > 0)
             {
                 _dbSet.Update(model);
             }
@@ -25,17 +25,17 @@
             }
             _webContext.SaveChanges();
         }
-        public void Remove(T model)
-        {
-            _dbSet.Remove(model);
-            _webContext.SaveChanges();
-        }
+        public void SaveList(List<T> models) => models.ForEach(Save);
         public void Remove(int id)
         {
             Remove(Get(id));
             _webContext.SaveChanges();
         }
-        public void SaveList(List<T> models) => models.ForEach(Save);
+        public void Remove(T model)
+        {
+            _dbSet.Remove(model);
+            _webContext.SaveChanges();
+        }
         public int Count() => _dbSet.Count();
     }
 }
