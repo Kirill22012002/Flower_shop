@@ -39,7 +39,6 @@
 }
 
     .button-submit input {
-        background-color: #166fe5;
         font-size: 18px;
         color: #fff;
         border: none;
@@ -88,7 +87,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #166fe5;
     font-size: 49px;
     font-family: Comic Sans MS;
     margin-top: 20px;

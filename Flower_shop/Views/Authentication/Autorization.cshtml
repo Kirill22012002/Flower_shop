@@ -1,4 +1,5 @@
 ﻿@model LoginViewModel
+@inject IColorSettingsService colorSettingService
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -30,3 +31,15 @@
         </div>
     </div>
 </section>
+
+ <style>
+    @{
+        var firstColor = colorSettingService.GetColorById(3).ColorHex;
+    }
+    .name{
+        color: @firstColor;
+    }
+    .button-submit input{
+        background-color: @firstColor;
+    }
+</style>
