@@ -1,5 +1,6 @@
 ﻿@model IndexPageViewModel
 @inject IUserService userService
+@inject IColorSettingsService colorSettingService
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -16,7 +17,7 @@
     <div class="get-started__container">
         <div class="get-started__contant">
             <div class="get-started__block-text block-text">
-                <h1 class="block-text__title block-text__title_blue">
+                <h1 class="block-text__title">
                     @Model.Images.SingleOrDefault(x => x.Block == 1).Title
                 </h1>
                 <div class="block-text__text">
@@ -31,7 +32,7 @@
     </div>
     @if (userService.IsAdmin())
     {
-        <a href="/AdminPlatform/ImageEdition?block=1" class="block-text__button button button_blue">ИЗМЕНИТЬ</a>
+        <a href="/AdminPlatform/ImageEdition?block=1" class="block-text__button button">ИЗМЕНИТЬ</a>
     }
 </section>
 <section class="present">
@@ -53,7 +54,7 @@
     </div>
     @if (userService.IsAdmin())
     {
-        <a href="/AdminPlatform/ImageEdition?block=2" class="block-text__button button button_blue">ИЗМЕНИТЬ</a>
+        <a href="/AdminPlatform/ImageEdition?block=2" class="block-text__button button ">ИЗМЕНИТЬ</a>
 
     }
 </section>
@@ -81,7 +82,7 @@
     <div class="balloon__container">
         <div class="balloon__contant">
             <div class="balloon__block-text block-text">
-                <h2 class="block-text__title block-text__title_blue">
+                <h2 class="block-text__title">
                     @Model.Images.SingleOrDefault(x => x.Block == 3).Title
                 </h2>
                 <div class="block-text__text">
@@ -96,7 +97,7 @@
     </div>
     @if (userService.IsAdmin())
     {
-        <a href="/AdminPlatform/ImageEdition?block=3" class="block-text__button button button_blue">ИЗМЕНИТЬ</a>
+        <a href="/AdminPlatform/ImageEdition?block=3" class="block-text__button button">ИЗМЕНИТЬ</a>
     }
 </section>
 <section class="delivery">
@@ -118,9 +119,18 @@
     </div>
     @if (userService.IsAdmin())
     {
-            <a href="/AdminPlatform/ImageEdition?block=4" class="block-text__button button button_blue">ИЗМЕНИТЬ</a>
+            <a href="/AdminPlatform/ImageEdition?block=4" class="block-text__button button">ИЗМЕНИТЬ</a>
     }
 </section>
 
 
 <script src="~/js/yandexMap.js" type="text/javascript"></script>
+
+<style>
+    @{
+        var firstColor = colorSettingService.GetColorById(2).ColorHex;
+    }
+    .get-started__container::before{
+        background-color: @firstColor;
+    }
+</style>
