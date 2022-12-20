@@ -1,5 +1,6 @@
-﻿@inject UserService userService
-@inject TypeProductService typeProductService
+﻿@inject IUserService userService
+@inject ITypeProductService typeProductService
+@inject IColorSettingsService colorSettingsService
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -77,5 +78,25 @@
     <script src="~/lib/jquery/dist/jquery.js"></script>
     <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&ampefd65cf8-8571-4b72-9d9c-97183c2c8ae2" type="text/javascript"></script>
 
+    <style>
+        @{
+            var firstColor = colorSettingsService.GetColorById(1).ColorHex;
+            var secondColor = colorSettingsService.GetColorById(2).ColorHex;
+
+        }
+        .button {
+            background-color: @firstColor;
+        }
+
+        @@media(max-width: 767.98px) {
+            .menu__body {
+                background-color: @secondColor;
+            }
+
+            .header:target .menu__body:before {
+                background-color: @secondColor;
+            }
+        }
+    </style>
 </body>
 </html>
