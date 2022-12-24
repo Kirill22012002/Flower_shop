@@ -5,7 +5,7 @@ namespace Flower_shop.Controllers
     public class AdminPlatformController : Controller
     {
         private IMapper _mapper;
-        private UserService _userService;
+        private IUserService _userService;
         private WebDbContext _dbContext;
         private IWebHostEnvironment _appEnvironment;
         private IProductRepository _productRepository;
@@ -13,7 +13,7 @@ namespace Flower_shop.Controllers
         private IImageRepository _imageRepository;
         public AdminPlatformController(
             IMapper mapper,
-            UserService userService,
+            IUserService userService,
             WebDbContext dbContext,
             IWebHostEnvironment appEnvironment,
             IProductRepository productRepository,
