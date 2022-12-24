@@ -9,14 +9,6 @@
         margin: 0px 0px 12px 0px;
     }
 
-    .block-text__title span {
-        color: #ec5863;
-    }
-
-.block-text__title_blue span {
-    color: #587eec;
-}
-
 .block-text__text {
     line-height: 138.5%;
 }

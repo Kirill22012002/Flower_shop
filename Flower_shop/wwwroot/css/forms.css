@@ -39,7 +39,6 @@
 }
 
     .button-submit input {
-        background-color: #166fe5;
         font-size: 18px;
         color: #fff;
         border: none;
@@ -65,10 +64,21 @@
     justify-content: center;
 }
 
-    .come-back-action a {
-        text-decoration: none;
-        color: #fff;
+.button-submit {
+    background-color: #00a400;
+    font-size: 18px;
+    border-radius: 6px;
+    display: flex;
+    justify-content: center;
+}
+    .button-submit input {
+        background-color: #00a400
     }
+
+.come-back-action a {
+    text-decoration: none;
+    color: #fff;
+}
 
 .input, .button-submit {
     width: 248px;
@@ -88,7 +98,6 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    color: #166fe5;
     font-size: 49px;
     font-family: Comic Sans MS;
     margin-top: 20px;

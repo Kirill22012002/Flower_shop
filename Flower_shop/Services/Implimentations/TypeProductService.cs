@@ -1,6 +1,7 @@
-﻿namespace Flower_shop.Services
+﻿
+namespace Flower_shop.Services.Implimentations
 {
-    public class TypeProductService
+    public class TypeProductService : ITypeProductService
     {
         private WebDbContext _dbContext;
 
@@ -12,8 +13,8 @@
         {
             var typeProductView = _dbContext.TypesProduct.Select(x => new TypeProductViewModel
             {
-               Id = x.Id,
-               Name = x.Name
+                Id = x.Id,
+                Name = x.Name
             }).ToList();
 
             return typeProductView;

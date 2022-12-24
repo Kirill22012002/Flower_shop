@@ -1,3 +1,5 @@
+using Flower_shop.Services.Implimentations;
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc();
@@ -13,12 +15,14 @@ builder.Services.AddAuthentication(builder.Configuration.GetConnectionString("Au
 builder.Services.AddDbContext<WebDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("FlowerShopDbContext")));
 
-builder.Services.AddScoped<UserService>();
-builder.Services.AddScoped<TypeProductService>();
+builder.Services.AddScoped<IUserService, UserService>();
+builder.Services.AddScoped<ITypeProductService, TypeProductService>();
+builder.Services.AddScoped<IColorSettingsService, ColorSettingsService>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ITypeProductRepository, TypeProductRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IColorRepository, ColorRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
