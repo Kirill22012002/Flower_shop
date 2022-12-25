@@ -14,9 +14,9 @@ namespace Flower_shop.Services.Implimentations
             _mapper = mapper;
         }
 
-        public ColorViewModel GetColorById(int id)
+        public ColorViewModel GetColorByAssignment(string name)
         {
-            return _mapper.Map<ColorViewModel>(_colorRepository.Get(id));
+            return _mapper.Map<ColorViewModel>(_colorRepository.GetByAssignment(name));
         }
         
     }

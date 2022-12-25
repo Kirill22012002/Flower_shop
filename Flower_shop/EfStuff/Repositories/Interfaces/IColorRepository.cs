@@ -2,5 +2,6 @@
 {
     public interface IColorRepository : IBaseRepository<Color>
     {
+        public Color GetByAssignment(string name);
     }
 }

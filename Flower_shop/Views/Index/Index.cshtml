@@ -128,7 +128,9 @@
 
 <style>
     @{
-        var firstColor = colorSettingService.GetColorById(2).ColorHex;
+        var firstColor = colorSettingService
+                            .GetColorByAssignment("Поменять цвет фона у навигационных кнопок.")
+                            .ColorHex;
     }
     .get-started__container::before{
         background-color: @firstColor;
