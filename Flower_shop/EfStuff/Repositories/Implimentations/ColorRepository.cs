@@ -5,5 +5,9 @@
         public ColorRepository(WebDbContext context) : base(context)
         {
         }
+        public Color GetByAssignment(string name)
+        {
+            return _dbSet.SingleOrDefault(x => x.AssignmentName == name);
+        }
     }
 }

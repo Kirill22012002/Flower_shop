@@ -2,6 +2,6 @@
 {
     public interface IColorSettingsService
     {
-        public ColorViewModel GetColorById(int id);
+        public ColorViewModel GetColorByAssignment(string name);
     }
 }

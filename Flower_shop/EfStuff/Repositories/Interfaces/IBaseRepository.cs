@@ -2,6 +2,7 @@
 {
     public interface IBaseRepository<T> where T : BaseModel
     {
+        public bool Any();
         public T Get(int id);
         public List<T> GetAll();
         public void Save(T model);
