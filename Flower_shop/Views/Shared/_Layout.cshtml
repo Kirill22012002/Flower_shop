@@ -80,9 +80,12 @@
 
     <style>
         @{
-            var firstColor = colorSettingsService.GetColorById(1).ColorHex;
-            var secondColor = colorSettingsService.GetColorById(2).ColorHex;
-
+            var firstColor = colorSettingsService
+                                .GetColorByAssignment("Поменять цвет кнопок \"Перейти\" и \"Войти\".")
+                                .ColorHex;
+            var secondColor = colorSettingsService
+                                .GetColorByAssignment("Поменять цвет фона у навигационных кнопок.")
+                                .ColorHex;
         }
         .button {
             background-color: @firstColor;

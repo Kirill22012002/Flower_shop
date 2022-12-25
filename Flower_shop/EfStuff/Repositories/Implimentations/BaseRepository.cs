@@ -11,6 +11,10 @@
             _dbSet = _webContext.Set<T>();
         }
 
+        public bool Any()
+        {
+            return _dbSet.Any();
+        }
         public T Get(int id) => _dbSet.FirstOrDefault(x => x.Id == id);
         public List<T> GetAll() => _dbSet.ToList();
         public void Save(T model)

@@ -1,5 +1,3 @@
-using Flower_shop.Services.Implimentations;
-
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMvc();
@@ -23,6 +21,7 @@ builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ITypeProductRepository, TypeProductRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IColorRepository, ColorRepository>();
+builder.Services.AddScoped<ISeedData, SeedData>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -56,6 +55,14 @@ app.UseEndpoints(endpoints =>
         name: "default",
         pattern: "{controller=Index}/{action=Index}/{id?}");
 });
+
+var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
+
+using(var scope = scopeFactory.CreateScope())
+{
+    var seedData = scope.ServiceProvider.GetService<ISeedData>();
+    seedData.Seed();
+}
 
 app.MapRazorPages();
 

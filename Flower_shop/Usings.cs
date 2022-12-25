@@ -7,6 +7,8 @@ global using Flower_shop.Models.ValidationAttributes;
 global using Flower_shop.EfStuff.Repositories.Interfaces;
 global using Flower_shop.EfStuff.Repositories.Implimentations;
 global using Flower_shop.Services.Interfaces;
+global using Flower_shop;
+global using Flower_shop.Services.Implimentations;
 
 
 global using Microsoft.AspNetCore.Mvc;

@@ -38,7 +38,9 @@
 
  <style>
     @{
-        var firstColor = colorSettingService.GetColorById(4).ColorHex;
+        var firstColor = colorSettingService
+                                .GetColorByAssignment("Поменять цвет кнопки \"Вход\"")
+                                .ColorHex;
     }
     .name{
         color: @firstColor;
