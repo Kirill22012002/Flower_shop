@@ -1,4 +1,6 @@
-﻿namespace Flower_shop.Controllers
+﻿using GoogleAuthentication.Services;
+
+namespace Flower_shop.Controllers
 {
     public class IndexController : Controller
     {
@@ -19,6 +21,11 @@
             var indexPageView = new IndexPageViewModel();
             indexPageView.Products = _mapper.Map<List<ProductViewModel>>(_productRepository.Take(4));
             indexPageView.Images = _mapper.Map<List<ImageViewModel>>(_imageRepository.GetAll());
+
+            var clientId = "291864101397-ifa7rc84i92op5t71pj674caqi9eeb96.apps.googleusercontent.com";
+            var redirectUrl = "https://localhost:7291/Authentication/RedirectGoogleLogin";
+            var response = GoogleAuth.GetAuthUrl(clientId, redirectUrl);
+            ViewBag.Response = response;
 
             return View(indexPageView);
         }
