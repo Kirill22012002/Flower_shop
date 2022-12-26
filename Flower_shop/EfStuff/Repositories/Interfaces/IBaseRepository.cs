@@ -2,13 +2,22 @@
 {
     public interface IBaseRepository<T> where T : BaseModel
     {
-        public bool Any();
-        public T Get(int id);
-        public List<T> GetAll();
-        public void Save(T model);
-        public void SaveList(List<T> models);
-        public void Remove(int id);
-        public void Remove(T model);
-        public int Count();
+        Task<bool> AnyAsync();
+
+        T GetById(int id);
+
+        Task<T> GetByIdAsync(int id);
+
+        Task<List<T>> GetAllAsync();
+
+        Task SaveAsync(T model);
+
+        Task SaveListAsync(IEnumerable<T> models);
+
+        Task RemoveAsync(T model);
+
+        Task RemoveByIdAsync(int id);
+
+        Task<int> CountAsync();
     }
 }

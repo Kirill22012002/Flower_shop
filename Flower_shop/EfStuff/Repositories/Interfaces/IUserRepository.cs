@@ -2,8 +2,10 @@
 {
     public interface IUserRepository : IBaseRepository<User>
     {
-        public User GetByEmAndPass(string email, string pass);
-        public bool IsEmailExist(string email);
-        public bool IsPasswordExist(string password);
+        Task<User> GetByEmAndPassAsync(string email, string pass);
+        bool IsEmailExist(string email);
+        Task<bool> IsEmailExistAsync(string email);
+        bool IsPasswordExist(string password);
+        Task<bool> IsPasswordExistAsync(string password);
     }
 }

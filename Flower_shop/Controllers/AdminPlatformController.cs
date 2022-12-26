@@ -41,14 +41,14 @@ namespace Flower_shop.Controllers
             return View();
         }
         [HttpGet]
-        public IActionResult ProductEdition()
+        public async Task<IActionResult> ProductEdition()
         {
             if (!_userService.IsAdmin())
             {
                 return RedirectToRoute("default", new { controller = "Index", action = "Index" });
             }
 
-            var typeView = _mapper.Map<List<TypeProductViewModel>>(_typeProductRepository.GetAll());
+            var typeView = _mapper.Map<List<TypeProductViewModel>>(await _typeProductRepository.GetAllAsync());
 
             var typeName = new List<string>();
 
@@ -85,20 +85,20 @@ namespace Flower_shop.Controllers
                     Price = productView.Price
                 };
 
-                var typeProduct = _typeProductRepository.GetByName(productView.TypeName);
+                var typeProduct = await _typeProductRepository.GetByNameAsync(productView.TypeName);
 
                 var productDb = _mapper.Map<Product>(productViewModel);
                 productDb.TypeProduct = typeProduct;
 
-                _productRepository.Save(productDb);
+                await _productRepository.SaveAsync(productDb);
             }
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
         [HttpGet]
-        public IActionResult TypeProductEdition()
+        public async Task<IActionResult> TypeProductEdition()
         {
-            var typesDb = _typeProductRepository.GetAll();
+            var typesDb = await _typeProductRepository.GetAllAsync();
 
             var typeView = new TypeProductViewModel
             {
@@ -112,10 +112,10 @@ namespace Flower_shop.Controllers
             return View(typeView);
         }
         [HttpPost]
-        public IActionResult TypeProductEdition(TypeProductViewModel typeProductView)
+        public async Task<IActionResult> TypeProductEdition(TypeProductViewModel typeProductView)
         {
             var typeProductDb = _mapper.Map<TypeProduct>(typeProductView);
-            _typeProductRepository.Save(typeProductDb);
+            await _typeProductRepository.SaveAsync(typeProductDb);
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
@@ -125,9 +125,9 @@ namespace Flower_shop.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult ProductDelete(int id)
+        public async Task<IActionResult> ProductDelete(int id)
         {
-            _productRepository.Remove(_productRepository.Get(id));
+            await _productRepository.RemoveByIdAsync(id);
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
@@ -137,15 +137,9 @@ namespace Flower_shop.Controllers
             return View();
         }
         [HttpPost]
-        public IActionResult TypeProductDelete(int typeId)
+        public async Task<IActionResult> TypeProductDelete(int typeId)
         {
-            var typeWithProducts = _dbContext.TypesProduct
-                .OrderBy(x => x.Name)
-                .Include(x => x.Products)
-                .FirstOrDefault(x => x.Id == typeId);
-
-            _dbContext.Remove(typeWithProducts);
-            _dbContext.SaveChanges();
+            await _typeProductRepository.RemoveTypeProductAsync(typeId);
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
@@ -167,27 +161,26 @@ namespace Flower_shop.Controllers
                 using (var fileStream = new FileStream(_appEnvironment.WebRootPath + path, FileMode.Create))
                 {
                     await imageViewModel.UploadedFile.CopyToAsync(fileStream);
-
                 }
 
-                var imageDb = _imageRepository.GetByBlock(imageViewModel.Block);
+                var imageDb = await _imageRepository.GetByBlockAsync(imageViewModel.Block);
 
                 imageDb.ImageName = imageViewModel.UploadedFile.Name;
                 imageDb.ImagePath = path;
                 imageDb.Title = imageViewModel.Title;
                 imageDb.Subtitle = imageViewModel.Subtitle;
 
-                _dbContext.SaveChanges();
+                await _dbContext.SaveChangesAsync();
             }
 
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
         [HttpGet]
-        public IActionResult GetAllUsers()
+        public async Task<IActionResult> GetAllUsers()
         {
             if (_userService.IsAdmin())
             {
-                return View(_mapper.Map<List<UserViewModel>>(_userRepository.GetAll()));
+                return View(_mapper.Map<List<UserViewModel>>(await _userRepository.GetAllAsync()));
             }
             else
             {

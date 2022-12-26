@@ -27,7 +27,7 @@
                 var userDb = _mapper.Map<User>(registerView);
                 userDb.Role = SiteRole.User;
 
-                _userRepository.Save(userDb);
+                await _userRepository.SaveAsync(userDb);
 
                 var claims = new List<Claim>()
                 {
@@ -53,7 +53,7 @@
         [HttpPost]
         public async Task<IActionResult> Autorization(LoginViewModel userView)
         {
-            var user = _userRepository.GetByEmAndPass(userView.Email, userView.Password);
+            var user = await _userRepository.GetByEmAndPassAsync(userView.Email, userView.Password);
 
             if (user == null)
             {

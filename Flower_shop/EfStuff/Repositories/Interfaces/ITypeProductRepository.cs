@@ -2,6 +2,7 @@
 {
     public interface ITypeProductRepository : IBaseRepository<TypeProduct>
     {
-        public TypeProduct GetByName(string name);
+        Task<TypeProduct> GetByNameAsync(string name);
+        Task RemoveTypeProductAsync(int id);
     }
 }

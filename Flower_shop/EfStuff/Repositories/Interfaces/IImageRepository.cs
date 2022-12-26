@@ -2,6 +2,6 @@
 {
     public interface IImageRepository : IBaseRepository<Image>
     {
-        Image GetByBlock(int block);
+        Task<Image> GetByBlockAsync(int block);
     }
 }

@@ -3,14 +3,14 @@
     public class UserService : IUserService
     {
         private IHttpContextAccessor _httpContextAccessor;
-        private WebDbContext _dbContext;
+        private IUserRepository _userRepository;
 
         public UserService(
             IHttpContextAccessor httpContextAccessor,
-            WebDbContext dbContext)
+             IUserRepository userRepository)
         {
             _httpContextAccessor = httpContextAccessor;
-            _dbContext = dbContext;
+            _userRepository = userRepository;
         }
 
         public User GetCurrent()
@@ -28,7 +28,7 @@
             }
             var id = int.Parse(idStr);
 
-            var user = _dbContext.Users.SingleOrDefault(x => x.Id == id);
+            var user = _userRepository.GetById(id);
             return user;
         }
         public bool HasRole(SiteRole role)
