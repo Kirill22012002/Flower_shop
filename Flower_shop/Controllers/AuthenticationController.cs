@@ -1,4 +1,6 @@
-﻿namespace Flower_shop.Controllers
+﻿using GoogleAuthentication.Services;
+
+namespace Flower_shop.Controllers
 {
     public class AuthenticationController : Controller
     {
@@ -77,6 +79,19 @@
         {
             await HttpContext.SignOutAsync();
 
+            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
+        }
+        public async Task<IActionResult> RedirectGoogleLogin(string code)
+        {
+            var clientId = "291864101397-ifa7rc84i92op5t71pj674caqi9eeb96.apps.googleusercontent.com";
+            var redirectUrl = "https://localhost:7291/Authentication/RedirectGoogleLogin";
+            var clientSecret = "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";
+
+            var token = await GoogleAuth.GetAuthAccessToken(code, clientId,clientSecret, redirectUrl);
+            var userProfile = await GoogleAuth.GetProfileResponseAsync(token.AccessToken.ToString());
+
+
+            Console.WriteLine();
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
     }
