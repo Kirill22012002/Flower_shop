@@ -62,7 +62,6 @@ namespace Flower_shop.Controllers
                 TypesName = typeName
             };
 
-
             return View(productView);
         }
         [HttpPost]
@@ -125,7 +124,7 @@ namespace Flower_shop.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> ProductDelete(int id)
+        public async Task<IActionResult> ProductDelete(long id)
         {
             await _productRepository.RemoveByIdAsync(id);
 
@@ -137,7 +136,7 @@ namespace Flower_shop.Controllers
             return View();
         }
         [HttpPost]
-        public async Task<IActionResult> TypeProductDelete(int typeId)
+        public async Task<IActionResult> TypeProductDelete(long typeId)
         {
             await _typeProductRepository.RemoveTypeProductAsync(typeId);
 

@@ -15,11 +15,11 @@
         {
             return await _dbSet.AnyAsync();
         }
-        public T GetById(int id)
+        public T GetById(long id)
         {
             return _dbSet.FirstOrDefault(x => x.Id == id);
         }
-        public async Task<T> GetByIdAsync(int id)
+        public async Task<T> GetByIdAsync(long id)
         {
             return await _dbSet.FirstOrDefaultAsync(x => x.Id == id);
         }
@@ -54,7 +54,7 @@
             await _webContext.SaveChangesAsync();
         }
 
-        public async Task RemoveByIdAsync(int id)
+        public async Task RemoveByIdAsync(long id)
         {
             _dbSet.Remove(await GetByIdAsync(id));
             await _webContext.SaveChangesAsync();

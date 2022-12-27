@@ -12,9 +12,10 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Flower_shop.Migrations
 {
     [DbContext(typeof(WebDbContext))]
-    partial class WebDbContextModelSnapshot : ModelSnapshot
+    [Migration("20221227125824_AddLongInsteadOfInt")]
+    partial class AddLongInsteadOfInt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -143,7 +144,6 @@ namespace Flower_shop.Migrations
 
                     b.ToTable("Users");
                 });
-
 
             modelBuilder.Entity("Flower_shop.EfStuff.DbModels.Product", b =>
                 {
