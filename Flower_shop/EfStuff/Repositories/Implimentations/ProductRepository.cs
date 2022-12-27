@@ -5,7 +5,9 @@
         public ProductRepository(WebDbContext context) : base(context)
         {
         }
-        public List<Product> Take(int count) => _webContext.Products.Take(count).ToList();
-
+        public async Task<List<Product>> TakeAsync(int count)
+        {
+            return await _webContext.Products.Take(count).ToListAsync();
+        }
     }
 }

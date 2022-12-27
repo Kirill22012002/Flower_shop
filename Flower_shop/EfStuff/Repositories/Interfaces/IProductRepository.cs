@@ -2,6 +2,6 @@
 {
     public interface IProductRepository : IBaseRepository<Product>
     {
-        public List<Product> Take(int count);
+        Task<List<Product>> TakeAsync(int count);
     }
 }

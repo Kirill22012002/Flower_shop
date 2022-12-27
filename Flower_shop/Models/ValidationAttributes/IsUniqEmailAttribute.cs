@@ -1,6 +1,4 @@
-﻿using Flower_shop.EfStuff.Repositories.Implimentations;
-
-namespace Flower_shop.Models.ValidationAttributes
+﻿namespace Flower_shop.Models.ValidationAttributes
 {
     public class IsUniqEmailAttribute : ValidationAttribute
     {

@@ -5,9 +5,9 @@
         public ImageRepository(WebDbContext context) : base(context)
         {
         }
-        public Image GetByBlock(int block)
+        public async Task<Image> GetByBlockAsync(int block)
         {
-            return _dbSet.Where(x => x.Block == block).FirstOrDefault();
+            return await _dbSet.Where(x => x.Block == block).SingleOrDefaultAsync();
         }
 
     }

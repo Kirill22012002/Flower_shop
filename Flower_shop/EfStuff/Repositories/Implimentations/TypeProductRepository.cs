@@ -5,9 +5,19 @@
         public TypeProductRepository(WebDbContext context) : base(context)
         {
         }
-        public TypeProduct GetByName(string name)
+        public async Task<TypeProduct> GetByNameAsync(string name)
         {
-            return _webContext.TypesProduct.SingleOrDefault(x => x.Name.ToLower() == name.ToLower());
+            return await _webContext.TypesProduct.SingleOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
+        }
+
+        public async Task RemoveTypeProductAsync(int id)
+        {
+            await _webContext.TypesProduct
+                .OrderBy(x => x.Name)
+                .Include(x => x.Products)
+                .SingleOrDefaultAsync(x => x.Id == id);
+
+            await _webContext.SaveChangesAsync();
         }
 
     }
