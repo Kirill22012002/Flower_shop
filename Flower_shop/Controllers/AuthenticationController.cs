@@ -1,4 +1,7 @@
-﻿using GoogleAuthentication.Services;
+﻿using Flower_shop.Models.UserViewModels;
+using GoogleAuthentication.Services;
+using Newtonsoft.Json;
+using System.Text.Json;
 
 namespace Flower_shop.Controllers
 {
@@ -90,8 +93,7 @@ namespace Flower_shop.Controllers
             var token = await GoogleAuth.GetAuthAccessToken(code, clientId,clientSecret, redirectUrl);
             var userProfile = await GoogleAuth.GetProfileResponseAsync(token.AccessToken.ToString());
 
-
-            Console.WriteLine();
+            var googleUser = JsonConvert.DeserializeObject<GoogleUserViewModel>(userProfile);
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
     }
