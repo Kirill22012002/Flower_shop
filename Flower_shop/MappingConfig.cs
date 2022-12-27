@@ -12,6 +12,7 @@
                 config.CreateMap<RegisterViewModel, User>().ReverseMap();
                 config.CreateMap<TypeProduct, TypeProductViewModel>().ReverseMap();
                 config.CreateMap<Image, ImageViewModel>().ReverseMap();
+                config.CreateMap<Color, ColorViewModel>().ReverseMap();
             });
         }
     }

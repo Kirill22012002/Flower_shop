@@ -47,15 +47,3 @@
 .button{
     margin:6px;
 }
-
-.button:hover {
-    background-color: #ff9299;
-}
-
-.button_blue {
-    background-color: blue;
-}
-
-    .button_blue:hover {
-        background-color: rgb(87, 87, 255);
-    }

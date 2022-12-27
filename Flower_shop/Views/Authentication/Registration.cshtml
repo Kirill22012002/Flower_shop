@@ -1,4 +1,5 @@
 ﻿@model RegisterViewModel
+@inject IColorSettingsService colorSettingService
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
@@ -34,3 +35,17 @@
         </div>
     </div>
 </section>
+
+ <style>
+    @{
+        var firstColor = colorSettingService
+                                .GetColorByAssignment("Поменять цвет кнопки \"Вход\"")
+                                .ColorHex;
+    }
+    .name{
+        color: @firstColor;
+    }
+    .button-submit input{
+        background-color: @firstColor;
+    }
+</style>
