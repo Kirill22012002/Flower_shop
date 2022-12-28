@@ -50,13 +50,13 @@ namespace Flower_shop.Migrations
                 oldClrType: typeof(string),
                 oldType: "nvarchar(max)");
 
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.AlterColumn<long>(
                 name: "TypeProductId",
                 table: "Products",
-                type: "int",
+                type: "bigint",
                 nullable: true,
-                oldClrType: typeof(int),
-                oldType: "int");
+                oldClrType: typeof(long),
+                oldType: "bigint");
 
             migrationBuilder.AlterColumn<string>(
                 name: "Price",
@@ -94,7 +94,7 @@ namespace Flower_shop.Migrations
                 name: "Images",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Block = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -173,14 +173,14 @@ namespace Flower_shop.Migrations
                 oldType: "nvarchar(max)",
                 oldNullable: true);
 
-            migrationBuilder.AlterColumn<int>(
+            migrationBuilder.AlterColumn<long>(
                 name: "TypeProductId",
                 table: "Products",
-                type: "int",
+                type: "bigint",
                 nullable: false,
                 defaultValue: 0,
-                oldClrType: typeof(int),
-                oldType: "int",
+                oldClrType: typeof(long),
+                oldType: "bigint",
                 oldNullable: true);
 
             migrationBuilder.AlterColumn<string>(

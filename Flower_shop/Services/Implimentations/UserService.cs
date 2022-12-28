@@ -26,7 +26,7 @@
             {
                 return null;
             }
-            var id = int.Parse(idStr);
+            var id = long.Parse(idStr);
 
             var user = _userRepository.GetById(id);
             return user;
