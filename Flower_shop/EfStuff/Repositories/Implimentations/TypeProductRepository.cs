@@ -10,7 +10,7 @@
             return await _webContext.TypesProduct.SingleOrDefaultAsync(x => x.Name.ToLower() == name.ToLower());
         }
 
-        public async Task RemoveTypeProductAsync(long id)
+        public async Task RemoveTypeProductAsync(int id)
         {
             await _webContext.TypesProduct
                 .OrderBy(x => x.Name)

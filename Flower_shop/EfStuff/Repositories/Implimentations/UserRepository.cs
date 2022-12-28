@@ -8,7 +8,7 @@
 
         public async Task<User> GetByEmAndPassAsync(string email, string pass)
         {
-            var user = await _dbSet.SingleOrDefaultAsync(x => x.Email == email && x.Password == pass);
+            var user = await _webContext.Users.SingleOrDefaultAsync(x => x.Email == email && x.Password == pass);
             return user;
         }
         public bool IsEmailExist(string email)

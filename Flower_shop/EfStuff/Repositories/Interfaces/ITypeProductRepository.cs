@@ -3,6 +3,6 @@
     public interface ITypeProductRepository : IBaseRepository<TypeProduct>
     {
         Task<TypeProduct> GetByNameAsync(string name);
-        Task RemoveTypeProductAsync(long id);
+        Task RemoveTypeProductAsync(int id);
     }
 }

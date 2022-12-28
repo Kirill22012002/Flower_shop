@@ -26,7 +26,7 @@
             {
                 return null;
             }
-            var id = Convert.ToInt64(idStr);
+            var id = int.Parse(idStr);
 
             var user = _userRepository.GetById(id);
             return user;

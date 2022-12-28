@@ -4,7 +4,6 @@ using Flower_shop.EfStuff;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -25,11 +24,11 @@ namespace Flower_shop.Migrations
 
             modelBuilder.Entity("Flower_shop.EfStuff.DbModels.Color", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AssignmentName")
                         .HasColumnType("nvarchar(max)");
@@ -44,11 +43,11 @@ namespace Flower_shop.Migrations
 
             modelBuilder.Entity("Flower_shop.EfStuff.DbModels.Image", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<int>("Block")
                         .HasColumnType("int");
@@ -72,11 +71,11 @@ namespace Flower_shop.Migrations
 
             modelBuilder.Entity("Flower_shop.EfStuff.DbModels.Product", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(max)");
@@ -90,8 +89,8 @@ namespace Flower_shop.Migrations
                     b.Property<string>("Price")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("TypeProductId")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("TypeProductId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
@@ -102,11 +101,11 @@ namespace Flower_shop.Migrations
 
             modelBuilder.Entity("Flower_shop.EfStuff.DbModels.TypeProduct", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -118,11 +117,11 @@ namespace Flower_shop.Migrations
 
             modelBuilder.Entity("Flower_shop.EfStuff.DbModels.User", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
+                        .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("Id"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("Email")
                         .HasColumnType("nvarchar(max)");
@@ -143,7 +142,6 @@ namespace Flower_shop.Migrations
 
                     b.ToTable("Users");
                 });
-
 
             modelBuilder.Entity("Flower_shop.EfStuff.DbModels.Product", b =>
                 {

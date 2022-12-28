@@ -2,7 +2,7 @@
 {
     public class ColorViewModel
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public string AssignmentName { get; set; }
         public string ColorHex { get; set; }
     }

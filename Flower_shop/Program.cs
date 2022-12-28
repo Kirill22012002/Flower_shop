@@ -58,7 +58,7 @@ app.UseEndpoints(endpoints =>
 
 var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
 
-using (var scope = scopeFactory.CreateScope())
+using(var scope = scopeFactory.CreateScope())
 {
     var seedData = scope.ServiceProvider.GetService<ISeedData>();
     seedData.Seed();

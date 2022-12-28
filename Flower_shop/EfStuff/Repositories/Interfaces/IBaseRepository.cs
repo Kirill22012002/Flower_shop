@@ -4,9 +4,9 @@
     {
         Task<bool> AnyAsync();
 
-        T GetById(long id);
+        T GetById(int id);
 
-        Task<T> GetByIdAsync(long id);
+        Task<T> GetByIdAsync(int id);
 
         Task<List<T>> GetAllAsync();
 
@@ -16,7 +16,7 @@
 
         Task RemoveAsync(T model);
 
-        Task RemoveByIdAsync(long id);
+        Task RemoveByIdAsync(int id);
 
         Task<int> CountAsync();
     }
