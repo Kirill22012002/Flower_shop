@@ -12,7 +12,7 @@
             _mapper = mapper;
             _typeProductRepository = typeProductRepository;
         }
-        public async Task<IActionResult> Products(int typeId)
+        public async Task<IActionResult> Products(long typeId)
         {
             var typeDb = await _typeProductRepository.GetByIdAsync(typeId);
             if (typeDb is null)

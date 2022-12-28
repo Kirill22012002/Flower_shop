@@ -10,10 +10,10 @@ namespace Flower_shop.Migrations
                 name: "Type",
                 table: "Products");
 
-            migrationBuilder.AddColumn<int>(
+            migrationBuilder.AddColumn<long>(
                 name: "TypeProductId",
                 table: "Products",
-                type: "int",
+                type: "bigint",
                 nullable: false,
                 defaultValue: 0);
 
@@ -21,7 +21,7 @@ namespace Flower_shop.Migrations
                 name: "TypesProduct",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<long>(type: "bigint", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
