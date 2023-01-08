@@ -1,16 +1,21 @@
-﻿namespace Flower_shop.Controllers
+﻿using System.Collections.Generic;
+
+namespace Flower_shop.Controllers
 {
     public class GalleryController : Controller
     {
         private IMapper _mapper;
         private ITypeProductRepository _typeProductRepository;
+        private IProductRepository _productRepository;
 
         public GalleryController(
             IMapper mapper,
-            ITypeProductRepository typeProductRepository)
+            ITypeProductRepository typeProductRepository,
+            IProductRepository productRepository)
         {
             _mapper = mapper;
             _typeProductRepository = typeProductRepository;
+            _productRepository = productRepository; 
         }
         public async Task<IActionResult> Products(int typeId)
         {
@@ -21,7 +26,8 @@
             }
             else
             {
-                return View(_mapper.Map<List<ProductViewModel>>(typeDb.Products));
+                var product = _mapper.Map<List<ProductViewModel>>(await _productRepository.GetProductsByTypeIdAsync(typeId));
+                return View(product);
             }
         }
         public IActionResult SingleProduct(ProductViewModel product)

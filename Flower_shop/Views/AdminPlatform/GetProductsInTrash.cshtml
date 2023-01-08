@@ -1,11 +1,9 @@
 ﻿@model List<ProductViewModel>
-@inject IUserService userService
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <link rel="stylesheet" href="~/css/gallery_products.css?v=2" />
-
-
 
 <section class="product">
     <div class="product__container">
@@ -24,20 +22,13 @@
                         @product.Price
                     </div>
                 </div>
-                @if (userService.IsAdmin())
-                {
                     <form  class="remove-block">
                         <div class="product-remove">
                             <input name="Id" type="hidden" value="@product.Id" class="product-id"/>
                             <input name="delete-product" value="Удалить" class="delete-product"/>
                         </div>
                     </form>
-                }
             </div>
         }
     </div>
 </section>
-
-@section Scripts{
-    <script src="/js/flowers.js"></script>
-}

@@ -1,4 +1,5 @@
 ﻿using Flower_shop.Services.Implimentations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Flower_shop.Controllers
 {
@@ -120,17 +121,17 @@ namespace Flower_shop.Controllers
             return RedirectToRoute("default", new { controller = "Index", action = "Index" });
         }
         [HttpGet]
-        public IActionResult ProductDelete()
-        {
-            return View();
-        }
-        [HttpPost]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> ProductDelete(int id)
         {
-            await _productRepository.RemoveByIdAsync(id);
+            if (!await _productRepository.MoveProductToTrash(id)) 
+            {
+                return BadRequest();
+            }
 
-            return RedirectToRoute("default", new { controller = "Index", action = "Index" });
+            return Ok();
         }
+
         [HttpGet]
         public IActionResult TypeProductDelete()
         {
@@ -186,6 +187,18 @@ namespace Flower_shop.Controllers
             {
                 return Redirect("~/Index/Index");
             }
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetProductsInTrash()
+        {
+            //тут берем только продукты из корзины
+            var products = _mapper
+                .Map<List<ProductViewModel>>(await _productRepository.GetAllAsync(onlyInTrash: true));
+            
+            return View(products);
+
         }
     }
 }
