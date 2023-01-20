@@ -1,4 +1,6 @@
-﻿namespace Flower_shop
+﻿using Yandex.Checkout.V3;
+
+namespace Flower_shop
 {
     public class MappingConfig
     {
@@ -13,6 +15,7 @@
                 config.CreateMap<TypeProduct, TypeProductViewModel>().ReverseMap();
                 config.CreateMap<Image, ImageViewModel>().ReverseMap();
                 config.CreateMap<Color, ColorViewModel>().ReverseMap();
+                config.CreateMap<Payment, MyPayment>().ReverseMap();
             });
         }
     }
