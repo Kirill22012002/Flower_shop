@@ -5,14 +5,17 @@
         private IMapper _mapper;
         private IProductRepository _productRepository;
         private IImageRepository _imageRepository;
+        private WebDbContext _dbContext;
         public IndexController(
             IMapper mapper,
             IProductRepository productRepository,
-            IImageRepository imageRepository)
+            IImageRepository imageRepository,
+            WebDbContext dbContext)
         {
             _mapper = mapper;
             _productRepository = productRepository;
             _imageRepository = imageRepository;
+            _dbContext = dbContext;
         }
         public IActionResult Index()
         {
@@ -26,6 +29,30 @@
         public IActionResult Pay()
         {
             return View();
+        }
+
+        [HttpGet]
+        public string Paid()
+        {
+            return "Оплачено";
+        }
+
+        [HttpPost]
+        public void Paid(string id, bool paid)
+        {
+            var myPayment = new MyPayment()
+            {
+                Id = id,
+                Paid = paid
+            };
+
+            _dbContext.MyPayments.Add(myPayment);
+            _dbContext.SaveChanges();
+        }
+
+        public string AfterPayment()
+        {
+            return "Страница после платежа";
         }
     }
 }

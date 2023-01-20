@@ -10,7 +10,7 @@ namespace Flower_shop.Controllers
         private WebDbContext _dbContext;
         private IMapper _mapper;
         private readonly Client _client = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY");
-        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Payment/AfterPayment";
+        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Index/AfterPayment";
 
         public PaymentController(
             WebDbContext dbContext,
@@ -45,14 +45,17 @@ namespace Flower_shop.Controllers
         }
 
 
-        [HttpPost]
-        public IActionResult GetAnswerTEST([FromBody] Payment payment)
+
+
+
+
+
+
+
+
+        /*[HttpPost]
+        public IActionResult Paid([FromBody]Payment payment)
         {
-            var myPayment = _mapper.Map<MyPayment>(payment);
-
-            _dbContext.MyPayments.Add(myPayment);
-            _dbContext.SaveChanges();
-
 
             switch (payment.Status)
             {
@@ -67,12 +70,7 @@ namespace Flower_shop.Controllers
             }
 
             return StatusCode(200);
-        }
+        }*/
 
-        [HttpGet]
-        public IActionResult AfterPayment()
-        {
-            return Redirect("~/Home/Index");
-        }
     }
 }
