@@ -50,9 +50,6 @@
             _dbContext.SaveChanges();
         }
 
-        public string AfterPayment()
-        {
-            return "Страница после платежа";
-        }
+        
     }
 }

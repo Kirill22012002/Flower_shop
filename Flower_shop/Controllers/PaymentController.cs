@@ -10,7 +10,7 @@ namespace Flower_shop.Controllers
         private WebDbContext _dbContext;
         private IMapper _mapper;
         private readonly Client _client = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY");
-        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Index/AfterPayment";
+        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Index/Paid";
 
         public PaymentController(
             WebDbContext dbContext,
