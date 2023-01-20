@@ -22,5 +22,10 @@
 
             return View(indexPageView);
         }
+
+        public IActionResult Pay()
+        {
+            return View();
+        }
     }
 }
