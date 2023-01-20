@@ -11,7 +11,7 @@ namespace Flower_shop.Controllers
         private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Payment/AfterPayment";
 
         [HttpPost]
-        public IActionResult CreatePayment(/*decimal value*/)
+        public void CreatePayment()
         {
             var newPayment = new NewPayment
             {
@@ -26,18 +26,13 @@ namespace Flower_shop.Controllers
                     ReturnUrl = AfterPaymentURL
                 }
             };
+
             Payment payment = _client.CreatePayment(newPayment);
 
-
-            return RedirectToAction("RedirectToBank", new { payment = payment });
-        }
-
-        [HttpPost]
-        public void RedirectToBank(Payment payment)
-        {
             string url = payment.Confirmation.ConfirmationUrl;
             Response.Redirect(url);
         }
+
 
         [HttpPost]
         public IActionResult GetAnswerTEST([FromBody] Payment payment)
