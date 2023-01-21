@@ -44,17 +44,17 @@ namespace Flower_shop.Controllers
             Response.Redirect(url);
         }
 
-        [HttpPost]
-        public void Paid(string code)
+        public async Task<IActionResult> Paid(string code)
         {
             var myPayment = new MyPayment()
             {
-                Id = "7Id",
+                Id = "56",
                 Code = code
             };
 
             _dbContext.MyPayments.Add(myPayment);
             _dbContext.SaveChanges();
+            return Ok();
         }
     }
 }
