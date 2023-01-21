@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.HttpsPolicy;
+using Newtonsoft.Json;
 using Yandex.Checkout.V3;
 
 namespace Flower_shop.Controllers
@@ -44,12 +45,13 @@ namespace Flower_shop.Controllers
             Response.Redirect(url);
         }
 
-        public async Task<IActionResult> Paid(string code)
+        public async Task<IActionResult> Paid(JsonContent json)
         {
+            
             var myPayment = new MyPayment()
             {
-                Id = "ad453",
-                Code = code
+                Id = "Ну что Заебал",
+                Code = json.ToString()
             };
 
             _dbContext.MyPayments.Add(myPayment);
