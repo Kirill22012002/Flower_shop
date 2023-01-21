@@ -47,22 +47,12 @@ namespace Flower_shop.Controllers
         }
 
         [HttpPost]
-        public void Paid(string notification_type, string operation_id, string label, string datetime,
-        decimal amount, decimal withdraw_amount, string sender, string sha1_hash, string currency, bool codepro)
+        public void Paid(string code)
         {
             
             var myAsnwer = new Answer()
             {
-                notification_type= notification_type,
-                operation_id= operation_id, 
-                label= label,
-                datetime=datetime,
-                amount= amount,
-                withdraw_amount= withdraw_amount,
-                sender= sender,
-                sha1_hash= sha1_hash,
-                currency=currency,
-                codepro=codepro
+                notification_type= code
             };
 
             _dbContext.Answers.Add(myAsnwer);
