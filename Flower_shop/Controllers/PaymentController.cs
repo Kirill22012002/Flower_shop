@@ -45,45 +45,16 @@ namespace Flower_shop.Controllers
         }
 
         [HttpPost]
-        public void Paid([FromBody]Payment payment)
+        public void Paid(string code)
         {
             var myPayment = new MyPayment()
             {
-                Id = "56Id",
-                Code = payment.CreatedAt.ToString()
+                Id = "7Id",
+                Code = code
             };
 
             _dbContext.MyPayments.Add(myPayment);
             _dbContext.SaveChanges();
         }
-
-
-
-
-
-
-
-
-
-
-        /*[HttpPost]
-        public IActionResult Paid([FromBody]Payment payment)
-        {
-
-            switch (payment.Status)
-            {
-                case PaymentStatus.Succeeded:
-                    return Redirect("~/Home/Index");
-
-                case PaymentStatus.WaitingForCapture:
-                    return Redirect("~/Home/Index");
-
-                case PaymentStatus.Canceled:
-                    return Redirect("~/Home/Index");
-            }
-
-            return StatusCode(200);
-        }*/
-
     }
 }
