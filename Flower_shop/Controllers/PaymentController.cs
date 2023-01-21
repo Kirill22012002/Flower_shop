@@ -49,7 +49,7 @@ namespace Flower_shop.Controllers
         {
             var myPayment = new MyPayment()
             {
-                Id = "3Id",
+                Id = "56Id",
                 Code = payment.CreatedAt.ToString()
             };
 
