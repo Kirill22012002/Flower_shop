@@ -1,4 +1,6 @@
-﻿namespace Flower_shop.Controllers
+﻿using Yandex.Checkout.V3;
+
+namespace Flower_shop.Controllers
 {
     [Route("[controller/[action]")]
     public class IndexController : Controller
@@ -50,7 +52,6 @@
             _dbContext.MyPayments.Add(myPayment);
             _dbContext.SaveChanges();
         }
-
 
     }
 }

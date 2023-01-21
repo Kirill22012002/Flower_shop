@@ -10,7 +10,7 @@ namespace Flower_shop.Controllers
         private WebDbContext _dbContext;
         private IMapper _mapper;
         private readonly Client _client = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY");
-        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Index/Paid";
+        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Payment/GetMessage";
 
         public PaymentController(
             WebDbContext dbContext,
@@ -44,33 +44,23 @@ namespace Flower_shop.Controllers
             Response.Redirect(url);
         }
 
-
-
-
-
-
-
-
-
-
-        /*[HttpPost]
-        public IActionResult Paid([FromBody]Payment payment)
+        [HttpGet]
+        public string GetMessage()
         {
+            return "Paid";
+        }
 
-            switch (payment.Status)
+        [HttpPost]
+        public void GetMessage(string code)
+        {
+            var myPayment = new MyPayment()
             {
-                case PaymentStatus.Succeeded:
-                    return Redirect("~/Home/Index");
+                Id = "2Id",
+                Code = code
+            };
 
-                case PaymentStatus.WaitingForCapture:
-                    return Redirect("~/Home/Index");
-
-                case PaymentStatus.Canceled:
-                    return Redirect("~/Home/Index");
-            }
-
-            return StatusCode(200);
-        }*/
-
+            _dbContext.MyPayments.Add(myPayment);
+            _dbContext.SaveChanges();
+        }
     }
 }
