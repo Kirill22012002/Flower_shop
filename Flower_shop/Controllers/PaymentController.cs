@@ -38,7 +38,8 @@ namespace Flower_shop.Controllers
                 {
                     Type = ConfirmationType.Redirect,
                     ReturnUrl = AfterPaymentURL
-                }
+                },
+                Capture = true
             };
 
             Payment payment = _client.CreatePayment(newPayment);
@@ -47,49 +48,17 @@ namespace Flower_shop.Controllers
             Response.Redirect(url);
         }
 
-        /*[HttpPost]
+        [HttpPost]
         public void Paid(string code)
         {
-            
+
             var myAsnwer = new Answer()
             {
-                notification_type= code
+                notification_type = code
             };
 
             _dbContext.Answers.Add(myAsnwer);
             _dbContext.SaveChanges();
-        }
-        public static async Task<string> GetPaymentDataFromYKassa(string url, string apiKey)
-        {
-            using (var client = new HttpClient())
-            {
-                // Set the headers
-                client.DefaultRequestHeaders.Add("X-API-KEY", apiKey);
-                // Get the response
-                var response = await client.GetAsync(url);
-                var content = await response.Content.ReadAsStringAsync();
-                // Return the response
-                return content;
-            }
-        }*/
-        [HttpPost]
-        public void GetDataByHttpJson(string url)
-        {
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "POST";
-            HttpWebResponse response = (HttpWebResponse)request.GetResponse();
-            Stream stream = response.GetResponseStream();
-            StreamReader reader = new StreamReader(stream);
-            string data = reader.ReadToEnd();
-
-            var myAsnwer = new Answer()
-            {
-                notification_type = data
-            };
-
-            _dbContext.Answers.Add(myAsnwer);
-            _dbContext.SaveChanges();
-
         }
     }
 }
