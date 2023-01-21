@@ -44,6 +44,19 @@ namespace Flower_shop.Controllers
             Response.Redirect(url);
         }
 
+        [HttpPost]
+        public void Paid(string code)
+        {
+            var myPayment = new MyPayment()
+            {
+                Id = "1Id",
+                Code = code
+            };
+
+            _dbContext.MyPayments.Add(myPayment);
+            _dbContext.SaveChanges();
+        }
+
 
 
 
