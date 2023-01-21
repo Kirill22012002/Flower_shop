@@ -49,12 +49,6 @@ app.UseAuthentication();
 // Where could I go 
 app.UseAuthorization();
 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapControllerRoute(
-        name: "default",
-        pattern: "{controller=Index}/{action=Index}/{id?}");
-});
 
 var scopeFactory = app.Services.GetRequiredService<IServiceScopeFactory>();
 
