@@ -76,7 +76,7 @@ namespace Flower_shop.Controllers
         public void GetDataByHttpJson(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
-            request.Method = "GET";
+            request.Method = "POST";
             HttpWebResponse response = (HttpWebResponse)request.GetResponse();
             Stream stream = response.GetResponseStream();
             StreamReader reader = new StreamReader(stream);
