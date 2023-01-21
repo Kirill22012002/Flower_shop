@@ -72,7 +72,8 @@ namespace Flower_shop.Controllers
                 return content;
             }
         }*/
-        public string GetDataByHttpJson(string url)
+        [HttpPost]
+        public void GetDataByHttpJson(string url)
         {
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(url);
             request.Method = "GET";
@@ -88,9 +89,6 @@ namespace Flower_shop.Controllers
 
             _dbContext.Answers.Add(myAsnwer);
             _dbContext.SaveChanges();
-
-            return data;
-
 
         }
     }
