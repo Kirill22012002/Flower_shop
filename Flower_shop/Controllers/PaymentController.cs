@@ -43,34 +43,5 @@ namespace Flower_shop.Controllers
             string url = payment.Confirmation.ConfirmationUrl;
             Response.Redirect(url);
         }
-
-
-
-
-
-
-
-
-
-
-        /*[HttpPost]
-        public IActionResult Paid([FromBody]Payment payment)
-        {
-
-            switch (payment.Status)
-            {
-                case PaymentStatus.Succeeded:
-                    return Redirect("~/Home/Index");
-
-                case PaymentStatus.WaitingForCapture:
-                    return Redirect("~/Home/Index");
-
-                case PaymentStatus.Canceled:
-                    return Redirect("~/Home/Index");
-            }
-
-            return StatusCode(200);
-        }*/
-
     }
 }

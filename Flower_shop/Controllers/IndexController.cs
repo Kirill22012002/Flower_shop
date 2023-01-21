@@ -1,4 +1,6 @@
-﻿namespace Flower_shop.Controllers
+﻿using Yandex.Checkout.V3;
+
+namespace Flower_shop.Controllers
 {
     public class IndexController : Controller
     {
@@ -38,7 +40,7 @@
         }
 
         [HttpPost]
-        public void Paid(string code)
+        public void Paid([FromBody]string code)
         {
             var myPayment = new MyPayment()
             {
@@ -49,7 +51,5 @@
             _dbContext.MyPayments.Add(myPayment);
             _dbContext.SaveChanges();
         }
-
-
     }
 }
