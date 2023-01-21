@@ -45,12 +45,12 @@ namespace Flower_shop.Controllers
         }
 
         [HttpPost]
-        public void Paid(string code)
+        public void Paid([FromBody]Payment payment)
         {
             var myPayment = new MyPayment()
             {
                 Id = "3Id",
-                Code = code
+                Code = payment.CreatedAt.ToString()
             };
 
             _dbContext.MyPayments.Add(myPayment);
