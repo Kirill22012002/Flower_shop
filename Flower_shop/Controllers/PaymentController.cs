@@ -49,12 +49,12 @@ namespace Flower_shop.Controllers
         }
 
         [HttpPost]
-        public void Paid(object code, EventArgs args)
+        public void Paid(object code)
         {
 
             var myAsnwer = new Answer()
             {
-                notification_type = args.ToString()
+                notification_type = code.ToString()
             };
 
             _dbContext.Answers.Add(myAsnwer);
