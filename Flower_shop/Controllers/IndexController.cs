@@ -1,5 +1,6 @@
 ﻿namespace Flower_shop.Controllers
 {
+    [Route("[controller/[action]")]
     public class IndexController : Controller
     {
         private IMapper _mapper;
@@ -42,7 +43,7 @@
         {
             var myPayment = new MyPayment()
             {
-                Id = "1Id",
+                Id = "2Id",
                 Code = code
             };
 
