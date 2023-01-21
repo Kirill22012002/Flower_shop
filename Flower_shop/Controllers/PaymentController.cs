@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.HttpsPolicy;
+﻿using Flower_shop.EfStuff.DbModels;
+using Microsoft.AspNetCore.HttpsPolicy;
 using Newtonsoft.Json;
 using Yandex.Checkout.V3;
 
@@ -45,18 +46,27 @@ namespace Flower_shop.Controllers
             Response.Redirect(url);
         }
 
-        public async Task<IActionResult> Paid(JsonContent json)
+        [HttpPost]
+        public void Paid(string notification_type, string operation_id, string label, string datetime,
+        decimal amount, decimal withdraw_amount, string sender, string sha1_hash, string currency, bool codepro)
         {
             
-            var myPayment = new MyPayment()
+            var myAsnwer = new Answer()
             {
-                Id = "Ну что Заебал",
-                Code = json.ToString()
+                notification_type= notification_type,
+                operation_id= operation_id, 
+                label= label,
+                datetime=datetime,
+                amount= amount,
+                withdraw_amount= withdraw_amount,
+                sender= sender,
+                sha1_hash= sha1_hash,
+                currency=currency,
+                codepro=codepro
             };
 
-            _dbContext.MyPayments.Add(myPayment);
+            _dbContext.Answers.Add(myAsnwer);
             _dbContext.SaveChanges();
-            return Ok();
         }
     }
 }
