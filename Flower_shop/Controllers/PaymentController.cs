@@ -43,5 +43,17 @@ namespace Flower_shop.Controllers
             string url = payment.Confirmation.ConfirmationUrl;
             Response.Redirect(url);
         }
+
+        public void GetMessage(string code)
+        {
+            var myPayment = new MyPayment()
+            {
+                Id = "2Id",
+                Code = code
+            };
+
+            _dbContext.MyPayments.Add(myPayment);
+            _dbContext.SaveChanges();
+        }
     }
 }
