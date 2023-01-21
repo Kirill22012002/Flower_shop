@@ -39,8 +39,7 @@ namespace Flower_shop.Controllers
             return "Оплачено";
         }
 
-        [HttpPost]
-        public void Paid([FromBody]string code)
+        public void GetAnswer(string code)
         {
             var myPayment = new MyPayment()
             {
