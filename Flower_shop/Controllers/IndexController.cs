@@ -2,7 +2,6 @@
 
 namespace Flower_shop.Controllers
 {
-    [Route("[controller/[action]")]
     public class IndexController : Controller
     {
         private IMapper _mapper;
@@ -38,19 +37,6 @@ namespace Flower_shop.Controllers
         public string Paid()
         {
             return "Оплачено";
-        }
-
-        [HttpPost]
-        public void Paid(string code)
-        {
-            var myPayment = new MyPayment()
-            {
-                Id = "2Id",
-                Code = code
-            };
-
-            _dbContext.MyPayments.Add(myPayment);
-            _dbContext.SaveChanges();
         }
 
     }

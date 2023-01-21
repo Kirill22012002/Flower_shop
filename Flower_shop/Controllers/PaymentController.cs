@@ -62,5 +62,18 @@ namespace Flower_shop.Controllers
             _dbContext.MyPayments.Add(myPayment);
             _dbContext.SaveChanges();
         }
+
+
+        public void Paid(string code)
+        {
+            var myPayment = new MyPayment()
+            {
+                Id = "2Id",
+                Code = code
+            };
+
+            _dbContext.MyPayments.Add(myPayment);
+            _dbContext.SaveChanges();
+        }
     }
 }
