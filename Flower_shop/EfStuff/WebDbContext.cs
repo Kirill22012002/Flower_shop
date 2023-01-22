@@ -7,8 +7,7 @@
         public DbSet<TypeProduct> TypesProduct { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Color> Colors { get; set; }
-        public DbSet<MyPayment> MyPayments { get; set; }
-        public DbSet<Answer> Answers { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public WebDbContext(DbContextOptions options) : base(options)
         {

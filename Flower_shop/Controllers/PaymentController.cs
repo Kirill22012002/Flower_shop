@@ -1,4 +1,5 @@
 ﻿using Flower_shop.EfStuff.DbModels;
+using Flower_shop.Models.Notification;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Newtonsoft.Json;
 using System.Net;
@@ -55,15 +56,14 @@ namespace Flower_shop.Controllers
         }
 
         [HttpPost]
-        public void Paid(object json)
+        public void Paid(NotificationViewModel json)
         {
-
-            var myAsnwer = new Answer()
+            var dbNotification = new Notification()
             {
-                Json = json.ToString()
+                NotificationStr = json.ToString()
             };
 
-            _dbContext.Answers.Add(myAsnwer);
+            _dbContext.Notifications.Add(dbNotification);
             _dbContext.SaveChanges();
         }
     }

@@ -15,7 +15,6 @@ namespace Flower_shop
                 config.CreateMap<TypeProduct, TypeProductViewModel>().ReverseMap();
                 config.CreateMap<Image, ImageViewModel>().ReverseMap();
                 config.CreateMap<Color, ColorViewModel>().ReverseMap();
-                config.CreateMap<Payment, MyPayment>().ReverseMap();
             });
         }
     }
