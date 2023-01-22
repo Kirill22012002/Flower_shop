@@ -55,11 +55,15 @@ namespace Flower_shop.Controllers
         }
 
         [HttpPost]
-        public void Paid(NotificationViewModel json)
+        public void Paid(NotificationViewModel vm)
         {
             var dbNotification = new Notification()
             {
-                NotificationStr = json.Object.Status.ToString()
+                Paid = vm.Object.Paid,
+                AmountValue = vm.Object.Amount.Value,
+                IncomeAmountValue = vm.Object.IncomeAmount.Value,
+                PaymentEvent = vm.Event,
+                PaymentId = vm.Object.Id
             };
 
             _dbContext.Notifications.Add(dbNotification);
