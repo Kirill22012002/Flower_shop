@@ -31,10 +31,10 @@
             return View();
         }
 
-        [HttpGet]
-        public string Paid()
+        public string AfterPayment()
         {
-            return "Оплачено";
+            return "Success";
         }
+        
     }
 }

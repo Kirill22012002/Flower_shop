@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Newtonsoft.Json;
 using System.Net;
 using Yandex.Checkout.V3;
+using static System.Net.WebRequestMethods;
 
 namespace Flower_shop.Controllers
 {
@@ -13,7 +14,7 @@ namespace Flower_shop.Controllers
         private WebDbContext _dbContext;
         private IMapper _mapper;
         private readonly Client _client = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY");
-        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Index/Paid";
+        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Payment/Paid";
 
         public PaymentController(
             WebDbContext dbContext,
@@ -47,14 +48,19 @@ namespace Flower_shop.Controllers
             string url = payment.Confirmation.ConfirmationUrl;
             Response.Redirect(url);
         }
+        [HttpGet]
+        public IActionResult Paid()
+        {
+            return Redirect("https://cvetu-lepel.by/Index/AfterPayment");
+        }
 
         [HttpPost]
-        public void Paid(object code)
+        public void Paid(Transaction transactionVm)
         {
 
             var myAsnwer = new Answer()
             {
-                notification_type = code.ToString()
+                Json = transactionVm.Event.ToString()
             };
 
             _dbContext.Answers.Add(myAsnwer);
