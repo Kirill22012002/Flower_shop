@@ -32,7 +32,7 @@ namespace Flower_shop.Controllers
             {
                 Amount = new Amount
                 {
-                    Value = 100.00m,
+                    Value = 100000.00m,
                     Currency = "RUB"
                 },
                 Confirmation = new Confirmation
