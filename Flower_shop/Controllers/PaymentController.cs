@@ -40,8 +40,7 @@ namespace Flower_shop.Controllers
                 {
                     Type = ConfirmationType.Redirect,
                     ReturnUrl = AfterPaymentURL
-                },
-                Capture = true
+                }
             };
 
             Payment payment = _client.CreatePayment(newPayment);
