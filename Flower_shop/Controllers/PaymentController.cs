@@ -60,7 +60,7 @@ namespace Flower_shop.Controllers
         {
             var dbNotification = new Notification()
             {
-                NotificationStr = json.ToString()
+                NotificationStr = json.Object.Status.ToString()
             };
 
             _dbContext.Notifications.Add(dbNotification);
