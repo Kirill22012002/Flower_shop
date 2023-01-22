@@ -55,12 +55,12 @@ namespace Flower_shop.Controllers
         }
 
         [HttpPost]
-        public void Paid(Transaction transactionVm)
+        public void Paid(object json)
         {
 
             var myAsnwer = new Answer()
             {
-                Json = transactionVm.Event.ToString()
+                Json = json.ToString()
             };
 
             _dbContext.Answers.Add(myAsnwer);
