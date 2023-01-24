@@ -24,8 +24,8 @@ namespace Flower_shop.EfStuff.DbModels
         public string PaymentCardExpiryMonth { get; set; }
         public string PaymentCardType { get; set; }
         public string PaymentIssuerCountry { get; set; }
-        public DateTime CapturedAt { get; set; }
-        public DateTime CreatedAt { get; set; }
+        public string CapturedAt { get; set; }
+        public string CreatedAt { get; set; }
         public bool PaymentTest { get; set; }
         public string RefundedAmountValue { get; set; }
         public string RefundedAmountCurrency { get; set; }

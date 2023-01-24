@@ -105,11 +105,11 @@ namespace Flower_shop
                         .ForMember(nameof(Notification.CapturedAt),
                             opt => opt
                         .MapFrom(model =>
-                            model.Object.CapturedAt))
+                            model.Object.CapturedAt.ToString()))
                         .ForMember(nameof(Notification.CreatedAt),
                             opt => opt
                         .MapFrom(model =>
-                            model.Object.CreatedAt))
+                            model.Object.CreatedAt.ToString()))
                         .ForMember(nameof(Notification.PaymentTest),
                             opt => opt
                         .MapFrom(model =>
