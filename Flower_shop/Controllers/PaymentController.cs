@@ -1,10 +1,6 @@
-﻿using Flower_shop.EfStuff.DbModels;
+﻿using Flower_shop.Models.Enums;
 using Flower_shop.Models.Notification;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Newtonsoft.Json;
-using System.Net;
 using Yandex.Checkout.V3;
-using static System.Net.WebRequestMethods;
 
 namespace Flower_shop.Controllers
 {
@@ -16,13 +12,16 @@ namespace Flower_shop.Controllers
         private IMapper _mapper;
         private readonly Client _client = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY");
         private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Payment/Paid";
+        private readonly ILogger<PaymentController> _logger;
 
         public PaymentController(
             WebDbContext dbContext,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<PaymentController> logger)
         {
             _dbContext = dbContext;
             _mapper = mapper;
+            _logger = logger;
         }
 
 
@@ -33,7 +32,7 @@ namespace Flower_shop.Controllers
             {
                 Amount = new Amount
                 {
-                    Value = 100000.00m,
+                    Value = 10.00m,
                     Currency = "RUB"
                 },
                 Confirmation = new Confirmation
@@ -56,19 +55,52 @@ namespace Flower_shop.Controllers
         }
 
         [HttpPost]
-        public void Paid(NotificationViewModel vm)
+        public IActionResult Paid(NotificationViewModel notificationVm)
         {
-            var dbNotification = new Notification()
+            try
             {
-                Paid = vm.Object.Paid,
-                AmountValue = vm.Object.Amount.Value,
-                IncomeAmountValue = vm.Object.IncomeAmount.Value,
-                PaymentEvent = vm.Event,
-                PaymentId = vm.Object.Id
-            };
+                _logger.LogInformation($"Notification ({notificationVm.ToString()})");
 
-            _dbContext.Notifications.Add(dbNotification);
-            _dbContext.SaveChanges();
+                var dbNotification = new Notification()
+                {
+                    AmountCurrency = notificationVm.Object.Amount.Currency,
+                    AmountValue= notificationVm.Object.Amount.Value,
+                    CapturedAt = notificationVm.Object.CapturedAt.ToString(),
+                    CreatedAt = notificationVm.Object.CreatedAt.ToString(),
+                    IncomeAmountCurrency = notificationVm.Object.IncomeAmount.Currency,
+                    IncomeAmountValue = notificationVm.Object.IncomeAmount.Value,
+                    Paid = notificationVm.Object.Paid,
+                    PaymentEvent = notificationVm.Event,
+                    PaymentStatus = notificationVm.Object.Status,
+                    RecipientAccountId = notificationVm.Object.Recipient.AccountId,
+                    RecipientGatewayId = notificationVm.Object.Recipient.GatewayId,
+                    PaymentMethodType = notificationVm.Object.PaymentMethod.Type,
+                    PaymentMethodId = notificationVm.Object.PaymentMethod.Id,
+                    PaymentId = notificationVm.Object.Id,
+                    PaymentMethodSaved = notificationVm.Object.PaymentMethod.Saved,
+                    Test = notificationVm.Object.Test,
+                    RefundedAmountValue = notificationVm.Object.RefundedAmount.Value,
+                    RefundedAmountCurrency = notificationVm.Object.RefundedAmount.Currency
+                };
+                
+                _dbContext.Notifications.Add(dbNotification);
+                _dbContext.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogWarning(ex.ToString());
+            }
+
+            return RedirectToAction("Success", new {str = "success"});
         }
+
+        public string Success(string message)
+        {
+            return message;
+        }
+
+        
+            
     }
 }

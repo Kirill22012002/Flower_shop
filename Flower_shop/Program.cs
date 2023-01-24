@@ -1,4 +1,21 @@
+using Serilog;
+using Serilog.Events;
+
 var builder = WebApplication.CreateBuilder(args);
+
+
+const string logTemplate = @"{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u4}] [{SourceContext:l}] {Message:lj}{NewLine}{Exception}";
+Log.Logger = new LoggerConfiguration()
+        .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+        .Enrich.FromLogContext()
+        .WriteTo.File("Logs/log.txt", LogEventLevel.Information, logTemplate, rollingInterval: RollingInterval.Day)
+        .WriteTo.File("Logs/error.txt", LogEventLevel.Error, logTemplate, rollingInterval: RollingInterval.Day)
+        .CreateLogger();
+
+builder.Logging.ClearProviders();
+
+builder.Services.AddLogging(loggingBuilder => 
+            loggingBuilder.AddSerilog(dispose: true));
 
 builder.Services.AddMvc();
 

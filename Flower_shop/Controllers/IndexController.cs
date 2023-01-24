@@ -1,4 +1,6 @@
-﻿namespace Flower_shop.Controllers
+﻿using Serilog.Events;
+
+namespace Flower_shop.Controllers
 {
     public class IndexController : Controller
     {
@@ -6,16 +8,19 @@
         private IProductRepository _productRepository;
         private IImageRepository _imageRepository;
         private WebDbContext _dbContext;
+        private ILogger<IndexController> _logger;
         public IndexController(
             IMapper mapper,
             IProductRepository productRepository,
             IImageRepository imageRepository,
-            WebDbContext dbContext)
+            WebDbContext dbContext,
+            ILogger<IndexController> logger)
         {
             _mapper = mapper;
             _productRepository = productRepository;
             _imageRepository = imageRepository;
             _dbContext = dbContext;
+            _logger = logger;
         }
         public IActionResult Index()
         {
@@ -28,6 +33,7 @@
 
         public IActionResult Pay()
         {
+            
             return View();
         }
 
