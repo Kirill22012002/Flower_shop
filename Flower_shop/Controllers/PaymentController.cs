@@ -59,7 +59,16 @@ namespace Flower_shop.Controllers
         {
             try
             {
-                _logger.LogInformation($"Notification ({notificationVm.ToString()})");
+                _logger.LogInformation($"Notification (" +
+                    $"{notificationVm.Object.Amount.Currency}," +
+                    $"{notificationVm.Object.Amount.Value}," +
+                    $"{notificationVm.Object.CapturedAt.ToString()}," +
+                    $"{notificationVm.Object.CreatedAt.ToString()}," +
+                    $"{notificationVm.Object.IncomeAmount.Currency}," +
+                    $"{notificationVm.Object.IncomeAmount.Value}," +
+                    $"{notificationVm.Object.Paid}," +
+                    $"{notificationVm.Event}");
+                _logger.LogInformation($"NOTIF NEW: {notificationVm}");
 
                 var dbNotification = new Notification()
                 {
