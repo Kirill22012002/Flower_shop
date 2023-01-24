@@ -50,6 +50,10 @@ namespace Flower_shop
                             opt => opt
                         .MapFrom(model =>
                             model.Object.IncomeAmount.Value))
+                        .ForMember(nameof(Notification.IncomeAmountCurrency),
+                            opt => opt
+                        .MapFrom(model =>
+                            model.Object.IncomeAmount.Currency))
                         .ForMember(nameof(Notification.RecipientAccountId),
                             opt => opt
                         .MapFrom(model =>
