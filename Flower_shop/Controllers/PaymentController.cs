@@ -24,7 +24,6 @@ namespace Flower_shop.Controllers
             _logger = logger;
         }
 
-
         [HttpPost]
         public void CreatePayment()
         {
@@ -59,38 +58,9 @@ namespace Flower_shop.Controllers
         {
             try
             {
-                _logger.LogInformation($"Notification (" +
-                    $"{notificationVm.Object.Amount.Currency}," +
-                    $"{notificationVm.Object.Amount.Value}," +
-                    $"{notificationVm.Object.CapturedAt.ToString()}," +
-                    $"{notificationVm.Object.CreatedAt.ToString()}," +
-                    $"{notificationVm.Object.IncomeAmount.Currency}," +
-                    $"{notificationVm.Object.IncomeAmount.Value}," +
-                    $"{notificationVm.Object.Paid}," +
-                    $"{notificationVm.Event}");
-                _logger.LogInformation($"NOTIF NEW: {notificationVm}");
+                _logger.LogInformation($"NOTIFICATION: {notificationVm}");
 
-                var dbNotification = new Notification()
-                {
-                    AmountCurrency = notificationVm.Object.Amount.Currency,
-                    AmountValue= notificationVm.Object.Amount.Value,
-                    CapturedAt = notificationVm.Object.CapturedAt.ToString(),
-                    CreatedAt = notificationVm.Object.CreatedAt.ToString(),
-                    IncomeAmountCurrency = notificationVm.Object.IncomeAmount.Currency,
-                    IncomeAmountValue = notificationVm.Object.IncomeAmount.Value,
-                    Paid = notificationVm.Object.Paid,
-                    PaymentEvent = notificationVm.Event,
-                    PaymentStatus = notificationVm.Object.Status,
-                    RecipientAccountId = notificationVm.Object.Recipient.AccountId,
-                    RecipientGatewayId = notificationVm.Object.Recipient.GatewayId,
-                    PaymentMethodType = notificationVm.Object.PaymentMethod.Type,
-                    PaymentMethodId = notificationVm.Object.PaymentMethod.Id,
-                    PaymentId = notificationVm.Object.Id,
-                    PaymentMethodSaved = notificationVm.Object.PaymentMethod.Saved,
-                    Test = notificationVm.Object.Test,
-                    RefundedAmountValue = notificationVm.Object.RefundedAmount.Value,
-                    RefundedAmountCurrency = notificationVm.Object.RefundedAmount.Currency
-                };
+                var dbNotification = _mapper.Map<Notification>(notificationVm);
                 
                 _dbContext.Notifications.Add(dbNotification);
                 _dbContext.SaveChanges();
@@ -101,15 +71,8 @@ namespace Flower_shop.Controllers
                 _logger.LogWarning(ex.ToString());
             }
 
-            return RedirectToAction("Success", new {str = "success"});
+            return Ok();
         }
 
-        public string Success(string message)
-        {
-            return message;
-        }
-
-        
-            
     }
 }
