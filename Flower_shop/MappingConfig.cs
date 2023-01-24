@@ -17,132 +17,140 @@ namespace Flower_shop
                 config.CreateMap<TypeProduct, TypeProductViewModel>().ReverseMap();
                 config.CreateMap<Image, ImageViewModel>().ReverseMap();
                 config.CreateMap<Color, ColorViewModel>().ReverseMap();
-                config.CreateMap<Notification, NotificationViewModel>()
-                        .ForMember(nameof(NotificationViewModel.Type),
-                    opt => opt
+                config.CreateMap<NotificationViewModel, Notification>()
+                        .ForMember(nameof(Notification.PaymentType),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentType))
-                        .ForMember(nameof(NotificationViewModel.Event),
-                    opt => opt
+                            model.Type))
+                        .ForMember(nameof(Notification.PaymentEvent),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentEvent))
-                        .ForMember(nameof(NotificationViewModel.Object.Id),
-                    opt => opt
+                            model.Event))
+                        .ForMember(nameof(Notification.PaymentStatus),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentId))
-                        .ForMember(nameof(NotificationViewModel.Object.Status),
-                    opt => opt
+                            model.Object.Status))
+                        .ForMember(nameof(Notification.PaymentId),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentStatus))
-                        .ForMember(nameof(NotificationViewModel.Object.Amount.Value),
-                    opt => opt
+                            model.Object.Id))
+                        .ForMember(nameof(Notification.AmountValue),
+                            opt => opt
                         .MapFrom(model =>
-                            model.AmountValue))
-                        .ForMember(nameof(NotificationViewModel.Object.Amount.Currency),
-                    opt => opt
+                            model.Object.Amount.Value))
+                        .ForMember(nameof(Notification.AmountValue),
+                            opt => opt
                         .MapFrom(model =>
-                            model.AmountCurrency))
-                        .ForMember(nameof(NotificationViewModel.Object.IncomeAmount.Value),
-                    opt => opt
+                            model.Object.Amount.Value))
+                        .ForMember(nameof(Notification.AmountCurrency),
+                            opt => opt
                         .MapFrom(model =>
-                            model.IncomeAmountValue))
-                        .ForMember(nameof(NotificationViewModel.Object.Recipient.AccountId),
-                    opt => opt
+                            model.Object.Amount.Currency))
+                        .ForMember(nameof(Notification.IncomeAmountValue),
+                            opt => opt
                         .MapFrom(model =>
-                            model.RecipientAccountId))
-                        .ForMember(nameof(NotificationViewModel.Object.Recipient.GatewayId),
-                    opt => opt
+                            model.Object.IncomeAmount.Value))
+                        .ForMember(nameof(Notification.RecipientAccountId),
+                            opt => opt
                         .MapFrom(model =>
-                            model.RecipientGatewayId))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Type),
-                    opt => opt
+                            model.Object.Recipient.AccountId))
+                        .ForMember(nameof(Notification.RecipientGatewayId),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentMethodType))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Id),
-                    opt => opt
+                            model.Object.Recipient.GatewayId))
+                        .ForMember(nameof(Notification.PaymentMethodType),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentMethodId))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Saved),
-                    opt => opt
+                            model.Object.PaymentMethod.Type))
+                        .ForMember(nameof(Notification.PaymentMethodId),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentMethodSaved))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Title),
-                    opt => opt
+                            model.Object.PaymentMethod.Id))
+                        .ForMember(nameof(Notification.PaymentMethodSaved),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentMethodTitle))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Card.First6),
-                    opt => opt
+                            model.Object.PaymentMethod.Saved))
+                        .ForMember(nameof(Notification.PaymentMethodTitle),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentCardFirst6))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Card.Last4),
-                    opt => opt
+                            model.Object.PaymentMethod.Title))
+                        .ForMember(nameof(Notification.PaymentCardFirst6),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentCardLast4))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Card.ExpiryYear),
-                    opt => opt
+                            model.Object.PaymentMethod.Card.First6))
+                        .ForMember(nameof(Notification.PaymentCardLast4),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentCardExpiryYear))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Card.ExpiryMonth),
-                    opt => opt
+                            model.Object.PaymentMethod.Card.Last4))
+                        .ForMember(nameof(Notification.PaymentCardExpiryYear),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentCardExpiryMonth))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Card.CardType),
-                    opt => opt
+                            model.Object.PaymentMethod.Card.ExpiryYear))
+                        .ForMember(nameof(Notification.PaymentCardExpiryYear),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentCardType))
-                        .ForMember(nameof(NotificationViewModel.Object.PaymentMethod.Card.IssuerCountry),
-                    opt => opt
+                            model.Object.PaymentMethod.Card.ExpiryYear))
+                        .ForMember(nameof(Notification.PaymentCardExpiryMonth),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentIssuerCountry))
-                        .ForMember(nameof(NotificationViewModel.Object.CapturedAt),
-                    opt => opt
+                            model.Object.PaymentMethod.Card.ExpiryMonth))
+                        .ForMember(nameof(Notification.PaymentCardType),
+                            opt => opt
                         .MapFrom(model =>
-                            model.CapturedAt))
-                        .ForMember(nameof(NotificationViewModel.Object.CreatedAt),
-                    opt => opt
+                            model.Object.PaymentMethod.Card.CardType))
+                        .ForMember(nameof(Notification.PaymentIssuerCountry),
+                            opt => opt
                         .MapFrom(model =>
-                            model.CreatedAt))
-                        .ForMember(nameof(NotificationViewModel.Object.Test),
-                    opt => opt
+                            model.Object.PaymentMethod.Card.IssuerCountry))
+                        .ForMember(nameof(Notification.CapturedAt),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentTest))
-                        .ForMember(nameof(NotificationViewModel.Object.RefundedAmount.Value),
-                    opt => opt
+                            model.Object.CapturedAt))
+                        .ForMember(nameof(Notification.CreatedAt),
+                            opt => opt
                         .MapFrom(model =>
-                            model.RefundedAmountValue))
-                        .ForMember(nameof(NotificationViewModel.Object.RefundedAmount.Currency),
-                    opt => opt
+                            model.Object.CreatedAt))
+                        .ForMember(nameof(Notification.PaymentTest),
+                            opt => opt
                         .MapFrom(model =>
-                            model.RefundedAmountCurrency))
-                        .ForMember(nameof(NotificationViewModel.Object.Paid),
-                    opt => opt
+                            model.Object.Test))
+                        .ForMember(nameof(Notification.RefundedAmountValue),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentPaid))
-                        .ForMember(nameof(NotificationViewModel.Object.Refundable),
-                    opt => opt
+                            model.Object.RefundedAmount.Value))
+                        .ForMember(nameof(Notification.RefundedAmountCurrency),
+                            opt => opt
                         .MapFrom(model =>
-                            model.PaymentRefundable))
-                        .ForMember(nameof(NotificationViewModel.Object.AuthorizationDetails.Rrn),
-                    opt => opt
+                            model.Object.RefundedAmount.Currency))
+                        .ForMember(nameof(Notification.PaymentPaid),
+                            opt => opt
                         .MapFrom(model =>
-                            model.AuthorizationDetailsRrn))
-                        .ForMember(nameof(NotificationViewModel.Object.AuthorizationDetails.AuthCode),
-                    opt => opt
+                            model.Object.Paid))
+                        .ForMember(nameof(Notification.PaymentRefundable),
+                            opt => opt
                         .MapFrom(model =>
-                            model.AuthorizationAuthCode))
-                        .ForMember(nameof(NotificationViewModel.Object.AuthorizationDetails.ThreeDSecure.Applied),
-                    opt => opt
+                            model.Object.Refundable))
+                        .ForMember(nameof(Notification.AuthorizationDetailsRrn),
+                            opt => opt
                         .MapFrom(model =>
-                            model.ThreeDSecureApplied))
-                        .ForMember(nameof(NotificationViewModel.Object.AuthorizationDetails.ThreeDSecure.MethodCompleted),
-                    opt => opt
+                            model.Object.AuthorizationDetails.Rrn))
+                        .ForMember(nameof(Notification.AuthorizationAuthCode),
+                            opt => opt
                         .MapFrom(model =>
-                            model.ThreeDSecureMethodCompleted))
-                        .ForMember(nameof(NotificationViewModel.Object.AuthorizationDetails.ThreeDSecure.ChallengeCompleted),
-                    opt => opt
+                            model.Object.AuthorizationDetails.AuthCode))
+                        .ForMember(nameof(Notification.ThreeDSecureApplied),
+                            opt => opt
                         .MapFrom(model =>
-                            model.ThreeDSecureChallengeCompleted))
-                    .ReverseMap();
+                            model.Object.AuthorizationDetails.ThreeDSecure.Applied))
+                        .ForMember(nameof(Notification.ThreeDSecureMethodCompleted),
+                            opt => opt
+                        .MapFrom(model =>
+                            model.Object.AuthorizationDetails.ThreeDSecure.MethodCompleted))
+                        .ForMember(nameof(Notification.ThreeDSecureChallengeCompleted),
+                            opt => opt
+                        .MapFrom(model =>
+                            model.Object.AuthorizationDetails.ThreeDSecure.ChallengeCompleted))
+                        .ReverseMap();
             });
         }
     }
