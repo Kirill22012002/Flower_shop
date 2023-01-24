@@ -71,7 +71,7 @@ namespace Flower_shop.Controllers
                 _logger.LogWarning(ex.ToString());
             }
 
-            return Ok();
+            return StatusCode(200);
         }
 
     }
