@@ -79,9 +79,13 @@ namespace Flower_shop.Controllers
 
                 var notificationDb = _mapper.Map<Notification>(notificationVm);
 
-                _paymentService.Transaction(notificationVm);
+                var returnUrl = _paymentService.Transaction(notificationVm);
+
+                _logger.LogInformation($"PaymentService Done");
 
                 _notificationRepository.Save(notificationDb);
+
+                _logger.LogInformation($"NOTIFICATION WAS SAVED");
             }
             catch (Exception ex)
             {
