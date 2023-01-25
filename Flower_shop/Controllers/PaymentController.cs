@@ -24,11 +24,7 @@ namespace Flower_shop.Controllers
             _mapper = mapper;
             _logger = logger;
         }
-        [HttpGet]
-        public string CreatePayment()
-        {
-            return "hello";
-        }
+        
         [HttpPost]
         public void CreatePayment(int count)
         {

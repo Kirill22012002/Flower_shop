@@ -31,9 +31,9 @@ namespace Flower_shop.Controllers
             return View(indexPageView);
         }
 
-        public IActionResult Pay()
+        public IActionResult Pay(int count)
         {
-            return View();
+            return Redirect($"https://cvetu-lepel.by/Payment/CreatePayment?count={count}");
         }
 
         public string AfterPayment()
