@@ -33,7 +33,7 @@ namespace Flower_shop.Controllers
         /// Creates a new payment and redirects to payment(to YKassa)
         /// </summary>
 
-        [HttpPost]
+        [HttpGet]
         public void CreatePayment(int count)
         {
             var newPayment = new NewPayment
