@@ -8,6 +8,7 @@
         public DbSet<Image> Images { get; set; }
         public DbSet<Color> Colors { get; set; }
         public DbSet<Notification> Notifications { get; set; }
+        public DbSet<Wallet> Wallets { get; set; }
 
         public WebDbContext(DbContextOptions options) : base(options)
         {

@@ -7,6 +7,7 @@ namespace Flower_shop.Services.Implimentations
     public class PaymentService : IPaymentService
     {
         private WebDbContext _dbContext;
+        private IWalletRepository _walletRepository;
         private IMapper _mapper;
 
         private readonly string SuccessUrl = "http://SuccessUrl";
@@ -15,9 +16,11 @@ namespace Flower_shop.Services.Implimentations
 
         public PaymentService(
             WebDbContext dbContext,
+            IWalletRepository walletRepository,
             IMapper mapper)
         {
             _dbContext = dbContext;
+            _walletRepository = walletRepository;
             _mapper = mapper;
         }
 
@@ -32,6 +35,8 @@ namespace Flower_shop.Services.Implimentations
         {
             if (notificationVm.Event == "payment.succeeded")
             {
+                PutMoneyIntoAccount(notificationVm);
+
                 return SuccessUrl;
             }
             else if (notificationVm.Object.Status == "payment.canceled")
@@ -40,6 +45,20 @@ namespace Flower_shop.Services.Implimentations
             }
 
             return ErrorUrl;
+        }
+        public void PutMoneyIntoAccount(NotificationViewModel notificationVm)
+        {
+            string customerId = notificationVm.Object.Metadata["customerId"];
+            decimal ammount = Decimal.Parse(notificationVm.Object.Amount.Value);
+
+
+            if (customerId != null)
+            {
+                var wallet = _walletRepository.GetByCustomerId(customerId);
+                wallet.Count += ammount;
+
+                _dbContext.SaveChanges();
+            }
         }
 
     }

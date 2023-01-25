@@ -19,14 +19,7 @@
         public List<T> GetAll() => _dbSet.ToList();
         public void Save(T model)
         {
-            if (model.Id > 0)
-            {
-                _dbSet.Update(model);
-            }
-            else
-            {
-                _dbSet.Add(model);
-            }
+            _dbSet.Add(model);
             _webContext.SaveChanges();
         }
         public void SaveList(List<T> models) => models.ForEach(Save);

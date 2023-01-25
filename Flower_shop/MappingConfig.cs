@@ -154,6 +154,10 @@ namespace Flower_shop
                             opt => opt
                         .MapFrom(model =>
                             model.Object.AuthorizationDetails.ThreeDSecure.ChallengeCompleted))
+                        .ForMember(nameof(Notification.CustomerId),
+                            opt => opt
+                        .MapFrom(model =>
+                            model.Object.Metadata["customerId"]))
                         .ReverseMap();
             });
         }

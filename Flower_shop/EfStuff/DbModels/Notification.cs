@@ -26,6 +26,7 @@ namespace Flower_shop.EfStuff.DbModels
         public string PaymentIssuerCountry { get; set; }
         public string CapturedAt { get; set; }
         public string CreatedAt { get; set; }
+        public string CustomerId { get; set; }
         public bool PaymentTest { get; set; }
         public string RefundedAmountValue { get; set; }
         public string RefundedAmountCurrency { get; set; }
@@ -36,5 +37,6 @@ namespace Flower_shop.EfStuff.DbModels
         public bool ThreeDSecureApplied { get; set; }
         public bool ThreeDSecureMethodCompleted { get; set; }
         public bool ThreeDSecureChallengeCompleted { get; set; }
+        
     }
 }

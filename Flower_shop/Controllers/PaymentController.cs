@@ -11,6 +11,7 @@ namespace Flower_shop.Controllers
     public class PaymentController : ControllerBase
     {
         private WebDbContext _dbContext;
+        private INotificationRepository _notificationRepository;
         private IMapper _mapper;
         private readonly ILogger<PaymentController> _logger;
         private IPaymentService _paymentService;
@@ -19,11 +20,13 @@ namespace Flower_shop.Controllers
 
         public PaymentController(
             WebDbContext dbContext,
+            INotificationRepository notificationRepository,
             IMapper mapper,
             ILogger<PaymentController> logger,
             IPaymentService paymentService)
         {
             _dbContext = dbContext;
+            _notificationRepository = notificationRepository;
             _mapper = mapper;
             _logger = logger;
             _paymentService = paymentService;
@@ -34,7 +37,7 @@ namespace Flower_shop.Controllers
         /// </summary>
 
         [HttpGet]
-        public void CreatePayment(int count)
+        public void CreatePayment(int count, string customerId)
         {
             var newPayment = new NewPayment
             {
@@ -47,7 +50,8 @@ namespace Flower_shop.Controllers
                     Type = ConfirmationType.Redirect,
                     ReturnUrl = AfterPaymentURL
                 },
-                Capture = true
+                Capture = true, 
+                Metadata = new Dictionary<string, string> { { "customerId", $"{customerId}"} }
             };
 
             Payment payment = _client.CreatePayment(newPayment);
@@ -56,9 +60,6 @@ namespace Flower_shop.Controllers
             Response.Redirect(url);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         [HttpGet]
         public IActionResult GetNotification()
         {
@@ -76,13 +77,11 @@ namespace Flower_shop.Controllers
             {
                 _logger.LogInformation($"NOTIFICATION: {notificationVm}");
 
-                var dbNotification = _mapper.Map<Notification>(notificationVm);
+                var notificationDb = _mapper.Map<Notification>(notificationVm);
 
                 _paymentService.Transaction(notificationVm);
 
-                _dbContext.Notifications.Add(dbNotification);
-                _dbContext.SaveChanges();
-
+                _notificationRepository.Save(notificationDb);
             }
             catch (Exception ex)
             {
