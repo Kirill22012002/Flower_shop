@@ -1,5 +1,6 @@
 ﻿using Flower_shop.Models.Enums;
 using Flower_shop.Models.Notification;
+using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Metrics;
 using Yandex.Checkout.V3;
 
@@ -24,8 +25,7 @@ namespace Flower_shop.Controllers
             _mapper = mapper;
             _logger = logger;
         }
-        
-        [HttpPost]
+
         public void CreatePayment(int count)
         {
             var newPayment = new NewPayment
