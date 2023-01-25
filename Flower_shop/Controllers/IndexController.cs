@@ -33,7 +33,6 @@ namespace Flower_shop.Controllers
 
         public IActionResult Pay()
         {
-            
             return View();
         }
 

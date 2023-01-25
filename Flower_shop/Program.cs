@@ -19,6 +19,9 @@ builder.Services.AddLogging(loggingBuilder =>
 
 builder.Services.AddMvc();
 
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 builder.Services.AddAuthentication(builder.Configuration.GetConnectionString("AuthName"))
     .AddCookie(builder.Configuration.GetConnectionString("AuthName"), config =>
     {
@@ -46,6 +49,14 @@ IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
 builder.Services.AddSingleton(mapper);
 
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

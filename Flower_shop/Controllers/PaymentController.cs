@@ -1,5 +1,6 @@
 ﻿using Flower_shop.Models.Enums;
 using Flower_shop.Models.Notification;
+using System.Diagnostics.Metrics;
 using Yandex.Checkout.V3;
 
 namespace Flower_shop.Controllers
@@ -23,16 +24,19 @@ namespace Flower_shop.Controllers
             _mapper = mapper;
             _logger = logger;
         }
-
+        [HttpGet]
+        public string CreatePayment()
+        {
+            return "hello";
+        }
         [HttpPost]
-        public void CreatePayment()
+        public void CreatePayment(int count)
         {
             var newPayment = new NewPayment
             {
                 Amount = new Amount
                 {
-                    Value = 10.00m,
-                    Currency = "RUB"
+                    Value = (decimal)count
                 },
                 Confirmation = new Confirmation
                 {
