@@ -36,6 +36,7 @@ builder.Services.AddDbContext<WebDbContext>(options =>
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITypeProductService, TypeProductService>();
 builder.Services.AddScoped<IColorSettingsService, ColorSettingsService>();
+builder.Services.AddTransient<IPaymentService, PaymentService>();
 builder.Services.AddScoped<IImageRepository, ImageRepository>();
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 builder.Services.AddScoped<ITypeProductRepository, TypeProductRepository>();

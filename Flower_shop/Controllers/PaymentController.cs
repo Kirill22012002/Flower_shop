@@ -12,20 +12,28 @@ namespace Flower_shop.Controllers
     {
         private WebDbContext _dbContext;
         private IMapper _mapper;
-        private readonly Client _client = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY");
-        private readonly string AfterPaymentURL = "https://cvetu-lepel.by/Payment/Paid";
         private readonly ILogger<PaymentController> _logger;
+        private IPaymentService _paymentService;
+        private readonly Client _client = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY");
+        private readonly string AfterPaymentURL = "https://town-send.ru/Payment/Paid";
 
         public PaymentController(
             WebDbContext dbContext,
             IMapper mapper,
-            ILogger<PaymentController> logger)
+            ILogger<PaymentController> logger,
+            IPaymentService paymentService)
         {
             _dbContext = dbContext;
             _mapper = mapper;
             _logger = logger;
+            _paymentService = paymentService;
         }
 
+        /// <summary>
+        /// Creates a new payment and redirects to payment(to YKassa)
+        /// </summary>
+
+        [HttpPost]
         public void CreatePayment(int count)
         {
             var newPayment = new NewPayment
@@ -47,21 +55,31 @@ namespace Flower_shop.Controllers
             string url = payment.Confirmation.ConfirmationUrl;
             Response.Redirect(url);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
         [HttpGet]
-        public IActionResult Paid()
+        public IActionResult GetNotification()
         {
-            return Redirect("https://cvetu-lepel.by/Index/AfterPayment");
+            return Redirect("https://town-send.ru/Index/AfterPayment");
         }
 
+        /// <summary>
+        /// Data comes here from Ykassa by HTTP and put it in db
+        /// and check it with the help of the _paymentService
+        /// </summary>
         [HttpPost]
-        public IActionResult Paid(NotificationViewModel notificationVm)
+        public IActionResult GetNotification(NotificationViewModel notificationVm)
         {
             try
             {
                 _logger.LogInformation($"NOTIFICATION: {notificationVm}");
 
                 var dbNotification = _mapper.Map<Notification>(notificationVm);
-                
+
+                _paymentService.Transaction(notificationVm);
+
                 _dbContext.Notifications.Add(dbNotification);
                 _dbContext.SaveChanges();
 
@@ -73,6 +91,5 @@ namespace Flower_shop.Controllers
 
             return StatusCode(200);
         }
-
     }
 }
