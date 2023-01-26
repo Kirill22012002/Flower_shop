@@ -1,6 +1,7 @@
 ﻿using Flower_shop.Models.Enums;
 using Flower_shop.Models.Notification;
 using Microsoft.OpenApi.Extensions;
+using Yandex.Checkout.V3;
 
 namespace Flower_shop.Services.Implimentations
 {
@@ -36,19 +37,22 @@ namespace Flower_shop.Services.Implimentations
 
         public string CheckTransaction(NotificationViewModel notificationVm)
         {
-            if (notificationVm.Event == "payment.succeeded")
+            var paymentStatus = notificationVm.Object.Status.ToString().ToLower();
+
+            if (paymentStatus == Yandex.Checkout.V3.PaymentStatus.Succeeded.ToString().ToLower())
             {
                 PutMoneyIntoAccount(notificationVm);
 
                 return SuccessUrl;
             }
-            else if (notificationVm.Object.Status == "payment.canceled")
+            else if (paymentStatus == Yandex.Checkout.V3.PaymentStatus.Canceled.ToString().ToLower())
             {
                 return UnsuccessUrl;
             }
 
             return ErrorUrl;
         }
+
         public void PutMoneyIntoAccount(NotificationViewModel notificationVm)
         {
             try
