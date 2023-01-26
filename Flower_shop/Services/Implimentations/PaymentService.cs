@@ -39,13 +39,13 @@ namespace Flower_shop.Services.Implimentations
         {
             var paymentStatus = notificationVm.Object.Status.ToString().ToLower();
 
-            if (paymentStatus == Yandex.Checkout.V3.PaymentStatus.Succeeded.ToString().ToLower())
+            if (paymentStatus == PaymentStatus.Succeeded.ToString().ToLower())
             {
                 PutMoneyIntoAccount(notificationVm);
 
                 return SuccessUrl;
             }
-            else if (paymentStatus == Yandex.Checkout.V3.PaymentStatus.Canceled.ToString().ToLower())
+            else if (paymentStatus == PaymentStatus.Canceled.ToString().ToLower())
             {
                 return UnsuccessUrl;
             }
