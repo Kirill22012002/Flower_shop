@@ -14,11 +14,28 @@ namespace Flower_shop.Controllers
         }
 
         [HttpGet]
-        public ActionResult TestPaymentService([FromQuery]NotificationViewModel notificationVm)
+        public ActionResult TestPaymentService()
         {
-            string returnUrl = _paymentService.Transaction(notificationVm);
+            var notificationVm = new NotificationViewModel()
+            {
+                Object = new PaymentObjectViewModel()
+                {
+                    Amount = new PaymentAmountViewModel()
+                    {
+                        Value = "1000.00"
+                    },
+                    Metadata = new Dictionary<string, string> 
+                    { 
+                        {
+                            "customerId", "kirill334"
+                        }
+                    },
+                    Id = "2b643ef8-000f-5000-a000-1df1b031420e",
+                    Status = "succeeded"
+                }
+            };
 
-            Console.WriteLine(returnUrl);
+            var returnUrl = _paymentService.Transaction(notificationVm);
 
             return Ok();
         }
