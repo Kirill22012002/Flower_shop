@@ -10,13 +10,6 @@ namespace Flower_shop
         {
             return new MapperConfiguration(config =>
             {
-                config.CreateMap<Product, ProductViewModel>().ReverseMap();
-                config.CreateMap<ProductViewModel, ProductViewModel>();
-                config.CreateMap<User, UserViewModel>().ReverseMap();
-                config.CreateMap<RegisterViewModel, User>().ReverseMap();
-                config.CreateMap<TypeProduct, TypeProductViewModel>().ReverseMap();
-                config.CreateMap<Image, ImageViewModel>().ReverseMap();
-                config.CreateMap<Color, ColorViewModel>().ReverseMap();
                 config.CreateMap<NotificationViewModel, Notification>()
                         .ForMember(nameof(Notification.PaymentType),
                             opt => opt

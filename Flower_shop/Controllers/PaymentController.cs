@@ -1,5 +1,6 @@
 ﻿using Flower_shop.Models.Notification;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics.Metrics;
 using Yandex.Checkout.V3;
 
@@ -7,14 +8,15 @@ namespace Flower_shop.Controllers
 {
     [ApiController]
     [Route("[controller]/[action]")]
-    public class PaymentController : ControllerBase
+    public class PaymentController : Controller
     {
         private WebDbContext _dbContext;
         private INotificationRepository _notificationRepository;
         private IMapper _mapper;
         private readonly ILogger<PaymentController> _logger;
         private IPaymentService _paymentService;
-        private readonly Client _client = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY");
+
+        private readonly AsyncClient _asyncClient = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY").MakeAsync();
         private readonly string AfterPaymentURL = "https://town-send.ru/Payment/Paid";
 
         public PaymentController(
@@ -29,14 +31,12 @@ namespace Flower_shop.Controllers
             _mapper = mapper;
             _logger = logger;
             _paymentService = paymentService;
+            
+
         }
 
-        /// <summary>
-        /// Creates a new payment and redirects to payment(to YKassa)
-        /// </summary>
-
         [HttpGet]
-        public void CreatePayment(decimal count, string customerId)
+        public async Task<IActionResult> CreatePayment(decimal count, string customerId)
         {
             var newPayment = new NewPayment
             {
@@ -53,10 +53,10 @@ namespace Flower_shop.Controllers
                 Metadata = new Dictionary<string, string> { { "customerId", $"{customerId}"} }
             };
 
-            Payment payment = _client.CreatePayment(newPayment);
-
+            Payment payment = await _asyncClient.CreatePaymentAsync(newPayment);
             string url = payment.Confirmation.ConfirmationUrl;
-            Response.Redirect(url);
+
+            return Redirect(url);
         }
 
         [HttpGet]
@@ -64,11 +64,7 @@ namespace Flower_shop.Controllers
         {
             return Redirect("https://town-send.ru/Index/AfterPayment");
         }
-
-        /// <summary>
-        /// Data comes here from Ykassa by HTTP and put it in db
-        /// and check it with the help of the _paymentService
-        /// </summary>
+        
         [HttpPost]
         public IActionResult GetNotification(NotificationViewModel notificationVm)
         {

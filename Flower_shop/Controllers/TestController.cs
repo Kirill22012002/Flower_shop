@@ -27,7 +27,7 @@ namespace Flower_shop.Controllers
                     Metadata = new Dictionary<string, string> 
                     { 
                         {
-                            "customerId", "kirill334"
+                            "customerId", "12345lexa"
                         }
                     },
                     Id = "2b643ef8-000f-5000-a000-1df1b031420e",

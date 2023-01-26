@@ -32,16 +32,8 @@
 
   <ItemGroup>
     <Folder Include="Logs\" />
-    <Folder Include="Models\Enums\" />
     <Folder Include="wwwroot\files\" />
     <Folder Include="wwwroot\logs\" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Content Update="Views\AdminPlatform\TypeProductEdition.cshtml">
-      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
-    </Content>
   </ItemGroup>
 
 </Project>

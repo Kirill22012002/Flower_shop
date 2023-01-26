@@ -1,21 +1,11 @@
-﻿@inject IUserService userService
-@inject ITypeProductService typeProductService
-@inject IColorSettingsService colorSettingsService
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Цветы Лепель</title>
 
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link href="https://fonts.googleapis.com/css?family=Raleway:700,800&display=swap" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Rubik:regular,700&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="~/css/site.css?v=3" />
-    <link rel="stylesheet" href="~/css/layout.css?v=2" />
-    <link rel="stylesheet" href="~/css/header.css?v=2" />
-    <link rel="stylesheet" href="~/css/footer.css?v=2" />
     <link rel="stylesheet" href="~/css/site.css?v=3" />
 
     @RenderSection("Scripts", required: false)
@@ -24,82 +14,27 @@
 
 <body>
     <div class="wrapper">
-        <header id="open" class="header">
-            <div id="close" class="header__container">
-                <a href="/Index/Index" class="header__logo">
-                    Cvetu-lepel.by
-                </a>
-                <div class="header__menu menu">
-                    <nav id="menu" class="menu__body">
-                        <ul class="menu__list">
-                            <li class="menu__item"><a href="/Index/Index" class="menu__link">ДОМОЙ</a></li>
-                            @foreach (var type in typeProductService.GetTypesName())
-                            {
-                                <li class="menu__item"><a href="/Gallery/Products?typeId=@type.Id" class="menu__link">@type.Name</a></li>
-                            }
-                            @if (userService.IsAdmin())
-                            {
-                                <li class="menu__item"><a href="/AdminPlatform/Platform" class="menu__link">Панель управления</a></li>
-                            }
-                        </ul>
-                    </nav>
-                </div>
-                <div class="header__button">
-                    @if (!User.Identity.IsAuthenticated)
-                    {
-                        <a href="/Authentication/Autorization" class="button button_blue">Войти</a>
-                    }
-                    else
-                    {
-                        <a href="/Profile/MyProfile" class="button button_blue">Профиль</a>
-                    }
-                    <a href="#open" class="open-icon-menu"><span><img src="~/img/menu-icon.svg" /></span></a>
-                    <a href="#close" class="close-icon-menu"><span><img src="~/img/close-icon.svg" /></span></a>
-                </div>
-            </div>
+        <header class="header">
         </header>
+        <div>
+            <div>
+                Hi! Let's pay!
+            </div>
+            <div>
+                <form method="get" action="@Url.Action("CreatePayment", "Payment")">
+                    <input type="text" name="count" placeholder="count" />
+                    <input type="text" name="customerId" placeholder="customerId" />
+                    <input type="submit" value="pay">
+                </form>
+            </div>
+        </div>
         <main class="main">
             @RenderBody()
         </main>
         <footer class="footer">
-            <div class="footer__container">
-                <div class="footer__items">
-                    <a href="https://www.instagram.com/cvetu_podarki_lepel/?igshid=YmMyMTA2M2Y%3D" class="footer__item" target="_blank">
-                        <img src="~/img/Footer/instagram-logo.svg" alt="Инстаграмм">
-                    </a>
-                </div>
-            </div>
         </footer>
     </div>
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    <script src="~/lib/jquery/dist/jquery.js"></script>
-    <script src="https://api-maps.yandex.ru/2.1/?lang=ru_RU&ampefd65cf8-8571-4b72-9d9c-97183c2c8ae2" type="text/javascript"></script>
-
-    <style>
-        @{
-            var firstColor = colorSettingsService
-                                .GetColorByAssignment("Поменять цвет кнопок \"Перейти\" и \"Войти\".")
-                                .ColorHex;
-            var secondColor = colorSettingsService
-                                .GetColorByAssignment("Поменять цвет фона у навигационных кнопок.")
-                                .ColorHex;
-        }
-        .button {
-            background-color: @firstColor;
-        }
-
-        @@media(max-width: 767.98px) {
-            .menu__body {
-                background-color: @secondColor;
-            }
-
-            .header:target .menu__body:before {
-                background-color: @secondColor;
-            }
-        }
-    </style>
 </body>
 </html>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
