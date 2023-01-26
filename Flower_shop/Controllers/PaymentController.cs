@@ -37,13 +37,13 @@ namespace Flower_shop.Controllers
         /// </summary>
 
         [HttpGet]
-        public void CreatePayment(int count, string customerId)
+        public void CreatePayment(decimal count, string customerId)
         {
             var newPayment = new NewPayment
             {
                 Amount = new Amount
                 {
-                    Value = (decimal)count
+                    Value = count
                 },
                 Confirmation = new Confirmation
                 {
@@ -75,21 +75,19 @@ namespace Flower_shop.Controllers
         {
             try
             {
-                _logger.LogInformation($"NOTIFICATION: {notificationVm}");
+                _logger.LogInformation($"NOTIFICATION: {notificationVm.Object.Id}");
 
                 var notificationDb = _mapper.Map<Notification>(notificationVm);
 
-                var returnUrl = _paymentService.Transaction(notificationVm);
-
-                _logger.LogInformation($"PaymentService Done");
-
                 _notificationRepository.Save(notificationDb);
-
-                _logger.LogInformation($"NOTIFICATION WAS SAVED");
             }
             catch (Exception ex)
             {
                 _logger.LogWarning(ex.ToString());
+            }
+            finally
+            {
+                var returnUrl = _paymentService.Transaction(notificationVm);
             }
 
             return StatusCode(200);

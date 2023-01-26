@@ -9,6 +9,7 @@ namespace Flower_shop.Services.Implimentations
         private WebDbContext _dbContext;
         private IWalletRepository _walletRepository;
         private IMapper _mapper;
+        private ILogger<PaymentService> _logger;
 
         private readonly string SuccessUrl = "http://SuccessUrl";
         private readonly string UnsuccessUrl = "http://UnsuccessUrl";
@@ -17,11 +18,13 @@ namespace Flower_shop.Services.Implimentations
         public PaymentService(
             WebDbContext dbContext,
             IWalletRepository walletRepository,
-            IMapper mapper)
+            IMapper mapper,
+            ILogger<PaymentService> logger)
         {
             _dbContext = dbContext;
             _walletRepository = walletRepository;
             _mapper = mapper;
+            _logger = logger;
         }
 
         public string Transaction(NotificationViewModel notificationVm)
@@ -48,16 +51,21 @@ namespace Flower_shop.Services.Implimentations
         }
         public void PutMoneyIntoAccount(NotificationViewModel notificationVm)
         {
-            string customerId = notificationVm.Object.Metadata["customerId"];
-            decimal ammount = Decimal.Parse(notificationVm.Object.Amount.Value);
-
-
-            if (customerId != null)
+            try
             {
-                var wallet = _walletRepository.GetByCustomerId(customerId);
-                wallet.Count += ammount;
+                string customerId = notificationVm.Object.Metadata["customerId"];
+                decimal amount = Decimal.Parse(notificationVm.Object.Amount.Value);
 
+                var wallet = _walletRepository.GetByCustomerId(customerId);
+                wallet.Count += amount;
+
+                _dbContext.Wallets.Update(wallet);
                 _dbContext.SaveChanges();
+
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError($"PutMoneyIntoAccount exception: {ex.Message}");
             }
         }
 
