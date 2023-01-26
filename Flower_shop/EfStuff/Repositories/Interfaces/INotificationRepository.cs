@@ -2,5 +2,7 @@
 {
     public interface INotificationRepository : IBaseRepository<Notification>
     {
+        string GetCustomerIdByPaymentId(string paymentId);
+
     }
 }

@@ -7,6 +7,7 @@ namespace Flower_shop.Services.Implimentations
     {
         private WebDbContext _dbContext;
         private IWalletRepository _walletRepository;
+        private INotificationRepository _notificationRepository;
         private IMapper _mapper;
         private ILogger<PaymentService> _logger;
 
@@ -18,12 +19,14 @@ namespace Flower_shop.Services.Implimentations
             WebDbContext dbContext,
             IWalletRepository walletRepository,
             IMapper mapper,
-            ILogger<PaymentService> logger)
+            ILogger<PaymentService> logger,
+            INotificationRepository notificationRepository)
         {
             _dbContext = dbContext;
             _walletRepository = walletRepository;
             _mapper = mapper;
             _logger = logger;
+            _notificationRepository = notificationRepository;
         }
 
         public string Transaction(NotificationViewModel notificationVm)
@@ -53,9 +56,11 @@ namespace Flower_shop.Services.Implimentations
 
         public void PutMoneyIntoAccount(NotificationViewModel notificationVm)
         {
+
             try
             {
-                string customerId = notificationVm.Object.Metadata["customerId"];
+                var customerId = _notificationRepository.GetCustomerIdByPaymentId(notificationVm.Object.Id);
+
                 decimal amount = Decimal.Parse(notificationVm.Object.Amount.Value);
 
                 var wallet = _walletRepository.GetByCustomerId(customerId);
