@@ -67,11 +67,13 @@ namespace Flower_shop.Services.Implimentations
             {
                 var customerId = _notificationRepository.GetCustomerIdByPaymentId(notificationVm.Object.Id);
                 var wallet = _walletRepository.GetByCustomerId(customerId);
-                decimal amount = Decimal.Parse(notificationVm.Object.Amount.Value);
+                decimal inputAmount;
+                bool parsed = Decimal.TryParse(notificationVm.Object.Amount.Value, out inputAmount);
 
+                _logger.LogInformation($"PutMoneyIntoAccount: Amount was parsed is: {parsed}");
                 _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount before payment: {wallet.Count}");
 
-                wallet.Count = wallet.Count + amount;
+                wallet.Count += inputAmount;
 
                 _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount after payment: {wallet.Count}");
 
