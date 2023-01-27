@@ -61,12 +61,6 @@ namespace Flower_shop.Controllers
             return Redirect(url);
         }
 
-        [HttpGet]
-        public IActionResult GetNotification()
-        {
-            return Redirect("https://town-send.ru/Index/AfterPayment");
-        }
-        
         [HttpPost]
         public async Task<IActionResult> GetNotification(NotificationViewModel notificationVm)
         {
