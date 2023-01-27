@@ -33,8 +33,6 @@ namespace Flower_shop.Controllers
             _mapper = mapper;
             _logger = logger;
             _paymentService = paymentService;
-            
-
         }
 
         [HttpGet]
