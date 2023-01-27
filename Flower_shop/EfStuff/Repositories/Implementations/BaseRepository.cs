@@ -22,6 +22,22 @@
             _dbSet.Add(model);
             _webContext.SaveChanges();
         }
+
+        public async Task<bool> SaveAsync(T model)
+        {
+            await _dbSet.AddAsync(model);
+            int result = await _webContext.SaveChangesAsync();
+            
+            if(result > 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public void SaveList(List<T> models) => models.ForEach(Save);
         public void Remove(int id)
         {
@@ -34,5 +50,11 @@
             _webContext.SaveChanges();
         }
         public int Count() => _dbSet.Count();
+
+        public void Update(T model)
+        {
+            _dbSet.Update(model);
+            _webContext.SaveChanges();
+        }
     }
 }

@@ -5,7 +5,6 @@ namespace Flower_shop.Services.Implimentations
 {
     public class PaymentService : IPaymentService
     {
-        private WebDbContext _dbContext;
         private IWalletRepository _walletRepository;
         private INotificationRepository _notificationRepository;
         private IMapper _mapper;
@@ -16,35 +15,39 @@ namespace Flower_shop.Services.Implimentations
         private readonly string ErrorUrl = "http://ErrorUrl";
 
         public PaymentService(
-            WebDbContext dbContext,
             IWalletRepository walletRepository,
             IMapper mapper,
             ILogger<PaymentService> logger,
             INotificationRepository notificationRepository)
         {
-            _dbContext = dbContext;
             _walletRepository = walletRepository;
             _mapper = mapper;
             _logger = logger;
             _notificationRepository = notificationRepository;
         }
 
-        public string Transaction(NotificationViewModel notificationVm)
+        public async Task<string> Transaction(NotificationViewModel notificationVm)
         {
-            var returnUrl = CheckTransaction(notificationVm);
+            var returnUrl = await CheckTransaction(notificationVm);
 
             return returnUrl;
         }
 
-        public string CheckTransaction(NotificationViewModel notificationVm)
+        public async Task<string> CheckTransaction(NotificationViewModel notificationVm)
         {
             var paymentStatus = notificationVm.Object.Status.ToString().ToLower();
 
             if (paymentStatus == PaymentStatus.Succeeded.ToString().ToLower())
             {
-                PutMoneyIntoAccount(notificationVm);
+                bool saved = await SaveNotificationAsync(notificationVm);
 
-                return SuccessUrl;
+                if (saved == true)
+                {
+                    PutMoneyIntoAccount(notificationVm);
+                    return SuccessUrl;
+                }
+
+                return UnsuccessUrl;
             }
             else if (paymentStatus == PaymentStatus.Canceled.ToString().ToLower())
             {
@@ -56,24 +59,28 @@ namespace Flower_shop.Services.Implimentations
 
         public void PutMoneyIntoAccount(NotificationViewModel notificationVm)
         {
-
             try
             {
                 var customerId = _notificationRepository.GetCustomerIdByPaymentId(notificationVm.Object.Id);
-
+                var wallet = _walletRepository.GetByCustomerId(customerId);
                 decimal amount = Decimal.Parse(notificationVm.Object.Amount.Value);
 
-                var wallet = _walletRepository.GetByCustomerId(customerId);
                 wallet.Count += amount;
 
-                _dbContext.Wallets.Update(wallet);
-                _dbContext.SaveChanges();
+                _walletRepository.Update(wallet);
 
             }
             catch (Exception ex)
             {
                 _logger.LogError($"PutMoneyIntoAccount exception: {ex.Message}");
             }
+        }
+
+        public async Task<bool> SaveNotificationAsync(NotificationViewModel notificationVm)
+        {
+            var notificationDb = _mapper.Map<Notification>(notificationVm);
+
+            return await _notificationRepository.SaveAsync(notificationDb);
         }
 
     }

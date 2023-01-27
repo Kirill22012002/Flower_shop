@@ -1,8 +1,10 @@
-﻿using Flower_shop.Models.Notification;
+﻿using Castle.DynamicProxy.Generators.Emitters.SimpleAST;
+using Flower_shop.Models.Notification;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Diagnostics.Metrics;
 using Yandex.Checkout.V3;
+using static System.Net.WebRequestMethods;
 
 namespace Flower_shop.Controllers
 {
@@ -66,26 +68,24 @@ namespace Flower_shop.Controllers
         }
         
         [HttpPost]
-        public IActionResult GetNotification(NotificationViewModel notificationVm)
+        public async Task<IActionResult> GetNotification(NotificationViewModel notificationVm)
         {
             try
             {
-                _logger.LogInformation($"NOTIFICATION: {notificationVm.Object.Id}");
+                string returnUrl = await _paymentService.Transaction(notificationVm);
 
-                var notificationDb = _mapper.Map<Notification>(notificationVm);
+                if(returnUrl == "http://SuccessUrl")
+                {
+                    return StatusCode(200);
+                }
 
-                _notificationRepository.Save(notificationDb);
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
                 _logger.LogWarning(ex.ToString());
             }
-            finally
-            {
-                var returnUrl = _paymentService.Transaction(notificationVm);
-            }
 
-            return StatusCode(200);
+            return StatusCode(500);
         }
     }
 }

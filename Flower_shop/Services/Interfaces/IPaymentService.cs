@@ -1,10 +1,15 @@
 ﻿using Flower_shop.Models.Notification;
+using Yandex.Checkout.V3;
 
 namespace Flower_shop.Services.Interfaces
 {
     public interface IPaymentService
     {
-        string CheckTransaction(NotificationViewModel notificationVm);
-        string Transaction(NotificationViewModel notificationVm);
+
+        Task<string> Transaction(NotificationViewModel notificationVm);
+        Task<string> CheckTransaction(NotificationViewModel notificationVm);
+        void PutMoneyIntoAccount(NotificationViewModel notificationVm);
+       Task<bool> SaveNotificationAsync(NotificationViewModel notificationVm);
+        
     }
 }
