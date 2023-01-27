@@ -71,7 +71,7 @@ namespace Flower_shop.Services.Implimentations
 
                 _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount before payment: {wallet.Count}");
 
-                wallet.Count += amount;
+                wallet.Count = wallet.Count + amount;
 
                 _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount after payment: {wallet.Count}");
 
