@@ -1,4 +1,6 @@
-﻿using Flower_shop.Models.Notification;
+﻿using AutoMapper.Execution;
+using Flower_shop.Models.Notification;
+using System.Globalization;
 using Yandex.Checkout.V3;
 
 namespace Flower_shop.Services.Implimentations
@@ -67,13 +69,13 @@ namespace Flower_shop.Services.Implimentations
             {
                 var customerId = _notificationRepository.GetCustomerIdByPaymentId(notificationVm.Object.Id);
                 var wallet = _walletRepository.GetByCustomerId(customerId);
-                float inputAmount;
-                bool isParsed = float.TryParse(notificationVm.Object.Amount.Value.ToString(), out inputAmount);
 
-                _logger.LogInformation($"PutMoneyIntoAccount: Amount was parsed is: {isParsed}");
+                var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
+                var amount = Decimal.Parse(notificationVm.Object.Amount.Value, numberFormatInfo);
+
                 _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount before payment: {wallet.Count}");
 
-                wallet.Count += inputAmount;
+                wallet.Count += amount;
 
                 _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount after payment: {wallet.Count}");
 
