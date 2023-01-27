@@ -14,8 +14,8 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Logging.ClearProviders();
 
-builder.Services.AddLogging(loggingBuilder => 
-            loggingBuilder.AddSerilog(dispose: true));
+/*builder.Services.AddLogging(loggingBuilder => 
+            loggingBuilder.AddSerilog(dispose: true));*/
 
 builder.Services.AddMvc();
 
