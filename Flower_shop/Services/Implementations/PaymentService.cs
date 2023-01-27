@@ -37,9 +37,13 @@ namespace Flower_shop.Services.Implimentations
         {
             var paymentStatus = notificationVm.Object.Status.ToString().ToLower();
 
+            _logger.LogInformation($"CheckTransaction: paymentStatus: {paymentStatus}");
+
             if (paymentStatus == PaymentStatus.Succeeded.ToString().ToLower())
             {
                 bool saved = await SaveNotificationAsync(notificationVm);
+
+                _logger.LogInformation($"CheckTransaction: Saved data is {saved}");
 
                 if (saved == true)
                 {
@@ -65,7 +69,11 @@ namespace Flower_shop.Services.Implimentations
                 var wallet = _walletRepository.GetByCustomerId(customerId);
                 decimal amount = Decimal.Parse(notificationVm.Object.Amount.Value);
 
+                _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount before payment: {wallet.Count}");
+
                 wallet.Count += amount;
+
+                _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount after payment: {wallet.Count}");
 
                 _walletRepository.Update(wallet);
 
