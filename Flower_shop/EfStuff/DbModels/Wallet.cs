@@ -3,6 +3,6 @@
     public class Wallet : BaseModel
     {
         public string CustomerId { get; set; }
-        public decimal Count { get; set; }
+        public float Count { get; set; }
     }
 }
