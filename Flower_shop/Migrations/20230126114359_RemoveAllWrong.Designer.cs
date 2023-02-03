@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Flower_shop.Migrations
 {
-    [DbContext(typeof(WebDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20230126114359_RemoveAllWrong")]
     partial class RemoveAllWrong
     {

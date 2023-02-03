@@ -12,9 +12,6 @@ namespace Flower_shop.Controllers
     [Route("[controller]/[action]")]
     public class PaymentController : Controller
     {
-        private WebDbContext _dbContext;
-        private INotificationRepository _notificationRepository;
-        private IMapper _mapper;
         private readonly ILogger<PaymentController> _logger;
         private IPaymentService _paymentService;
 
@@ -22,15 +19,9 @@ namespace Flower_shop.Controllers
         private readonly string AfterPaymentURL = "https://town-send.ru/Payment/Paid";
 
         public PaymentController(
-            WebDbContext dbContext,
-            INotificationRepository notificationRepository,
-            IMapper mapper,
             ILogger<PaymentController> logger,
             IPaymentService paymentService)
         {
-            _dbContext = dbContext;
-            _notificationRepository = notificationRepository;
-            _mapper = mapper;
             _logger = logger;
             _paymentService = paymentService;
         }

@@ -2,33 +2,37 @@
 {
     public abstract class BaseRepository<T> : IBaseRepository<T> where T : BaseModel
     {
-        protected WebDbContext _webContext;
+        protected readonly ApplicationDbContext _dbContext;
         protected DbSet<T> _dbSet;
 
-        protected BaseRepository(WebDbContext webContext)
+        protected BaseRepository(ApplicationDbContext dbContext)
         {
-            _webContext = webContext;
-            _dbSet = _webContext.Set<T>();
+            _dbContext = dbContext;
+            _dbSet = _dbContext.Set<T>();
         }
 
-        public bool Any()
+        public virtual async Task<T> GetByIdAsync(long id)
         {
-            return _dbSet.Any();
-        }
-        public T Get(int id) => _dbSet.FirstOrDefault(x => x.Id == id);
-        public List<T> GetAll() => _dbSet.ToList();
-        public void Save(T model)
-        {
-            _dbSet.Add(model);
-            _webContext.SaveChanges();
+            return await _dbSet.FindAsync(id);
         }
 
-        public async Task<bool> SaveAsync(T model)
+        public virtual async Task<List<T>> GetAllAsync()
+        {
+            return await _dbSet.ToListAsync();
+        }
+
+        public virtual async Task AddAsync(T model)
         {
             await _dbSet.AddAsync(model);
-            int result = await _webContext.SaveChangesAsync();
-            
-            if(result > 0)
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public virtual async Task<bool> TryAddAsync(T model)
+        {
+            await _dbSet.AddAsync(model);
+            int result = await _dbContext.SaveChangesAsync();
+
+            if (result > 0)
             {
                 return true;
             }
@@ -38,23 +42,31 @@
             }
         }
 
-        public void SaveList(List<T> models) => models.ForEach(Save);
-        public void Remove(int id)
+        public async Task AddAllAsync(List<T> models)
         {
-            Remove(Get(id));
-            _webContext.SaveChanges();
+            foreach (var model in models)
+            {
+                await AddAsync(model);
+            }
         }
-        public void Remove(T model)
-        {
-            _dbSet.Remove(model);
-            _webContext.SaveChanges();
-        }
-        public int Count() => _dbSet.Count();
 
-        public void Update(T model)
+        public virtual async Task UpdateAsync(T model)
         {
             _dbSet.Update(model);
-            _webContext.SaveChanges();
+            await _dbContext.SaveChangesAsync();
         }
+
+        public virtual async Task DeleteAsync(T model)
+        {
+            _dbSet.Remove(model);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public virtual async Task DeleteByIdAsync(long id)
+        {
+            await DeleteAsync(await GetByIdAsync(id));
+            await _dbContext.SaveChangesAsync();
+        }
+
     }
 }

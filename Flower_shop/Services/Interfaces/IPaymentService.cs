@@ -5,11 +5,10 @@ namespace Flower_shop.Services.Interfaces
 {
     public interface IPaymentService
     {
-
         Task<string> Transaction(NotificationViewModel notificationVm);
         Task<string> CheckTransaction(NotificationViewModel notificationVm);
-        void PutMoneyIntoAccount(NotificationViewModel notificationVm);
-       Task<bool> SaveNotificationAsync(NotificationViewModel notificationVm);
+        Task PutMoneyIntoAccount(NotificationViewModel notificationVm);
+        Task<bool> SaveNotificationAsync(NotificationViewModel notificationVm);
         
     }
 }

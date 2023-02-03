@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Flower_shop.Migrations
 {
-    [DbContext(typeof(WebDbContext))]
+    [DbContext(typeof(ApplicationDbContext))]
     [Migration("20221011175515_fixProductTable")]
     partial class fixProductTable
     {

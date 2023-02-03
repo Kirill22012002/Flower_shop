@@ -1,3 +1,5 @@
+using Hangfire;
+using Hangfire.SqlServer;
 using Serilog;
 using Serilog.Events;
 
@@ -14,8 +16,8 @@ Log.Logger = new LoggerConfiguration()
 
 builder.Logging.ClearProviders();
 
-/*builder.Services.AddLogging(loggingBuilder => 
-            loggingBuilder.AddSerilog(dispose: true));*/
+builder.Services.AddLogging(loggingBuilder =>
+            loggingBuilder.AddSerilog(dispose: true));
 
 builder.Services.AddMvc();
 
@@ -30,11 +32,13 @@ builder.Services.AddAuthentication(builder.Configuration.GetConnectionString("Au
         config.Cookie.Name = "CoockieCool";
     });
 
-builder.Services.AddDbContext<WebDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("FlowerShopDbContext")));
+builder.Services
+    .AddDbContext<ApplicationDbContext>(options =>
+        options.UseSqlServer(builder.Configuration.GetConnectionString("FlowerShopDbContext")))
+    .AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("FlowerShopDbContext")));
 
 builder.Services.AddTransient<IPaymentService, PaymentService>();
-builder.Services.AddScoped<IWalletRepository, WalletRepository>();
+builder.Services.AddScoped<ICustomerWalletRepository, CustomerWalletRepository>();
 builder.Services.AddScoped<INotificationRepository, NotificationRepository>();
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
@@ -51,6 +55,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseHangfireServer();
+app.UseHangfireDashboard();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

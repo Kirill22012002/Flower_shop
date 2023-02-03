@@ -2,7 +2,7 @@
 {
     public interface INotificationRepository : IBaseRepository<Notification>
     {
-        string GetCustomerIdByPaymentId(string paymentId);
+        Task<string> GetCustomerIdByPaymentIdAsync(string paymentId);
 
     }
 }

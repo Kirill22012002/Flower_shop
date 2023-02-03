@@ -2,14 +2,14 @@
 {
     public class NotificationRepository :  BaseRepository<Notification> , INotificationRepository
     {
-        public NotificationRepository(WebDbContext context) : base(context)
+        public NotificationRepository(ApplicationDbContext context) : base(context)
         {
         }
-        
-        public string GetCustomerIdByPaymentId(string paymentId)
+
+        public async Task<string> GetCustomerIdByPaymentIdAsync(string paymentId)
         {
-            return _webContext.Notifications
-                .SingleOrDefault(x => x.PaymentId == paymentId)
+            return (await _dbContext.Notifications
+                .SingleOrDefaultAsync(x => x.PaymentId == paymentId))
                 .CustomerId
                 .ToString();
         }

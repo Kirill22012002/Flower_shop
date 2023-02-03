@@ -7,7 +7,7 @@ namespace Flower_shop.Services.Implimentations
 {
     public class PaymentService : IPaymentService
     {
-        private IWalletRepository _walletRepository;
+        private ICustomerWalletRepository _walletRepository;
         private INotificationRepository _notificationRepository;
         private IMapper _mapper;
         private ILogger<PaymentService> _logger;
@@ -17,7 +17,7 @@ namespace Flower_shop.Services.Implimentations
         private readonly string ErrorUrl = "http://ErrorUrl";
 
         public PaymentService(
-            IWalletRepository walletRepository,
+            ICustomerWalletRepository walletRepository,
             IMapper mapper,
             ILogger<PaymentService> logger,
             INotificationRepository notificationRepository)
@@ -49,7 +49,7 @@ namespace Flower_shop.Services.Implimentations
 
                 if (saved == true)
                 {
-                    PutMoneyIntoAccount(notificationVm);
+                    await PutMoneyIntoAccount(notificationVm);
                     return SuccessUrl;
                 }
 
@@ -63,12 +63,12 @@ namespace Flower_shop.Services.Implimentations
             return ErrorUrl;
         }
 
-        public void PutMoneyIntoAccount(NotificationViewModel notificationVm)
+        public async Task PutMoneyIntoAccount(NotificationViewModel notificationVm)
         {
             try
             {
-                var customerId = _notificationRepository.GetCustomerIdByPaymentId(notificationVm.Object.Id);
-                var wallet = _walletRepository.GetByCustomerId(customerId);
+                var customerId = await _notificationRepository.GetCustomerIdByPaymentIdAsync(notificationVm.Object.Id);
+                var wallet = await _walletRepository.GetByCustomerIdAsync(customerId);
 
                 var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
                 var amount = Decimal.Parse(notificationVm.Object.Amount.Value, numberFormatInfo);
@@ -79,8 +79,7 @@ namespace Flower_shop.Services.Implimentations
 
                 _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount after payment: {wallet.Count}");
 
-                _walletRepository.Update(wallet);
-
+                await _walletRepository.UpdateAsync(wallet);
             }
             catch (Exception ex)
             {
@@ -92,7 +91,7 @@ namespace Flower_shop.Services.Implimentations
         {
             var notificationDb = _mapper.Map<Notification>(notificationVm);
 
-            return await _notificationRepository.SaveAsync(notificationDb);
+            return await _notificationRepository.TryAddAsync(notificationDb);
         }
 
     }
