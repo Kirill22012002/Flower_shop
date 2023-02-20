@@ -34,8 +34,7 @@ builder.Services.AddAuthentication(builder.Configuration.GetConnectionString("Au
 
 builder.Services
     .AddDbContext<ApplicationDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("FlowerShopDbContext")))
-    .AddHangfire(x => x.UseSqlServerStorage(builder.Configuration.GetConnectionString("FlowerShopDbContext")));
+        options.UseSqlServer(builder.Configuration.GetConnectionString("FlowerShopDbContext")));
 
 builder.Services.AddTransient<IPaymentService, PaymentService>();
 builder.Services.AddScoped<ICustomerWalletRepository, CustomerWalletRepository>();
@@ -54,9 +53,6 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
-app.UseHangfireServer();
-app.UseHangfireDashboard();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
