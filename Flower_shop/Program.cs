@@ -3,7 +3,6 @@ using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 const string logTemplate = @"{Timestamp:yyyy-MM-dd HH:mm:ss} [{Level:u4}] [{SourceContext:l}] {Message:lj}{NewLine}{Exception}";
 Log.Logger = new LoggerConfiguration()
         .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
