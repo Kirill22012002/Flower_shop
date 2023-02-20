@@ -1,5 +1,3 @@
-using Hangfire;
-using Hangfire.SqlServer;
 using Serilog;
 using Serilog.Events;
 
