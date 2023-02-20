@@ -12,6 +12,10 @@ namespace Flower_shop.Controllers
         {
         }
 
+        public IActionResult BasePage()
+        {
+            return View();
+        }
         public IActionResult Index()
         {
             return View();

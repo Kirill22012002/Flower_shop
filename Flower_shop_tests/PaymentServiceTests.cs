@@ -23,6 +23,34 @@ namespace Flower_shop_tests
         private readonly string ErrorUrl = "http://ErrorUrl";
         private readonly string UnsuccessUrl = "http://UnsuccessUrl";
 
+        private readonly NotificationViewModel _succeededNotification = new NotificationViewModel
+        {
+            Object = new PaymentObjectViewModel
+            {
+                Id = "1",
+                Amount = new PaymentAmountViewModel
+                {
+                    Value = "10.00"
+                },
+                Status = PaymentStatus.Succeeded.ToString().ToLower(),
+                Metadata = new Dictionary<string, string> { { "customerId", "TestCustomerId" } }
+            }
+        };
+
+        private NotificationViewModel _canceledNotification = new NotificationViewModel
+        {
+            Object = new PaymentObjectViewModel
+            {
+                Id = "1",
+                Amount = new PaymentAmountViewModel
+                {
+                    Value = "10.00"
+                },
+                Status = PaymentStatus.Canceled.ToString().ToLower(),
+                Metadata = new Dictionary<string, string> { { "customerId", "TestCustomerId" } }
+            }
+        };
+
         [SetUp]
         public void SetUp()
         {
@@ -42,29 +70,12 @@ namespace Flower_shop_tests
         public async Task Transaction_ReturnsSuccessUrl_WhenPaymentSucceeded()
         {
             // Arrange
-            var notificationVm = new NotificationViewModel
-            {
-                Object = new PaymentObjectViewModel
-                {
-                    Id = "1",
-                    Amount = new PaymentAmountViewModel
-                    {
-                        Value = "10.00"
-                    },
-                    Status = PaymentStatus.Succeeded.ToString().ToLower()
-                }
-            };
-
-            var customerId = "1";
+            var customerId = "TestCustomerId";
             var wallet = new CustomerWallet
             {
                 CustomerId = customerId,
                 Count = 100
             };
-
-            _mockNotificationRepository
-                .Setup(repo => repo.GetCustomerIdByPaymentIdAsync(It.IsAny<string>()))
-                .ReturnsAsync(customerId);
 
             _mockWalletRepository
                 .Setup(repo => repo.GetByCustomerIdAsync(customerId))
@@ -79,30 +90,17 @@ namespace Flower_shop_tests
                 .ReturnsAsync(true);
 
             // Act
-            var result = await _paymentService.Transaction(notificationVm);
+            var result = await _paymentService.Transaction(_succeededNotification);
 
             // Assert
             Assert.AreEqual(SuccessUrl, result);
-            Assert.AreEqual(100 + Convert.ToDecimal(notificationVm.Object.Amount.Value), wallet.Count);
+            Assert.AreEqual(100 + Convert.ToDecimal(_succeededNotification.Object.Amount.Value), wallet.Count);
         }
 
         [Test]
         public async Task Transaction_ReturnsSuccessUrl_WhenPaymentSucceeded_AndPutMoneyIntoAccountSucceeds()
         {
             // Arrange
-            var notificationVm = new NotificationViewModel
-            {
-                Object = new PaymentObjectViewModel
-                {
-                    Id = "1",
-                    Amount = new PaymentAmountViewModel
-                    {
-                        Value = "10.00"
-                    },
-                    Status = PaymentStatus.Succeeded.ToString().ToLower()
-                }
-            };
-
             _mockNotificationRepository
                 .Setup(x => x.TryAddAsync(It.IsAny<Notification>()))
                 .ReturnsAsync(true);
@@ -112,7 +110,7 @@ namespace Flower_shop_tests
                 .ReturnsAsync(new CustomerWallet { Count = 0 });
 
             // Act
-            var result = await _paymentService.Transaction(notificationVm);
+            var result = await _paymentService.Transaction(_succeededNotification);
 
             // Assert
             Assert.AreEqual(SuccessUrl, result);
@@ -123,19 +121,6 @@ namespace Flower_shop_tests
         public async Task Transaction_ReturnsUnsuccessUrl_WhenPaymentCanceled()
         {
             // Arrange
-            var notificationVm = new NotificationViewModel
-            {
-                Object = new PaymentObjectViewModel
-                {
-                    Id = "1",
-                    Amount = new PaymentAmountViewModel
-                    {
-                        Value = "10.00"
-                    },
-                    Status = PaymentStatus.Canceled.ToString().ToLower()
-                }
-            };
-
             _mockMapper
                 .Setup(mapper => mapper.Map<Notification>(It.IsAny<NotificationViewModel>()))
                 .Returns(new Notification());
@@ -145,7 +130,7 @@ namespace Flower_shop_tests
                 .ReturnsAsync(true);
 
             // Act
-            var result = await _paymentService.Transaction(notificationVm);
+            var result = await _paymentService.Transaction(_canceledNotification);
 
             // Assert
             Assert.AreEqual(UnsuccessUrl, result);
@@ -183,19 +168,6 @@ namespace Flower_shop_tests
         public async Task Transaction_ReturnsErrorUrl_WhenPaymentSucceeded_AndPutMoneyIntoAccountThrowsException()
         {
             // Arrange
-            var notificationVm = new NotificationViewModel
-            {
-                Object = new PaymentObjectViewModel
-                {
-                    Id = "1",
-                    Amount = new PaymentAmountViewModel
-                    {
-                        Value = "10.00"
-                    },
-                    Status = PaymentStatus.Succeeded.ToString().ToLower()
-                }
-            };
-
             _mockNotificationRepository
                 .Setup(x => x.TryAddAsync(It.IsAny<Notification>()))
                 .ReturnsAsync(true);
@@ -209,7 +181,7 @@ namespace Flower_shop_tests
                 .ThrowsAsync(new Exception("Something went wrong!"));
 
             // Act
-            var result = await _paymentService.Transaction(notificationVm);
+            var result = await _paymentService.Transaction(_succeededNotification);
 
             // Assert
             Assert.AreEqual(ErrorUrl, result);

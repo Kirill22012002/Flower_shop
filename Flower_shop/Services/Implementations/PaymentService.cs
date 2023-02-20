@@ -72,12 +72,22 @@ namespace Flower_shop.Services.Implimentations
 
         public async Task PutMoneyIntoAccount(NotificationViewModel notificationVm)
         {
-            var customerId = await _notificationRepository.GetCustomerIdByPaymentIdAsync(notificationVm.Object.Id);
-            var wallet = await _walletRepository.GetByCustomerIdAsync(customerId);
+            var wallet = new CustomerWallet();
+            string customerId;
+
+            if(notificationVm.Object.Metadata.TryGetValue("customerId", out customerId))
+            {
+                wallet = await _walletRepository.GetByCustomerIdAsync(customerId);
+            }
+            else
+            {
+                _logger.LogError($"PutMoneyIntoAccount: customerId is not found");
+            }
 
             var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
             var amount = Decimal.Parse(notificationVm.Object.Amount.Value, numberFormatInfo);
 
+            _logger.LogInformation($"PutMoneyIntoAccount: CustomerId: {customerId}");
             _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount before payment: {wallet.Count}");
 
             wallet.Count += amount;
