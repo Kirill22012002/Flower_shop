@@ -41,50 +41,50 @@ namespace Flower_shop.Services.Implimentations
 
             _logger.LogInformation($"CheckTransaction: paymentStatus: {paymentStatus}");
 
-            if (paymentStatus == PaymentStatus.Succeeded.ToString().ToLower())
-            {
-                bool saved = await SaveNotificationAsync(notificationVm);
+            bool saved = await SaveNotificationAsync(notificationVm);
 
+            if (saved == true)
+            {
                 _logger.LogInformation($"CheckTransaction: Saved data is {saved}");
 
-                if (saved == true)
+                if (paymentStatus == PaymentStatus.Succeeded.ToString().ToLower())
                 {
-                    await PutMoneyIntoAccount(notificationVm);
-                    return SuccessUrl;
+                    try
+                    {
+                        await PutMoneyIntoAccount(notificationVm);
+
+                        return SuccessUrl;
+                    }
+                    catch (Exception ex)
+                    {
+                        _logger.LogError($"PutMoneyIntoAccount exception: {ex.Message}");
+
+                        return ErrorUrl;
+                    }
                 }
-
-                return UnsuccessUrl;
+                else if (paymentStatus == PaymentStatus.Canceled.ToString().ToLower())
+                {
+                    return UnsuccessUrl;
+                }
             }
-            else if (paymentStatus == PaymentStatus.Canceled.ToString().ToLower())
-            {
-                return UnsuccessUrl;
-            }
-
             return ErrorUrl;
         }
 
         public async Task PutMoneyIntoAccount(NotificationViewModel notificationVm)
         {
-            try
-            {
-                var customerId = await _notificationRepository.GetCustomerIdByPaymentIdAsync(notificationVm.Object.Id);
-                var wallet = await _walletRepository.GetByCustomerIdAsync(customerId);
+            var customerId = await _notificationRepository.GetCustomerIdByPaymentIdAsync(notificationVm.Object.Id);
+            var wallet = await _walletRepository.GetByCustomerIdAsync(customerId);
 
-                var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
-                var amount = Decimal.Parse(notificationVm.Object.Amount.Value, numberFormatInfo);
+            var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
+            var amount = Decimal.Parse(notificationVm.Object.Amount.Value, numberFormatInfo);
 
-                _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount before payment: {wallet.Count}");
+            _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount before payment: {wallet.Count}");
 
-                wallet.Count += amount;
+            wallet.Count += amount;
 
-                _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount after payment: {wallet.Count}");
+            _logger.LogInformation($"PutMoneyIntoAccount: CustomerAmount after payment: {wallet.Count}");
 
-                await _walletRepository.UpdateAsync(wallet);
-            }
-            catch (Exception ex)
-            {
-                _logger.LogError($"PutMoneyIntoAccount exception: {ex.Message}");
-            }
+            await _walletRepository.UpdateAsync(wallet);
         }
 
         public async Task<bool> SaveNotificationAsync(NotificationViewModel notificationVm)
@@ -93,6 +93,5 @@ namespace Flower_shop.Services.Implimentations
 
             return await _notificationRepository.TryAddAsync(notificationDb);
         }
-
     }
 }

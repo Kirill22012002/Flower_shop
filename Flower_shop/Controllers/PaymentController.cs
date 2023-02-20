@@ -15,15 +15,19 @@ namespace Flower_shop.Controllers
         private readonly ILogger<PaymentController> _logger;
         private IPaymentService _paymentService;
 
-        private readonly AsyncClient _asyncClient = new Client("976779", "test_MBXuTxf0WcyIigi7Js-zI_xpdCj8zUg58QhK8LFg3vY").MakeAsync();
+        private readonly AsyncClient _asyncClient;
         private readonly string AfterPaymentURL = "https://town-send.ru/Payment/Paid";
 
         public PaymentController(
             ILogger<PaymentController> logger,
-            IPaymentService paymentService)
+            IPaymentService paymentService,
+            IConfiguration configuration)
         {
             _logger = logger;
             _paymentService = paymentService;
+            var clientId = configuration.GetValue<string>("YandexCheckout:ShopId");
+            var secretKey = configuration.GetValue<string>("YandexCheckout:SecretKey");
+            _asyncClient = new Client(clientId, secretKey).MakeAsync();
         }
 
         [HttpGet]
@@ -40,8 +44,8 @@ namespace Flower_shop.Controllers
                     Type = ConfirmationType.Redirect,
                     ReturnUrl = AfterPaymentURL
                 },
-                Capture = true, 
-                Metadata = new Dictionary<string, string> { { "customerId", $"{customerId}"} }
+                Capture = true,
+                Metadata = new Dictionary<string, string> { { "customerId", $"{customerId}" } }
             };
 
             Payment payment = await _asyncClient.CreatePaymentAsync(newPayment);
@@ -57,13 +61,12 @@ namespace Flower_shop.Controllers
             {
                 string returnUrl = await _paymentService.Transaction(notificationVm);
 
-                if(returnUrl == "http://SuccessUrl")
+                if (returnUrl == "http://SuccessUrl")
                 {
                     return StatusCode(200);
                 }
-
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 _logger.LogWarning(ex.ToString());
             }
