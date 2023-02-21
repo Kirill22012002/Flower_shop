@@ -1,6 +1,7 @@
 ﻿using AutoMapper.Execution;
 using Flower_shop.Models.Notification;
 using System.Globalization;
+using System.Reflection.Metadata;
 using Yandex.Checkout.V3;
 
 namespace Flower_shop.Services.Implimentations
@@ -72,17 +73,8 @@ namespace Flower_shop.Services.Implimentations
 
         public async Task PutMoneyIntoAccount(NotificationViewModel notificationVm)
         {
-            var wallet = new CustomerWallet();
-            string customerId;
-
-            if(notificationVm.Object.Metadata.TryGetValue("customerId", out customerId))
-            {
-                wallet = await _walletRepository.GetByCustomerIdAsync(customerId);
-            }
-            else
-            {
-                _logger.LogError($"PutMoneyIntoAccount: customerId is not found");
-            }
+            var customerId = notificationVm.Object.Metadata.GetValueOrDefault("customerId");
+            var wallet = await _walletRepository.GetByCustomerIdAsync(customerId);
 
             var numberFormatInfo = new NumberFormatInfo { NumberDecimalSeparator = "." };
             var amount = Decimal.Parse(notificationVm.Object.Amount.Value, numberFormatInfo);
